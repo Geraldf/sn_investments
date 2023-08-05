@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_composite_data_m2m_predicate_bundle">
+    <sys_ux_composite_data_m2m_predicate_bundle action="INSERT_OR_UPDATE">
+        <dataset display_value="Custom Portal Landing - Popular Articles">5dafba88e7e8311033ab1a48069d40d8</dataset>
+        <order/>
+        <predicate_bundle display_value="Popular articles bundle">19afba8831e8311002511e106f20e2d4</predicate_bundle>
+        <sys_class_name>sys_ux_composite_data_m2m_predicate_bundle</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-04 18:45:17</sys_created_on>
+        <sys_id>15afba882fe83110bc0b186cb077a7d5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_composite_data_m2m_predicate_bundle_15afba882fe83110bc0b186cb077a7d5</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-04 18:45:17</sys_updated_on>
+    </sys_ux_composite_data_m2m_predicate_bundle>
+</record_update>

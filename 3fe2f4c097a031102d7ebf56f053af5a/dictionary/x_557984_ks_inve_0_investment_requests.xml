@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="live_feed=true" db_object_id="eb43a98c976431102d7ebf56f053afb8" extends="task" label="Investment Requests" max_length="40" name="x_557984_ks_inve_0_investment_requests" type="collection">
+        <element display="true" label="ZinvNumber" max_length="40" name="zinvnumber" type="integer"/>
+    </element>
+</database>

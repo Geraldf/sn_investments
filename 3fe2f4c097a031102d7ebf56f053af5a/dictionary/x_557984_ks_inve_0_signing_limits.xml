@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="5b263c8497a031102d7ebf56f053afd9" label="Signing Limits" max_length="40" name="x_557984_ks_inve_0_signing_limits" type="collection">
+        <element attributes="omit_sys_original=true" label="Limit" max_length="20" name="limit" type="currency"/>
+        <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="P71" label="System" max_length="40" name="system" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="SAP P71" sequence="0" value="sap_p71"/>
+                <element inactive_on_update="false" label="SAP PRD" sequence="1" value="sap_prd"/>
+            </choice>
+        </element>
+        <element default="javascript:current.getTableName();" label="Class" max_length="80" name="sys_class_name" type="sys_class_name"/>
+        <element attributes="edge_encryption_enabled=true" label="User" max_length="40" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="sys_class_name"/>
+        </index>
+    </element>
+</database>

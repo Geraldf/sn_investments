@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sn_ihub_data_mapping_definition">
+    <sn_ihub_data_mapping_definition action="DELETE">
+        <integration_table>sys_data_source</integration_table>
+        <published_source_structure/>
+        <record_id>5033f8c097a031102d7ebf56f053aff0</record_id>
+        <source_structure/>
+        <sys_class_name>sn_ihub_data_mapping_definition</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-04 08:34:34</sys_created_on>
+        <sys_id>08e3b40497a031102d7ebf56f053af14</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sn_ihub_data_mapping_definition_08e3b40497a031102d7ebf56f053af14</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:36:12</sys_updated_on>
+    </sn_ihub_data_mapping_definition>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sn_ihub_data_mapping_definition_08e3b40497a031102d7ebf56f053af14</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sn_ihub_data_mapping_definition"><sn_ihub_data_mapping_definition action="INSERT_OR_UPDATE"><integration_table>sys_data_source</integration_table><published_source_structure/><record_id>5033f8c097a031102d7ebf56f053aff0</record_id><source_structure/><sys_class_name>sn_ihub_data_mapping_definition</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-04 08:34:34</sys_created_on><sys_id>08e3b40497a031102d7ebf56f053af14</sys_id><sys_mod_count>2</sys_mod_count><sys_name/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sn_ihub_data_mapping_definition_08e3b40497a031102d7ebf56f053af14</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-04 08:36:12</sys_updated_on></sn_ihub_data_mapping_definition></record_update>]]></payload>
+        <payload_hash>-1769896503</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>3efc178bb4a32110320f8dc279c80415</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-04 08:39:53</sys_created_on>
+        <sys_id>b115b84497a031102d7ebf56f053af2f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189bfb4059a0000001</sys_recorded_at>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:39:53</sys_updated_on>
+        <type>Integration Data Mapping Definition</type>
+        <update_guid>bd15b84470a0311051f72cf0184ff82e</update_guid>
+        <update_guid_history>bd15b84470a0311051f72cf0184ff82e:0,b515b844a2a031104a21597c1a6eae2c:0,b3347804baa03110850c2a348373ce80:1099328728,b50478047aa031104c0f81c04fc660be:87274457,84e3b404cea03110099e6e7782b63992:-946432249</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">3115b84497a031102d7ebf56f053af34</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-04 08:39:53</sys_created_on>
+        <sys_db_object display_value="" name="sn_ihub_data_mapping_definition">sn_ihub_data_mapping_definition</sys_db_object>
+        <sys_id>0c5573bacf8842188503698bd9f56744</sys_id>
+        <sys_metadata>08e3b40497a031102d7ebf56f053af14</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sn_ihub_data_mapping_definition_08e3b40497a031102d7ebf56f053af14</sys_update_name>
+        <sys_update_version display_value="sn_ihub_data_mapping_definition_08e3b40497a031102d7ebf56f053af14">b115b84497a031102d7ebf56f053af2f</sys_update_version>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:39:53</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

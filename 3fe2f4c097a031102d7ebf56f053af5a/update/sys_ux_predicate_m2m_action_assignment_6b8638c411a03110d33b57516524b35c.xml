@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_predicate_m2m_action_assignment">
+    <sys_ux_predicate_m2m_action_assignment action="INSERT_OR_UPDATE">
+        <declarative_action_assignment display_value="approve">ef8638c4bfa031105387f094c19ce18d</declarative_action_assignment>
+        <predicate display_value="My tasks requested item">6b8638c4d2a0311012c4cbb8d1c75065</predicate>
+        <sys_class_name>sys_ux_predicate_m2m_action_assignment</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-04 08:46:20</sys_created_on>
+        <sys_id>6b8638c411a03110d33b57516524b35c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_predicate_m2m_action_assignment_6b8638c411a03110d33b57516524b35c</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:46:20</sys_updated_on>
+    </sys_ux_predicate_m2m_action_assignment>
+</record_update>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_applicability_m2m_screen">
+    <sys_ux_applicability_m2m_screen action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applicability display_value="Public">638638c416a031102c85ed4c22cc618f</applicability>
+        <order>0</order>
+        <screen display_value="Login Default">e38638c4eda031108225498e04c7f083</screen>
+        <sys_class_name>sys_ux_applicability_m2m_screen</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-04 08:46:19</sys_created_on>
+        <sys_id>a78638c4fca03110ec78d3f7cdc47883</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_applicability_m2m_screen_a78638c4fca03110ec78d3f7cdc47883</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:46:19</sys_updated_on>
+    </sys_ux_applicability_m2m_screen>
+</record_update>

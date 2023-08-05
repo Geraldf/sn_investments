@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_complex_object">
+    <sys_complex_object action="DELETE">
+        <label/>
+        <name>ih_import_FD08e3b4043da0311054cfb9b3df8d8b11</name>
+        <namespace>FlowDesigner</namespace>
+        <scope_name>3fe2f4c097a031102d7ebf56f053af5a</scope_name>
+        <serialized_content>{"FlowDesigner:ih_import_FD08e3b4043da0311054cfb9b3df8d8b11":{"u_name":"String","u_name.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"string\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Name\",\"mandatory\":\"false\",\"order\":\"0\",\"max_length\":\"0\"}"},"u_limit":"Integer","u_limit.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"integer\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Limit\",\"mandatory\":\"false\",\"order\":\"0\",\"max_length\":\"0\"}"}},"FlowDesigner:ih_import_FD08e3b4043da0311054cfb9b3df8d8b11.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"object\",\"co_type_name\":\"ih_import_FD08e3b4043da0311054cfb9b3df8d8b11\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Excel Header\",\"mandatory\":\"false\",\"order\":\"0\",\"max_length\":\"0\"}"}}</serialized_content>
+        <sys_class_name>sys_complex_object</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-04 08:34:34</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c8e3b40497a031102d7ebf56f053af11</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ih_import_FD08e3b4043da0311054cfb9b3df8d8b11</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_complex_object_c8e3b40497a031102d7ebf56f053af11</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:34:34</sys_updated_on>
+        <type>complex_object_schema</type>
+    </sys_complex_object>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_complex_object_c8e3b40497a031102d7ebf56f053af11</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_complex_object"><sys_complex_object action="INSERT_OR_UPDATE"><label/><name>ih_import_FD08e3b4043da0311054cfb9b3df8d8b11</name><namespace>FlowDesigner</namespace><scope_name>3fe2f4c097a031102d7ebf56f053af5a</scope_name><serialized_content>{"FlowDesigner:ih_import_FD08e3b4043da0311054cfb9b3df8d8b11":{"u_name":"String","u_name.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"string\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"string\",\"default_value\":\"\",\"label\":\"Name\",\"mandatory\":\"false\",\"order\":\"0\",\"max_length\":\"0\"}"},"u_limit":"Integer","u_limit.$field_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"integer\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"integer\",\"default_value\":\"\",\"label\":\"Limit\",\"mandatory\":\"false\",\"order\":\"0\",\"max_length\":\"0\"}"}},"FlowDesigner:ih_import_FD08e3b4043da0311054cfb9b3df8d8b11.$type_facets":{"SimpleMapFacet":"{\"uiTypeLabel\":\"object\",\"co_type_name\":\"ih_import_FD08e3b4043da0311054cfb9b3df8d8b11\",\"read_only\":\"false\",\"hint\":null,\"uiType\":\"object\",\"default_value\":\"\",\"label\":\"Excel Header\",\"mandatory\":\"false\",\"order\":\"0\",\"max_length\":\"0\"}"}}</serialized_content><sys_class_name>sys_complex_object</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-04 08:34:34</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>c8e3b40497a031102d7ebf56f053af11</sys_id><sys_mod_count>0</sys_mod_count><sys_name>ih_import_FD08e3b4043da0311054cfb9b3df8d8b11</sys_name><sys_overrides/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_complex_object_c8e3b40497a031102d7ebf56f053af11</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-04 08:34:34</sys_updated_on><type>complex_object_schema</type></sys_complex_object></record_update>]]></payload>
+        <payload_hash>2084927476</payload_hash>
+        <record_name>ih_import_FD08e3b4043da0311054cfb9b3df8d8b11</record_name>
+        <reverted_from/>
+        <source>33e2f4c097a031102d7ebf56f053af5d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-04 08:34:34</sys_created_on>
+        <sys_id>40e3b40497a031102d7ebf56f053af14</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189bfaf28c00000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:34:34</sys_updated_on>
+        <type>Complex Object</type>
+        <update_guid>84e3b404c5a0311093733189c2c83e13</update_guid>
+        <update_guid_history>84e3b404c5a0311093733189c2c83e13:2084927476</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-04 08:35:14</sys_created_on>
+        <sys_db_object display_value="" name="sys_complex_object">sys_complex_object</sys_db_object>
+        <sys_id>07cc3443bbf143cd80d302003ce3d619</sys_id>
+        <sys_metadata>c8e3b40497a031102d7ebf56f053af11</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ih_import_FD08e3b4043da0311054cfb9b3df8d8b11</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_complex_object_c8e3b40497a031102d7ebf56f053af11</sys_update_name>
+        <sys_update_version display_value="sys_complex_object_c8e3b40497a031102d7ebf56f053af11">40e3b40497a031102d7ebf56f053af14</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-04 08:35:14</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
