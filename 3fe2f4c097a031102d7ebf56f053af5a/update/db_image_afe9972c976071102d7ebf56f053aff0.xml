@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <format/>
+        <height/>
+        <image>170a972c976071102d7ebf56f053aff5</image>
+        <name>x_557984_ks_inve_0.KS_O.svg</name>
+        <size_bytes>1212</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 09:57:19</sys_created_on>
+        <sys_id>afe9972c976071102d7ebf56f053aff0</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_557984_ks_inve_0.KS_O.svg</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>db_image_afe9972c976071102d7ebf56f053aff0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:57:34</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <file_name>image</file_name>
+        <hash>b01f30e44ca1e73bb01699780b14ad48c0bb4baa91f2ab1fa1186fb4858c9eb9</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>1212</size_bytes>
+        <size_compressed>607</size_compressed>
+        <state>available</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 09:57:34</sys_created_on>
+        <sys_id>170a972c976071102d7ebf56f053aff5</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>guest</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:57:34</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>afe9972c976071102d7ebf56f053aff0</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="170a972c976071102d7ebf56f053aff5">170a972c976071102d7ebf56f053aff5</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 09:57:34</sys_created_on>
+        <sys_id>570a972c976071102d7ebf56f053aff5</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>bZRtb9owEMff91N4lia1EvghDkkcSiuVdtWkPVRau2l9lxE3eA02clJg+/S7pHaAqSAUfrn73//uFOf8creq0Ua5Rlszw5wwjJRZ2FKbaoYf7j+MM4yatjBlUVujZthYfHlxcv7u+uv8/ufdDWo2Fbp7uPr0cY7wmNIfYk7p9f01+vb9FnHCKb35ghFetu06p3S73ZKtINZV9NYV66VeNBQSaZcIIgrFOCdlW2Kw6CpvddkuoS3G3mO0VLpatoE2Wm2v7G6GGWIoSrofx4eTAMFsppm94R4xxjo3n5Lvam2e30rkUkraR/vUvFkXC9jC2qlGuY0KegD9dKTv75CFXdFuf39qED3puh67l1rlaqOMLcvpotbr4ztN6+yzGoOh+m21yZ19McPdlW6VqzVc8mgKK0LwOa9Q6wrTPFm3muFV0Tq9O+UjBl8+GotMpER0V5YSKc+8qBeui3aJdAnDwJ8oThOMAD4LmaSERyMvmYtMToiIAyNfUmRJQiIxoBQZYXzuMWZMkgwFbcwSiEKyr+15HjNQySEcMwnhOKgDhtoDe2uvHho7bvzxYJIkBh3ou0AWGPQxPCVdga5usufBL3CakayLv+pjxiPCsoNpep4LGUFf6T6eSUGieNDvOezKs/cP+tDff/33A02I7AqwiKQTMIwTEg8MAsFIAgNKnpEJP2BvOPAkfY0HfQqNpGhfv2fIzyaHcVgAJ9EgHzCsy2MwD+LQ3FHzj0fHInfVr9N0lMQjLtKz6f6kGGv+KmenmPrHnVbwauiO7sXJP1GhqiC8BAAA</data>
+        <length>796</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="170a972c976071102d7ebf56f053aff5">170a972c976071102d7ebf56f053aff5</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 09:57:34</sys_created_on>
+        <sys_id>d70a972c976071102d7ebf56f053aff5</sys_id>
+    </sys_attachment_doc>
+</record_update>

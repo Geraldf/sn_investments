@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_client_script">
+    <sys_ux_client_script action="DELETE">
+        <includes/>
+        <macroponent display_value="">bc9513e453607110470883fea10a3014</macroponent>
+        <name>setFeedbackReason</name>
+        <preset/>
+        <required_translations>[ ]</required_translations>
+        <script><![CDATA[/**
+ * @param {params} params
+ * @param {api} params.api
+ * @param {any} params.event
+ * @param {any} params.imports
+ */
+function handler({
+    api,
+    event,
+    helpers,
+    imports
+}) {
+    var selectedReasons = [];
+    selectedReasons.push(event.payload.item.id);
+    api.setState("selectedReason", () => selectedReasons);
+}]]></script>
+        <script_api_version>2.0.0</script_api_version>
+        <sys_class_name>sys_ux_client_script</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:01</sys_created_on>
+        <sys_id>389513e4b6607110a45f746e38b5bd14</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>setFeedbackReason</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_client_script_389513e4b6607110a45f746e38b5bd14</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:01</sys_updated_on>
+        <target/>
+        <type/>
+    </sys_ux_client_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_client_script_389513e4b6607110a45f746e38b5bd14</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ux_client_script"&gt;&lt;sys_ux_client_script action="INSERT_OR_UPDATE"&gt;&lt;includes/&gt;&lt;macroponent display_value=""&gt;bc9513e453607110470883fea10a3014&lt;/macroponent&gt;&lt;name&gt;setFeedbackReason&lt;/name&gt;&lt;preset/&gt;&lt;required_translations&gt;[ ]&lt;/required_translations&gt;&lt;script&gt;&lt;![CDATA[/**
+ * @param {params} params
+ * @param {api} params.api
+ * @param {any} params.event
+ * @param {any} params.imports
+ */
+function handler({
+    api,
+    event,
+    helpers,
+    imports
+}) {
+    var selectedReasons = [];
+    selectedReasons.push(event.payload.item.id);
+    api.setState("selectedReason", () =&gt; selectedReasons);
+}]]&gt;&lt;/script&gt;&lt;script_api_version&gt;2.0.0&lt;/script_api_version&gt;&lt;sys_class_name&gt;sys_ux_client_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;system&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-06 09:38:01&lt;/sys_created_on&gt;&lt;sys_id&gt;389513e4b6607110a45f746e38b5bd14&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;setFeedbackReason&lt;/sys_name&gt;&lt;sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="KS Investment Requests"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ux_client_script_389513e4b6607110a45f746e38b5bd14&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;system&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-08-06 09:38:01&lt;/sys_updated_on&gt;&lt;target/&gt;&lt;type/&gt;&lt;/sys_ux_client_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1776068036</payload_hash>
+        <record_name>setFeedbackReason</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:01:02</sys_created_on>
+        <sys_id>1b3da83c97a471102d7ebf56f053afc5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb949e770000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:01:02</sys_updated_on>
+        <type>UX Client Script</type>
+        <update_guid>d73da83ccca471107485e545125cc5c5</update_guid>
+        <update_guid_history>d73da83ccca471107485e545125cc5c5:1776068036</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:01:02</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_client_script">sys_ux_client_script</sys_db_object>
+        <sys_id>10166043a4fc45feb370cbc31df642e9</sys_id>
+        <sys_metadata>389513e4b6607110a45f746e38b5bd14</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>setFeedbackReason</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_client_script_389513e4b6607110a45f746e38b5bd14</sys_update_name>
+        <sys_update_version display_value="sys_ux_client_script_389513e4b6607110a45f746e38b5bd14">1b3da83c97a471102d7ebf56f053afc5</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:01:02</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

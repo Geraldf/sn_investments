@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_addon_event_mapping">
+    <sys_ux_addon_event_mapping action="DELETE">
+        <active>true</active>
+        <controller/>
+        <description/>
+        <name>Reject Mapping</name>
+        <parent_macroponent display_value="">3c9513e46e607110b9d06f8a402ca11f</parent_macroponent>
+        <source_component/>
+        <source_da display_value="reject">749513e4d2607110a0d2636ae977f827</source_da>
+        <source_element_id>data_row_1</source_element_id>
+        <sys_class_name>sys_ux_addon_event_mapping</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:03</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f49513e48c607110c659ff68bc5f151e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Reject Mapping</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_addon_event_mapping_f49513e48c607110c659ff68bc5f151e</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:03</sys_updated_on>
+        <target_event display_value="My tasks reject">389513e48f607110b17e13d8bd58e61d</target_event>
+        <target_payload_mapping>{
+  "type": "MAP_CONTAINER",
+  "container": {
+    "sysId": {
+      "type": "EVENT_PAYLOAD_BINDING",
+      "binding": {
+        "address": [
+          "sysId"
+        ]
+      }
+    },
+    "table": {
+      "type": "EVENT_PAYLOAD_BINDING",
+      "binding": {
+        "address": [
+          "table"
+        ]
+      }
+    }
+  }
+}</target_payload_mapping>
+    </sys_ux_addon_event_mapping>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_addon_event_mapping_f49513e48c607110c659ff68bc5f151e</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_addon_event_mapping"><sys_ux_addon_event_mapping action="INSERT_OR_UPDATE"><active>true</active><controller/><description/><name>Reject Mapping</name><parent_macroponent display_value="">3c9513e46e607110b9d06f8a402ca11f</parent_macroponent><source_component/><source_da display_value="reject">749513e4d2607110a0d2636ae977f827</source_da><source_element_id>data_row_1</source_element_id><sys_class_name>sys_ux_addon_event_mapping</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-06 09:38:03</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>f49513e48c607110c659ff68bc5f151e</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Reject Mapping</sys_name><sys_overrides/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_addon_event_mapping_f49513e48c607110c659ff68bc5f151e</sys_update_name><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-06 09:38:03</sys_updated_on><target_event display_value="My tasks reject">389513e48f607110b17e13d8bd58e61d</target_event><target_payload_mapping>{
+  "type": "MAP_CONTAINER",
+  "container": {
+    "sysId": {
+      "type": "EVENT_PAYLOAD_BINDING",
+      "binding": {
+        "address": [
+          "sysId"
+        ]
+      }
+    },
+    "table": {
+      "type": "EVENT_PAYLOAD_BINDING",
+      "binding": {
+        "address": [
+          "table"
+        ]
+      }
+    }
+  }
+}</target_payload_mapping></sys_ux_addon_event_mapping></record_update>]]></payload>
+        <payload_hash>1133424340</payload_hash>
+        <record_name>Reject Mapping</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:01:05</sys_created_on>
+        <sys_id>404d2c3c97a471102d7ebf56f053af49</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb94aac80000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:01:05</sys_updated_on>
+        <type>UX Add-on Event Mapping</type>
+        <update_guid>004d2c3c93a47110ee7627d6f51ee049</update_guid>
+        <update_guid_history>004d2c3c93a47110ee7627d6f51ee049:1133424340</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:01:05</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_addon_event_mapping">sys_ux_addon_event_mapping</sys_db_object>
+        <sys_id>0082b46be9d84cb089e22f1129eba781</sys_id>
+        <sys_metadata>f49513e48c607110c659ff68bc5f151e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Reject Mapping</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_addon_event_mapping_f49513e48c607110c659ff68bc5f151e</sys_update_name>
+        <sys_update_version display_value="sys_ux_addon_event_mapping_f49513e48c607110c659ff68bc5f151e">404d2c3c97a471102d7ebf56f053af49</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:01:05</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

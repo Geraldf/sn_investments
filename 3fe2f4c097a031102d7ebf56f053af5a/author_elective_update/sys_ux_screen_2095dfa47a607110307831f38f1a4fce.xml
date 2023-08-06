@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_screen">
+    <sys_ux_screen action="DELETE">
+        <active>true</active>
+        <app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config>
+        <description/>
+        <event_mappings>[ ]</event_mappings>
+        <macroponent display_value="Task Approved">609513e4db607110b467ebc4fd3f900c</macroponent>
+        <macroponent_config>{
+  "label" : {
+    "type" : "TRANSLATION_LITERAL",
+    "value" : {
+      "code" : null,
+      "message" : "",
+      "comment" : ""
+    }
+  },
+  "bare" : {
+    "type" : "JSON_LITERAL",
+    "value" : true
+  },
+  "scrollable" : {
+    "type" : "JSON_LITERAL",
+    "value" : "y"
+  },
+  "headerLevel" : {
+    "type" : "JSON_LITERAL",
+    "value" : "1"
+  },
+  "headingOnlyVisibleToScreenReaders" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "interceptNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "propagateNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  }
+}</macroponent_config>
+        <name>Task Approved Default</name>
+        <order>0</order>
+        <parent_macroponent display_value="Portal App Shell">b66bf1075b31101016fd7c1bf481c7a7</parent_macroponent>
+        <required_translations>[ ]</required_translations>
+        <rollback_screen/>
+        <screen_condition/>
+        <screen_type display_value="Task Approved">b89513e493607110873ca4c1ce422918</screen_type>
+        <sys_class_name>sys_ux_screen</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:03</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2095dfa47a607110307831f38f1a4fce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Task Approved Default</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_screen_2095dfa47a607110307831f38f1a4fce</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:03</sys_updated_on>
+    </sys_ux_screen>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_screen_2095dfa47a607110307831f38f1a4fce</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_screen"><sys_ux_screen action="INSERT_OR_UPDATE"><active>true</active><app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config><description/><event_mappings>[ ]</event_mappings><macroponent display_value="Task Approved">609513e4db607110b467ebc4fd3f900c</macroponent><macroponent_config>{
+  "label" : {
+    "type" : "TRANSLATION_LITERAL",
+    "value" : {
+      "code" : null,
+      "message" : "",
+      "comment" : ""
+    }
+  },
+  "bare" : {
+    "type" : "JSON_LITERAL",
+    "value" : true
+  },
+  "scrollable" : {
+    "type" : "JSON_LITERAL",
+    "value" : "y"
+  },
+  "headerLevel" : {
+    "type" : "JSON_LITERAL",
+    "value" : "1"
+  },
+  "headingOnlyVisibleToScreenReaders" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "interceptNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "propagateNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  }
+}</macroponent_config><name>Task Approved Default</name><order>0</order><parent_macroponent display_value="Portal App Shell">b66bf1075b31101016fd7c1bf481c7a7</parent_macroponent><required_translations>[ ]</required_translations><rollback_screen/><screen_condition/><screen_type display_value="Task Approved">b89513e493607110873ca4c1ce422918</screen_type><sys_class_name>sys_ux_screen</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-06 09:38:03</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>2095dfa47a607110307831f38f1a4fce</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Task Approved Default</sys_name><sys_overrides/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_screen_2095dfa47a607110307831f38f1a4fce</sys_update_name><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-06 09:38:03</sys_updated_on></sys_ux_screen></record_update>]]></payload>
+        <payload_hash>-1886402440</payload_hash>
+        <record_name>Task Approved Default</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:56</sys_created_on>
+        <sys_id>4e3d283c97a471102d7ebf56f053af60</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb948a830000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:56</sys_updated_on>
+        <type>UX Screen</type>
+        <update_guid>0e3d283c6fa47110f9f09ba7d75f4160</update_guid>
+        <update_guid_history>0e3d283c6fa47110f9f09ba7d75f4160:-1886402440</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:56</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_screen">sys_ux_screen</sys_db_object>
+        <sys_id>6c8828fbf83c44e0b3594e0ed6d51100</sys_id>
+        <sys_metadata>2095dfa47a607110307831f38f1a4fce</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Task Approved Default</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_screen_2095dfa47a607110307831f38f1a4fce</sys_update_name>
+        <sys_update_version display_value="sys_ux_screen_2095dfa47a607110307831f38f1a4fce">4e3d283c97a471102d7ebf56f053af60</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:56</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

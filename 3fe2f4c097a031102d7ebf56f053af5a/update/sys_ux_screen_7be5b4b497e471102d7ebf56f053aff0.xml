@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_screen">
+    <sys_ux_screen action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <app_config display_value="KS Investment Requests Config">e1e5b0b405e47110c1a5669b5a6fd4a5</app_config>
+        <description/>
+        <event_mappings>[ ]</event_mappings>
+        <macroponent display_value="Investment Requests Record Page">f3e5b4b497e471102d7ebf56f053af99</macroponent>
+        <macroponent_config>{
+  "views" : {
+    "type" : "JSON_LITERAL",
+    "value" : ""
+  },
+  "selectedTabIndex" : {
+    "type" : "JSON_LITERAL",
+    "value" : 0
+  },
+  "label" : {
+    "type" : "TRANSLATION_LITERAL",
+    "value" : {
+      "code" : null,
+      "message" : "",
+      "comment" : ""
+    }
+  },
+  "bare" : {
+    "type" : "JSON_LITERAL",
+    "value" : true
+  },
+  "scrollable" : {
+    "type" : "JSON_LITERAL",
+    "value" : "y"
+  },
+  "headerLevel" : {
+    "type" : "JSON_LITERAL",
+    "value" : "1"
+  },
+  "headingOnlyVisibleToScreenReaders" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "interceptNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "propagateNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  }
+}</macroponent_config>
+        <name>Investment Requests Record Page</name>
+        <order>100</order>
+        <parent_macroponent display_value="Workspace App Shell">c276387cc331101080d6d3658940ddd2</parent_macroponent>
+        <required_translations>[ ]</required_translations>
+        <rollback_screen/>
+        <screen_condition>table=x_557984_ks_inve_0_investment_requests</screen_condition>
+        <screen_type display_value="Record">ade5b0b45ae471108b61d45de8797697</screen_type>
+        <sys_class_name>sys_ux_screen</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:39:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7be5b4b497e471102d7ebf56f053aff0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Investment Requests Record Page</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_screen_7be5b4b497e471102d7ebf56f053aff0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:39:01</sys_updated_on>
+    </sys_ux_screen>
+    <sys_translated_text action="delete_multiple" query="documentkey=7be5b4b497e471102d7ebf56f053aff0"/>
+</record_update>

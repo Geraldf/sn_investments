@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary_override">
+    <sys_dictionary_override action="DELETE">
+        <attributes/>
+        <attributes_override>false</attributes_override>
+        <base_table>task</base_table>
+        <calculation/>
+        <calculation_override>false</calculation_override>
+        <default_value/>
+        <default_value_override>false</default_value_override>
+        <dependent/>
+        <dependent_override>false</dependent_override>
+        <display_override>false</display_override>
+        <element>assigned_to</element>
+        <mandatory>true</mandatory>
+        <mandatory_override>true</mandatory_override>
+        <name>x_557984_ks_inve_0_investment_requests</name>
+        <read_only>false</read_only>
+        <read_only_override>false</read_only_override>
+        <reference_qual/>
+        <reference_qual_override>false</reference_qual_override>
+        <sys_class_name>sys_dictionary_override</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:52:53</sys_created_on>
+        <sys_id>daefc070976471102d7ebf56f053afa4</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>assigned_to</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_dictionary_override_daefc070976471102d7ebf56f053afa4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:52:53</sys_updated_on>
+    </sys_dictionary_override>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_dictionary_override_daefc070976471102d7ebf56f053afa4</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_dictionary_override"><sys_dictionary_override action="INSERT_OR_UPDATE"><attributes/><attributes_override>false</attributes_override><base_table>task</base_table><calculation/><calculation_override>false</calculation_override><default_value/><default_value_override>false</default_value_override><dependent/><dependent_override>false</dependent_override><display_override>false</display_override><element>assigned_to</element><mandatory>true</mandatory><mandatory_override>true</mandatory_override><name>x_557984_ks_inve_0_investment_requests</name><read_only>false</read_only><read_only_override>false</read_only_override><reference_qual/><reference_qual_override>false</reference_qual_override><sys_class_name>sys_dictionary_override</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-06 13:52:53</sys_created_on><sys_id>daefc070976471102d7ebf56f053afa4</sys_id><sys_mod_count>1</sys_mod_count><sys_name>assigned_to</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_dictionary_override_daefc070976471102d7ebf56f053afa4</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-06 13:52:53</sys_updated_on></sys_dictionary_override></record_update>]]></payload>
+        <payload_hash>1861154104</payload_hash>
+        <record_name>assigned_to</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:52:53</sys_created_on>
+        <sys_id>1eefc070976471102d7ebf56f053afad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb1f4ecf0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:52:53</sys_updated_on>
+        <type>Dictionary Entry Override</type>
+        <update_guid>92efc0704f6471104dc6cbe560a676ad</update_guid>
+        <update_guid_history>92efc0704f6471104dc6cbe560a676ad:1861154104,16efc07048647110e6f2557bf5ec50a8:-1013120468</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:05:17</sys_created_on>
+        <sys_db_object display_value="" name="sys_dictionary_override">sys_dictionary_override</sys_db_object>
+        <sys_id>3a8806983f014062982afe3674dbeca9</sys_id>
+        <sys_metadata>daefc070976471102d7ebf56f053afa4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>assigned_to</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent display_value="">25147310972431102d7ebf56f053afd0</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_dictionary_override_daefc070976471102d7ebf56f053afa4</sys_update_name>
+        <sys_update_version display_value="sys_dictionary_override_daefc070976471102d7ebf56f053afa4">1eefc070976471102d7ebf56f053afad</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:05:17</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

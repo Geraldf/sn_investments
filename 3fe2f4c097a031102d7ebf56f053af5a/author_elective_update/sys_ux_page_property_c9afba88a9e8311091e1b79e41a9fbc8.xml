@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_page_property">
+    <sys_ux_page_property action="DELETE">
+        <choices/>
+        <description/>
+        <name>chrome_header</name>
+        <page display_value="KS Investment Requests">c5afba8897e831102d7ebf56f053af98</page>
+        <required_translations>[ {
+  "message" : "Configure",
+  "comment" : ""
+}, {
+  "message" : "Logout",
+  "comment" : ""
+}, {
+  "message" : "Settings",
+  "comment" : ""
+}, {
+  "message" : "UserMenu",
+  "comment" : ""
+} ]</required_translations>
+        <route/>
+        <suffix/>
+        <sys_class_name>sys_ux_page_property</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-04 18:45:17</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c9afba88a9e8311091e1b79e41a9fbc8</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>chrome_header</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_page_property_c9afba88a9e8311091e1b79e41a9fbc8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-05 13:58:37</sys_updated_on>
+        <type>json</type>
+        <unique_name>x_557984_ks_inve_0.c5afba8897e831102d7ebf56f053af98.root.chrome_header</unique_name>
+        <value>{"privatePage":{"searchEnabled":false,"userPrefsEnabled":true,"currentScreenLinkConfiguration":{"roles":["admin"],"position":250},"globalTools":{"collapsingMenuId":0,"primaryItems":[{"label":"UserMenu","icon":"user","type":"menu","primaryDisplay":"icon","value":{"children":[{"label":{"translatable":true,"message":"Settings"},"position":100,"type":"navigation","value":{"type":"route","value":{"route":"settings","fields":{}}}},{"condition":{"roles":["admin","ui_builder_admin"]},"label":{"translatable":true,"message":"Configure"},"type":"navigation","position":200,"primaryDisplay":"none","value":{"type":"external","opensWindow":"true","value":{"href":"/nav_to.do?uri=/sys_ux_app_config.do?sys_id=c9afba8897e831102d7ebf56f053af98"}}},{"label":{"translatable":true,"message":"Logout"},"position":500,"type":"navigation","value":{"type":"AUTH_ROUTE_BINDING","binding":{"address":["logout"],"params":{"reload":true},"default":"/logout.do"}}}]}}],"secondaryItems":[]}},"publicPage":{"menuEnabled":false,"logoRoute":{"type":"route","value":{"route":"landing","fields":{}}},"searchEnabled":false}}</value>
+    </sys_ux_page_property>
+    <sys_translated_text action="DELETE" query="documentkey=c9afba88a9e8311091e1b79e41a9fbc8"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_page_property_c9afba88a9e8311091e1b79e41a9fbc8</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_page_property"><sys_ux_page_property action="INSERT_OR_UPDATE"><choices/><description/><name>chrome_header</name><page display_value="KS Investment Requests">c5afba8897e831102d7ebf56f053af98</page><required_translations>[ {
+  "message" : "Configure",
+  "comment" : ""
+}, {
+  "message" : "Logout",
+  "comment" : ""
+}, {
+  "message" : "Settings",
+  "comment" : ""
+}, {
+  "message" : "UserMenu",
+  "comment" : ""
+} ]</required_translations><route/><suffix/><sys_class_name>sys_ux_page_property</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-04 18:45:17</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>c9afba88a9e8311091e1b79e41a9fbc8</sys_id><sys_mod_count>2</sys_mod_count><sys_name>chrome_header</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_page_property_c9afba88a9e8311091e1b79e41a9fbc8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-05 13:58:37</sys_updated_on><type>json</type><unique_name>x_557984_ks_inve_0.c5afba8897e831102d7ebf56f053af98.root.chrome_header</unique_name><value>{"privatePage":{"searchEnabled":false,"userPrefsEnabled":true,"currentScreenLinkConfiguration":{"roles":["admin"],"position":250},"globalTools":{"collapsingMenuId":0,"primaryItems":[{"label":"UserMenu","icon":"user","type":"menu","primaryDisplay":"icon","value":{"children":[{"label":{"translatable":true,"message":"Settings"},"position":100,"type":"navigation","value":{"type":"route","value":{"route":"settings","fields":{}}}},{"condition":{"roles":["admin","ui_builder_admin"]},"label":{"translatable":true,"message":"Configure"},"type":"navigation","position":200,"primaryDisplay":"none","value":{"type":"external","opensWindow":"true","value":{"href":"/nav_to.do?uri=/sys_ux_app_config.do?sys_id=c9afba8897e831102d7ebf56f053af98"}}},{"label":{"translatable":true,"message":"Logout"},"position":500,"type":"navigation","value":{"type":"AUTH_ROUTE_BINDING","binding":{"address":["logout"],"params":{"reload":true},"default":"/logout.do"}}}]}}],"secondaryItems":[]}},"publicPage":{"menuEnabled":false,"logoRoute":{"type":"route","value":{"route":"landing","fields":{}}},"searchEnabled":false}}</value></sys_ux_page_property><sys_translated_text action="delete_multiple" query="documentkey=c9afba88a9e8311091e1b79e41a9fbc8"/></record_update>]]></payload>
+        <payload_hash>-987762652</payload_hash>
+        <record_name>chrome_header</record_name>
+        <reverted_from/>
+        <source>33e2f4c097a031102d7ebf56f053af5d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-05 13:58:37</sys_created_on>
+        <sys_id>28a7c714976031102d7ebf56f053afba</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189c5fe31a30000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-05 13:58:37</sys_updated_on>
+        <type>UX Page Property</type>
+        <update_guid>6ca7c714ff6031100ef00209781393b9</update_guid>
+        <update_guid_history>6ca7c714ff6031100ef00209781393b9:-987762652,77afbe88cce83110e0b894f1e08ea171:-1454699754,33afbe8850e8311052120fa3b6ab9e57:-295514962</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-05 17:52:09</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_page_property">sys_ux_page_property</sys_db_object>
+        <sys_id>1b68d49e1cfc4cb68401d9a638d37904</sys_id>
+        <sys_metadata>c9afba88a9e8311091e1b79e41a9fbc8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>chrome_header</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_page_property_c9afba88a9e8311091e1b79e41a9fbc8</sys_update_name>
+        <sys_update_version display_value="sys_ux_page_property_c9afba88a9e8311091e1b79e41a9fbc8">28a7c714976031102d7ebf56f053afba</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-05 17:52:09</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

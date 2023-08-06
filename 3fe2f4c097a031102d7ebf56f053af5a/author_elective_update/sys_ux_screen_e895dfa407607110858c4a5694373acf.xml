@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_screen">
+    <sys_ux_screen action="DELETE">
+        <active>true</active>
+        <app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config>
+        <description/>
+        <event_mappings>[ {
+  "eventMappingId" : "ckhbbvlebuaaaaccddddhhhhhnqwpffceec",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SAVE_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SAVE_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : null,
+    "operation" : {
+      "dataBrokerId" : "dc6e87a5232200100e4bc50947bf654b",
+      "operationName" : "SAVE",
+      "parentResourceId" : "glide_form_1",
+      "payload" : {
+        "type" : "JSON_LITERAL",
+        "value" : { }
+      }
+    },
+    "targetId" : "ckhbbvlebuaaaaccccddhhhhhsggddhkxpf",
+    "type" : "DATABROKER_OP"
+  } ]
+}, {
+  "eventMappingId" : "ckhbbvjtghhaaaabbeeddhhhhhslggaaaabbhm",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_MANDATORY_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_MANDATORY_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : null,
+    "operation" : {
+      "dataBrokerId" : "dc6e87a5232200100e4bc50947bf654b",
+      "operationName" : "SET_MANDATORY",
+      "parentResourceId" : "glide_form_1",
+      "payload" : {
+        "type" : "JSON_LITERAL",
+        "value" : { }
+      }
+    },
+    "targetId" : "ckhbbvjtghhaaaabbddddhhhhhcmshhbbaabk",
+    "type" : "DATABROKER_OP"
+  } ]
+}, {
+  "eventMappingId" : "ckhbbvirmeeaaaaaarddhhhhhpeeygbabo",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_VALUE_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_VALUE_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : null,
+    "operation" : {
+      "dataBrokerId" : "dc6e87a5232200100e4bc50947bf654b",
+      "operationName" : "SET_VALUE",
+      "parentResourceId" : "glide_form_1",
+      "payload" : {
+        "type" : "JSON_LITERAL",
+        "value" : { }
+      }
+    },
+    "targetId" : "ckhbbvirmddaaaaaaqddhhhhhaauaehhivw",
+    "type" : "DATABROKER_OP"
+  } ]
+}, {
+  "eventMappingId" : "ckfejcxhhyaaaacceeddhhhbemzsynabb",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "x_557984_ks_inve_0.NAV_ITEM_SELECTED_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "x_557984_ks_inve_0.NAV_ITEM_SELECTED_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : {
+      "apiName" : "sn_canvas_core.NAV_ITEM_SELECTED",
+      "payload" : {
+        "type" : "MAP_CONTAINER",
+        "container" : {
+          "route" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "route" ]
+            }
+          },
+          "fields" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "fields" ]
+            }
+          },
+          "params" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "params" ]
+            }
+          },
+          "redirect" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "redirect" ]
+            }
+          },
+          "passiveNavigation" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "passiveNavigation" ]
+            }
+          },
+          "title" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "title" ]
+            }
+          },
+          "multiInstField" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "multiInstField" ]
+            }
+          },
+          "targetRoute" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "targetRoute" ]
+            }
+          },
+          "external" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "external" ]
+            }
+          }
+        }
+      },
+      "sysId" : "8b82bf18e5276c8e423b6e4e0889b463"
+    },
+    "operation" : null,
+    "targetId" : "ckfejcxhhyaaaaccddddhhhbzxegnyacc",
+    "type" : "EVENT"
+  } ]
+} ]</event_mappings>
+        <macroponent display_value="Tasks">7c9513e4c1607110c653df9709670d12</macroponent>
+        <macroponent_config>{
+  "approvalId" : {
+    "type" : "CONTEXT_BINDING",
+    "binding" : {
+      "address" : [ "approvalId" ],
+      "category" : "props"
+    }
+  },
+  "label" : {
+    "type" : "TRANSLATION_LITERAL",
+    "value" : {
+      "code" : null,
+      "message" : "",
+      "comment" : ""
+    }
+  },
+  "bare" : {
+    "type" : "JSON_LITERAL",
+    "value" : true
+  },
+  "scrollable" : {
+    "type" : "JSON_LITERAL",
+    "value" : "none"
+  },
+  "headerLevel" : {
+    "type" : "JSON_LITERAL",
+    "value" : "1"
+  },
+  "headingOnlyVisibleToScreenReaders" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "interceptNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "propagateNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  }
+}</macroponent_config>
+        <name>Tasks Default</name>
+        <order>0</order>
+        <parent_macroponent display_value="">b09513e44c60711062d84b94c9161e1d</parent_macroponent>
+        <required_translations>[ ]</required_translations>
+        <rollback_screen/>
+        <screen_condition/>
+        <screen_type display_value="Indicate your decision">3c9513e44a607110bdffb6435072f516</screen_type>
+        <sys_class_name>sys_ux_screen</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e895dfa407607110858c4a5694373acf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Tasks Default</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_screen_e895dfa407607110858c4a5694373acf</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:01</sys_updated_on>
+    </sys_ux_screen>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_screen_e895dfa407607110858c4a5694373acf</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_screen"><sys_ux_screen action="INSERT_OR_UPDATE"><active>true</active><app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config><description/><event_mappings>[ {
+  "eventMappingId" : "ckhbbvlebuaaaaccddddhhhhhnqwpffceec",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SAVE_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SAVE_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : null,
+    "operation" : {
+      "dataBrokerId" : "dc6e87a5232200100e4bc50947bf654b",
+      "operationName" : "SAVE",
+      "parentResourceId" : "glide_form_1",
+      "payload" : {
+        "type" : "JSON_LITERAL",
+        "value" : { }
+      }
+    },
+    "targetId" : "ckhbbvlebuaaaaccccddhhhhhsggddhkxpf",
+    "type" : "DATABROKER_OP"
+  } ]
+}, {
+  "eventMappingId" : "ckhbbvjtghhaaaabbeeddhhhhhslggaaaabbhm",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_MANDATORY_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_MANDATORY_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : null,
+    "operation" : {
+      "dataBrokerId" : "dc6e87a5232200100e4bc50947bf654b",
+      "operationName" : "SET_MANDATORY",
+      "parentResourceId" : "glide_form_1",
+      "payload" : {
+        "type" : "JSON_LITERAL",
+        "value" : { }
+      }
+    },
+    "targetId" : "ckhbbvjtghhaaaabbddddhhhhhcmshhbbaabk",
+    "type" : "DATABROKER_OP"
+  } ]
+}, {
+  "eventMappingId" : "ckhbbvirmeeaaaaaarddhhhhhpeeygbabo",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_VALUE_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "3fe2f4c097a031102d7ebf56f053af5a.GLIDE_FORM_1_SET_VALUE_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : null,
+    "operation" : {
+      "dataBrokerId" : "dc6e87a5232200100e4bc50947bf654b",
+      "operationName" : "SET_VALUE",
+      "parentResourceId" : "glide_form_1",
+      "payload" : {
+        "type" : "JSON_LITERAL",
+        "value" : { }
+      }
+    },
+    "targetId" : "ckhbbvirmddaaaaaaqddhhhhhaauaehhivw",
+    "type" : "DATABROKER_OP"
+  } ]
+}, {
+  "eventMappingId" : "ckfejcxhhyaaaacceeddhhhbemzsynabb",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "x_557984_ks_inve_0.NAV_ITEM_SELECTED_RELAY_7c9513e4c1607110c653df9709670d12",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "x_557984_ks_inve_0.NAV_ITEM_SELECTED_RELAY_7c9513e4c1607110c653df9709670d12",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : {
+      "apiName" : "sn_canvas_core.NAV_ITEM_SELECTED",
+      "payload" : {
+        "type" : "MAP_CONTAINER",
+        "container" : {
+          "route" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "route" ]
+            }
+          },
+          "fields" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "fields" ]
+            }
+          },
+          "params" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "params" ]
+            }
+          },
+          "redirect" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "redirect" ]
+            }
+          },
+          "passiveNavigation" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "passiveNavigation" ]
+            }
+          },
+          "title" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "title" ]
+            }
+          },
+          "multiInstField" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "multiInstField" ]
+            }
+          },
+          "targetRoute" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "targetRoute" ]
+            }
+          },
+          "external" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "external" ]
+            }
+          }
+        }
+      },
+      "sysId" : "8b82bf18e5276c8e423b6e4e0889b463"
+    },
+    "operation" : null,
+    "targetId" : "ckfejcxhhyaaaaccddddhhhbzxegnyacc",
+    "type" : "EVENT"
+  } ]
+} ]</event_mappings><macroponent display_value="Tasks">7c9513e4c1607110c653df9709670d12</macroponent><macroponent_config>{
+  "approvalId" : {
+    "type" : "CONTEXT_BINDING",
+    "binding" : {
+      "address" : [ "approvalId" ],
+      "category" : "props"
+    }
+  },
+  "label" : {
+    "type" : "TRANSLATION_LITERAL",
+    "value" : {
+      "code" : null,
+      "message" : "",
+      "comment" : ""
+    }
+  },
+  "bare" : {
+    "type" : "JSON_LITERAL",
+    "value" : true
+  },
+  "scrollable" : {
+    "type" : "JSON_LITERAL",
+    "value" : "none"
+  },
+  "headerLevel" : {
+    "type" : "JSON_LITERAL",
+    "value" : "1"
+  },
+  "headingOnlyVisibleToScreenReaders" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "interceptNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "propagateNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  }
+}</macroponent_config><name>Tasks Default</name><order>0</order><parent_macroponent display_value="">b09513e44c60711062d84b94c9161e1d</parent_macroponent><required_translations>[ ]</required_translations><rollback_screen/><screen_condition/><screen_type display_value="Indicate your decision">3c9513e44a607110bdffb6435072f516</screen_type><sys_class_name>sys_ux_screen</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-06 09:38:01</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>e895dfa407607110858c4a5694373acf</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Tasks Default</sys_name><sys_overrides/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_screen_e895dfa407607110858c4a5694373acf</sys_update_name><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-06 09:38:01</sys_updated_on></sys_ux_screen></record_update>]]></payload>
+        <payload_hash>1560416034</payload_hash>
+        <record_name>Tasks Default</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:58</sys_created_on>
+        <sys_id>523d283c97a471102d7ebf56f053afd0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb948eea0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:58</sys_updated_on>
+        <type>UX Screen</type>
+        <update_guid>123d283c40a471103fd870bbf91ebed0</update_guid>
+        <update_guid_history>123d283c40a471103fd870bbf91ebed0:1560416034</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:58</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_screen">sys_ux_screen</sys_db_object>
+        <sys_id>bdfcf888ac264e408f7456f789e1a240</sys_id>
+        <sys_metadata>e895dfa407607110858c4a5694373acf</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Tasks Default</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_screen_e895dfa407607110858c4a5694373acf</sys_update_name>
+        <sys_update_version display_value="sys_ux_screen_e895dfa407607110858c4a5694373acf">523d283c97a471102d7ebf56f053afd0</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:58</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_client_script">
+    <sys_ux_client_script action="DELETE">
+        <includes/>
+        <macroponent display_value="Landing Page">3c9513e46e607110b9d06f8a402ca11f</macroponent>
+        <name>Card click redirection for My requests</name>
+        <preset/>
+        <required_translations>[ ]</required_translations>
+        <script><![CDATA[function handler({
+    api,
+    event,
+    imports
+}) {
+    const {
+        setState,
+        emit
+    } = api;
+
+    const table = event.payload.table;
+    const sysId = event.payload.sysId;
+    const route = "record_request";
+
+    if (table === "sc_req_item") {
+        emit('NAV_ITEM_SELECTED', {
+            route,
+            fields: {
+                table,
+                sysId
+            }
+        });
+    } else if(table == "incident"){
+        emit('NAV_ITEM_SELECTED', {
+            route,
+            fields: {
+                table: "incident",
+                sysId
+            }
+        });
+    }
+    else{
+        emit('NAV_ITEM_SELECTED', {
+            route,
+            fields: {
+                table: "task",
+                sysId
+            }
+        });
+    }
+}]]></script>
+        <script_api_version>2.0.0</script_api_version>
+        <sys_class_name>sys_ux_client_script</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:03</sys_created_on>
+        <sys_id>349513e48c6071105f07ad763d885815</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Card click redirection for My requests</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_client_script_349513e48c6071105f07ad763d885815</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:03</sys_updated_on>
+        <target/>
+        <type/>
+    </sys_ux_client_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_client_script_349513e48c6071105f07ad763d885815</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ux_client_script"&gt;&lt;sys_ux_client_script action="INSERT_OR_UPDATE"&gt;&lt;includes/&gt;&lt;macroponent display_value="Landing Page"&gt;3c9513e46e607110b9d06f8a402ca11f&lt;/macroponent&gt;&lt;name&gt;Card click redirection for My requests&lt;/name&gt;&lt;preset/&gt;&lt;required_translations&gt;[ ]&lt;/required_translations&gt;&lt;script&gt;&lt;![CDATA[function handler({
+    api,
+    event,
+    imports
+}) {
+    const {
+        setState,
+        emit
+    } = api;
+
+    const table = event.payload.table;
+    const sysId = event.payload.sysId;
+    const route = "record_request";
+
+    if (table === "sc_req_item") {
+        emit('NAV_ITEM_SELECTED', {
+            route,
+            fields: {
+                table,
+                sysId
+            }
+        });
+    } else if(table == "incident"){
+        emit('NAV_ITEM_SELECTED', {
+            route,
+            fields: {
+                table: "incident",
+                sysId
+            }
+        });
+    }
+    else{
+        emit('NAV_ITEM_SELECTED', {
+            route,
+            fields: {
+                table: "task",
+                sysId
+            }
+        });
+    }
+}]]&gt;&lt;/script&gt;&lt;script_api_version&gt;2.0.0&lt;/script_api_version&gt;&lt;sys_class_name&gt;sys_ux_client_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;system&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-06 09:38:03&lt;/sys_created_on&gt;&lt;sys_id&gt;349513e48c6071105f07ad763d885815&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Card click redirection for My requests&lt;/sys_name&gt;&lt;sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="KS Investment Requests"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ux_client_script_349513e48c6071105f07ad763d885815&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;system&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-08-06 09:38:03&lt;/sys_updated_on&gt;&lt;target/&gt;&lt;type/&gt;&lt;/sys_ux_client_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1108898919</payload_hash>
+        <record_name>Card click redirection for My requests</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:10</sys_created_on>
+        <sys_id>879517e4976071102d7ebf56f053af48</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189ca3617d70000001</sys_recorded_at>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:10</sys_updated_on>
+        <type>UX Client Script</type>
+        <update_guid>cb9517e40f607110f4adfae5346f5c47</update_guid>
+        <update_guid_history>cb9517e40f607110f4adfae5346f5c47:-1108898919</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:01:05</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_client_script">sys_ux_client_script</sys_db_object>
+        <sys_id>029668b77d614a068dd50b9a39801469</sys_id>
+        <sys_metadata>349513e48c6071105f07ad763d885815</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Card click redirection for My requests</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_client_script_349513e48c6071105f07ad763d885815</sys_update_name>
+        <sys_update_version display_value="sys_ux_client_script_349513e48c6071105f07ad763d885815">879517e4976071102d7ebf56f053af48</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:01:05</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

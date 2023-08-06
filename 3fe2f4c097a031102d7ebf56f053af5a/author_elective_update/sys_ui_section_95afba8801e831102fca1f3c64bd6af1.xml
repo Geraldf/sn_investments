@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section action="DELETE" caption="" section_id="95afba8801e831102fca1f3c64bd6af1" sys_domain="global" table="sys_user" version="3" view="3_custom_portal_settings_x_557984_ks_inve_0">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>time_zone</element>
+            <position>0</position>
+            <sys_created_by>system</sys_created_by>
+            <sys_created_on>2023-08-04 18:45:18</sys_created_on>
+            <sys_id>19afba88cae83110fbe330fa2fb539f2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="sys_user" sys_domain="global" view="91afba88eae83110236fc9f839e2f9f2">95afba8801e831102fca1f3c64bd6af1</sys_ui_section>
+            <sys_updated_by>system</sys_updated_by>
+            <sys_updated_on>2023-08-04 18:45:18</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>1</position>
+            <sys_created_by>system</sys_created_by>
+            <sys_created_on>2023-08-04 18:45:18</sys_created_on>
+            <sys_id>5dafba882fe831108525e9ed68feb8f0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="sys_user" sys_domain="global" view="91afba88eae83110236fc9f839e2f9f2">95afba8801e831102fca1f3c64bd6af1</sys_ui_section>
+            <sys_updated_by>system</sys_updated_by>
+            <sys_updated_on>2023-08-04 18:45:18</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>preferred_language</element>
+            <position>2</position>
+            <sys_created_by>system</sys_created_by>
+            <sys_created_on>2023-08-04 18:45:18</sys_created_on>
+            <sys_id>59afba88d7e83110982d034136adbdf1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="sys_user" sys_domain="global" view="91afba88eae83110236fc9f839e2f9f2">95afba8801e831102fca1f3c64bd6af1</sys_ui_section>
+            <sys_updated_by>system</sys_updated_by>
+            <sys_updated_on>2023-08-04 18:45:18</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="DELETE">
+            <caption/>
+            <header>false</header>
+            <name>sys_user</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>system</sys_created_by>
+            <sys_created_on>2023-08-04 18:45:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>95afba8801e831102fca1f3c64bd6af1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sys_user</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+            <sys_update_name>sys_ui_section_95afba8801e831102fca1f3c64bd6af1</sys_update_name>
+            <sys_updated_by>system</sys_updated_by>
+            <sys_updated_on>2023-08-04 18:45:18</sys_updated_on>
+            <sys_user/>
+            <title>false</title>
+            <view display_value="3_custom_portal_settings_x_557984_ks_inve_0" name="3_custom_portal_settings_x_557984_ks_inve_0">91afba88eae83110236fc9f839e2f9f2</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ui_section_95afba8801e831102fca1f3c64bd6af1</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_section caption="" section_id="95afba8801e831102fca1f3c64bd6af1" sys_domain="global" table="sys_user" version="3" view="3_custom_portal_settings_x_557984_ks_inve_0"><sys_ui_element action="INSERT_OR_UPDATE"><element>time_zone</element><position>0</position><sys_created_by>system</sys_created_by><sys_created_on>2023-08-04 18:45:18</sys_created_on><sys_id>19afba88cae83110fbe330fa2fb539f2</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_user" sys_domain="global" view="91afba88eae83110236fc9f839e2f9f2">95afba8801e831102fca1f3c64bd6af1</sys_ui_section><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-04 18:45:18</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>.split</element><position>1</position><sys_created_by>system</sys_created_by><sys_created_on>2023-08-04 18:45:18</sys_created_on><sys_id>5dafba882fe831108525e9ed68feb8f0</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_user" sys_domain="global" view="91afba88eae83110236fc9f839e2f9f2">95afba8801e831102fca1f3c64bd6af1</sys_ui_section><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-04 18:45:18</sys_updated_on><sys_user/><type>.split</type></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>preferred_language</element><position>2</position><sys_created_by>system</sys_created_by><sys_created_on>2023-08-04 18:45:18</sys_created_on><sys_id>59afba88d7e83110982d034136adbdf1</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="sys_user" sys_domain="global" view="91afba88eae83110236fc9f839e2f9f2">95afba8801e831102fca1f3c64bd6af1</sys_ui_section><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-04 18:45:18</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_section action="INSERT_OR_UPDATE"><caption/><header>false</header><name>sys_user</name><roles/><sys_class_name>sys_ui_section</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-04 18:45:18</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>95afba8801e831102fca1f3c64bd6af1</sys_id><sys_mod_count>0</sys_mod_count><sys_name>sys_user</sys_name><sys_overrides/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ui_section_95afba8801e831102fca1f3c64bd6af1</sys_update_name><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-04 18:45:18</sys_updated_on><sys_user/><title>false</title><view display_value="3_custom_portal_settings_x_557984_ks_inve_0" name="3_custom_portal_settings_x_557984_ks_inve_0">91afba88eae83110236fc9f839e2f9f2</view><view_name/></sys_ui_section></sys_ui_section></record_update>]]></payload>
+        <payload_hash>-187579399</payload_hash>
+        <record_name>User</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:55:19</sys_created_on>
+        <sys_id>3d709c70976471102d7ebf56f053af9f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb2186da0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:55:19</sys_updated_on>
+        <type>Form Layout</type>
+        <update_guid>f9709c70796471101d47cf998ea6979f</update_guid>
+        <update_guid_history>f9709c70796471101d47cf998ea6979f:-187579399</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:55:19</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_section">sys_ui_section</sys_db_object>
+        <sys_id>121d23e304354ff08d4aa27907786100</sys_id>
+        <sys_metadata>95afba8801e831102fca1f3c64bd6af1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sys_user</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent display_value="Sys User">94991f03b4232110320f8dc279c80457</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ui_section_95afba8801e831102fca1f3c64bd6af1</sys_update_name>
+        <sys_update_version display_value="sys_ui_section_95afba8801e831102fca1f3c64bd6af1">3d709c70976471102d7ebf56f053af9f</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:55:19</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

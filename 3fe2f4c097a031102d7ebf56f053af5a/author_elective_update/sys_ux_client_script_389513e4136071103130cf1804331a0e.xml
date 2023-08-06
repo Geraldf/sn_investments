@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_client_script">
+    <sys_ux_client_script action="DELETE">
+        <includes/>
+        <macroponent display_value="Additional details">b09513e43a607110f6fb50195a30fe0e</macroponent>
+        <name>Fetch catalog item details</name>
+        <preset/>
+        <required_translations>[ {
+  "code" : "",
+  "message" : "No additional details at this time.",
+  "comment" : ""
+} ]</required_translations>
+        <script><![CDATA[/**
+ * @param {params} params
+ * @param {api} params.api
+ * @param {any} params.event
+ * @param {any} params.imports
+ * @param {ApiHelpers} params.helpers
+ */
+async function handler({
+    api,
+    event,
+    helpers,
+    imports
+}) {
+    var data = api.data.look_up_records_1.results;
+    var finalOutput = [];
+    data.forEach(function(element) {
+        if (element.sc_item_option._reference.value.displayValue) {
+            finalOutput.push({
+                'label': element.sc_item_option._reference.item_option_new.displayValue,
+                'value': {
+                    'type': 'string',
+                    'value': element.sc_item_option._reference.value.displayValue
+                }
+            });
+        }
+    });
+    if (finalOutput != "") {
+        api.setState('labelValue', finalOutput);
+    } else {
+        var emptylabel = await helpers.translate("No additional details at this time.");
+        var emptyvalue = "";
+        finalOutput.push({
+            'label': emptylabel,
+            'value': {
+                'type': 'string',
+                'value': emptyvalue
+            }
+        });
+        api.setState('labelValue', finalOutput);
+    }
+}]]></script>
+        <script_api_version>2.0.0</script_api_version>
+        <sys_class_name>sys_ux_client_script</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:04</sys_created_on>
+        <sys_id>389513e4136071103130cf1804331a0e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Fetch catalog item details</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_client_script_389513e4136071103130cf1804331a0e</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:04</sys_updated_on>
+        <target/>
+        <type>default</type>
+    </sys_ux_client_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_client_script_389513e4136071103130cf1804331a0e</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ux_client_script"&gt;&lt;sys_ux_client_script action="INSERT_OR_UPDATE"&gt;&lt;includes/&gt;&lt;macroponent display_value="Additional details"&gt;b09513e43a607110f6fb50195a30fe0e&lt;/macroponent&gt;&lt;name&gt;Fetch catalog item details&lt;/name&gt;&lt;preset/&gt;&lt;required_translations&gt;[ {
+  "code" : "",
+  "message" : "No additional details at this time.",
+  "comment" : ""
+} ]&lt;/required_translations&gt;&lt;script&gt;&lt;![CDATA[/**
+ * @param {params} params
+ * @param {api} params.api
+ * @param {any} params.event
+ * @param {any} params.imports
+ * @param {ApiHelpers} params.helpers
+ */
+async function handler({
+    api,
+    event,
+    helpers,
+    imports
+}) {
+    var data = api.data.look_up_records_1.results;
+    var finalOutput = [];
+    data.forEach(function(element) {
+        if (element.sc_item_option._reference.value.displayValue) {
+            finalOutput.push({
+                'label': element.sc_item_option._reference.item_option_new.displayValue,
+                'value': {
+                    'type': 'string',
+                    'value': element.sc_item_option._reference.value.displayValue
+                }
+            });
+        }
+    });
+    if (finalOutput != "") {
+        api.setState('labelValue', finalOutput);
+    } else {
+        var emptylabel = await helpers.translate("No additional details at this time.");
+        var emptyvalue = "";
+        finalOutput.push({
+            'label': emptylabel,
+            'value': {
+                'type': 'string',
+                'value': emptyvalue
+            }
+        });
+        api.setState('labelValue', finalOutput);
+    }
+}]]&gt;&lt;/script&gt;&lt;script_api_version&gt;2.0.0&lt;/script_api_version&gt;&lt;sys_class_name&gt;sys_ux_client_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;system&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-06 09:38:04&lt;/sys_created_on&gt;&lt;sys_id&gt;389513e4136071103130cf1804331a0e&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Fetch catalog item details&lt;/sys_name&gt;&lt;sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="KS Investment Requests"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ux_client_script_389513e4136071103130cf1804331a0e&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;system&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-08-06 09:38:04&lt;/sys_updated_on&gt;&lt;target/&gt;&lt;type&gt;default&lt;/type&gt;&lt;/sys_ux_client_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1194764515</payload_hash>
+        <record_name>Fetch catalog item details</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:59</sys_created_on>
+        <sys_id>7e3d683c97a471102d7ebf56f053afa9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb9495a40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:59</sys_updated_on>
+        <type>UX Client Script</type>
+        <update_guid>3e3d683cf1a4711002811be87b0499a9</update_guid>
+        <update_guid_history>3e3d683cf1a4711002811be87b0499a9:1194764515</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:59</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_client_script">sys_ux_client_script</sys_db_object>
+        <sys_id>0096e81376984078a9691c54dd45e824</sys_id>
+        <sys_metadata>389513e4136071103130cf1804331a0e</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Fetch catalog item details</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_client_script_389513e4136071103130cf1804331a0e</sys_update_name>
+        <sys_update_version display_value="sys_ux_client_script_389513e4136071103130cf1804331a0e">7e3d683c97a471102d7ebf56f053afa9</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:59</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

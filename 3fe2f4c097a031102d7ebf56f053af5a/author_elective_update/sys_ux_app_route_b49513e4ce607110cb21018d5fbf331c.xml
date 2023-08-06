@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_app_route">
+    <sys_ux_app_route action="DELETE">
+        <app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config>
+        <description/>
+        <extension_point/>
+        <fields>sysId,table,approvalId</fields>
+        <icon/>
+        <name>Record Page(task)</name>
+        <optional_parameters>newId</optional_parameters>
+        <order>0</order>
+        <parent_macroponent display_value="Portal App Shell">b66bf1075b31101016fd7c1bf481c7a7</parent_macroponent>
+        <parent_macroponent_composition_element_id/>
+        <route_type>rec_task</route_type>
+        <screen_type display_value="Record Page(task)">309513e414607110e8250a2eefcd091c</screen_type>
+        <sys_class_name>sys_ux_app_route</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:04</sys_created_on>
+        <sys_id>b49513e4ce607110cb21018d5fbf331c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Page(task)</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_app_route_b49513e4ce607110cb21018d5fbf331c</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:04</sys_updated_on>
+    </sys_ux_app_route>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_app_route_b49513e4ce607110cb21018d5fbf331c</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_app_route"><sys_ux_app_route action="INSERT_OR_UPDATE"><app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config><description/><extension_point/><fields>sysId,table,approvalId</fields><icon/><name>Record Page(task)</name><optional_parameters>newId</optional_parameters><order>0</order><parent_macroponent display_value="Portal App Shell">b66bf1075b31101016fd7c1bf481c7a7</parent_macroponent><parent_macroponent_composition_element_id/><route_type>rec_task</route_type><screen_type display_value="Record Page(task)">309513e414607110e8250a2eefcd091c</screen_type><sys_class_name>sys_ux_app_route</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-06 09:38:04</sys_created_on><sys_id>b49513e4ce607110cb21018d5fbf331c</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Record Page(task)</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_app_route_b49513e4ce607110cb21018d5fbf331c</sys_update_name><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-06 09:38:04</sys_updated_on></sys_ux_app_route></record_update>]]></payload>
+        <payload_hash>-24590464</payload_hash>
+        <record_name>Record Page(task)</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:32:29</sys_created_on>
+        <sys_id>573b443c972471102d7ebf56f053afdc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb0c9df80000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:32:29</sys_updated_on>
+        <type>UX App Route</type>
+        <update_guid>173b443c3924711082237f670ad186dc</update_guid>
+        <update_guid_history>173b443c3924711082237f670ad186dc:-24590464</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:32:29</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_app_route">sys_ux_app_route</sys_db_object>
+        <sys_id>19354b328c474394a7777ad77b14e910</sys_id>
+        <sys_metadata>b49513e4ce607110cb21018d5fbf331c</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Page(task)</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_app_route_b49513e4ce607110cb21018d5fbf331c</sys_update_name>
+        <sys_update_version display_value="sys_ux_app_route_b49513e4ce607110cb21018d5fbf331c">573b443c972471102d7ebf56f053afdc</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:32:29</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

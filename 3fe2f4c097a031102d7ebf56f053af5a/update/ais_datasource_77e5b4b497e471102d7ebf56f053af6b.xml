@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ais_datasource">
+    <ais_datasource action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <filter/>
+        <force_late_binding>false</force_late_binding>
+        <name>Signing Limits Table</name>
+        <retention_policy/>
+        <source>x_557984_ks_inve_0_signing_limits</source>
+        <sys_class_name>ais_datasource</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:39:00</sys_created_on>
+        <sys_id>77e5b4b497e471102d7ebf56f053af6b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Signing Limits Table</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>ais_datasource_77e5b4b497e471102d7ebf56f053af6b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:39:00</sys_updated_on>
+        <type>internal</type>
+    </ais_datasource>
+</record_update>

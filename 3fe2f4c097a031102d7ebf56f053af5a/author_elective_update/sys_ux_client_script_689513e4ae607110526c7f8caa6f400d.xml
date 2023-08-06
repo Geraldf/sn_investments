@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_client_script">
+    <sys_ux_client_script action="DELETE">
+        <includes/>
+        <macroponent display_value="">b09513e44c60711062d84b94c9161e1d</macroponent>
+        <name>breadcrumbs_1_items</name>
+        <preset/>
+        <required_translations>[ {
+  "code" : null,
+  "message" : "Home",
+  "comment" : ""
+} ]</required_translations>
+        <script><![CDATA[/**
+ * @param {params} params
+ * @param {api} params.api
+ * @param {TransformApiHelpers} params.helpers
+ */
+function evaluateProperty({
+    api,
+    helpers
+}) {
+    return [{
+
+            "label": helpers.translateSync("Home"),
+
+            "icon": "home-outline",
+
+            "hideLabel": false
+
+        },
+
+        {
+
+            "label": api.data.look_up_record_1.result.number.displayValue
+
+        }
+
+    ];
+}]]></script>
+        <script_api_version>2.0.0</script_api_version>
+        <sys_class_name>sys_ux_client_script</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:03</sys_created_on>
+        <sys_id>689513e4ae607110526c7f8caa6f400d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>breadcrumbs_1_items</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_client_script_689513e4ae607110526c7f8caa6f400d</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:03</sys_updated_on>
+        <target/>
+        <type>transform</type>
+    </sys_ux_client_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_client_script_689513e4ae607110526c7f8caa6f400d</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ux_client_script"&gt;&lt;sys_ux_client_script action="INSERT_OR_UPDATE"&gt;&lt;includes/&gt;&lt;macroponent display_value=""&gt;b09513e44c60711062d84b94c9161e1d&lt;/macroponent&gt;&lt;name&gt;breadcrumbs_1_items&lt;/name&gt;&lt;preset/&gt;&lt;required_translations&gt;[ {
+  "code" : null,
+  "message" : "Home",
+  "comment" : ""
+} ]&lt;/required_translations&gt;&lt;script&gt;&lt;![CDATA[/**
+ * @param {params} params
+ * @param {api} params.api
+ * @param {TransformApiHelpers} params.helpers
+ */
+function evaluateProperty({
+    api,
+    helpers
+}) {
+    return [{
+
+            "label": helpers.translateSync("Home"),
+
+            "icon": "home-outline",
+
+            "hideLabel": false
+
+        },
+
+        {
+
+            "label": api.data.look_up_record_1.result.number.displayValue
+
+        }
+
+    ];
+}]]&gt;&lt;/script&gt;&lt;script_api_version&gt;2.0.0&lt;/script_api_version&gt;&lt;sys_class_name&gt;sys_ux_client_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;system&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-06 09:38:03&lt;/sys_created_on&gt;&lt;sys_id&gt;689513e4ae607110526c7f8caa6f400d&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;breadcrumbs_1_items&lt;/sys_name&gt;&lt;sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="KS Investment Requests"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ux_client_script_689513e4ae607110526c7f8caa6f400d&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;system&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-08-06 09:38:03&lt;/sys_updated_on&gt;&lt;target/&gt;&lt;type&gt;transform&lt;/type&gt;&lt;/sys_ux_client_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1893819587</payload_hash>
+        <record_name>breadcrumbs_1_items</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:58</sys_created_on>
+        <sys_id>6e3d683c97a471102d7ebf56f053af0b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb9491290000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:58</sys_updated_on>
+        <type>UX Client Script</type>
+        <update_guid>2e3d683c81a47110bd7b05edf5ccd10b</update_guid>
+        <update_guid_history>2e3d683c81a47110bd7b05edf5ccd10b:-1893819587</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:00:58</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_client_script">sys_ux_client_script</sys_db_object>
+        <sys_id>08cc0fe0ca4b47e4ad5a1dd7208e51e1</sys_id>
+        <sys_metadata>689513e4ae607110526c7f8caa6f400d</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>breadcrumbs_1_items</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_client_script_689513e4ae607110526c7f8caa6f400d</sys_update_name>
+        <sys_update_version display_value="sys_ux_client_script_689513e4ae607110526c7f8caa6f400d">6e3d683c97a471102d7ebf56f053af0b</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:00:58</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

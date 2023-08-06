@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_ui_policy_action">
+    <catalog_ui_policy_action action="INSERT_OR_UPDATE">
+        <catalog_item/>
+        <catalog_variable>IO:d2e88b28972071102d7ebf56f053af8b</catalog_variable>
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field/>
+        <mandatory>ignore</mandatory>
+        <order>100</order>
+        <sys_class_name>catalog_ui_policy_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 08:44:35</sys_created_on>
+        <sys_id>12598b68972071102d7ebf56f053afd2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>enter_the_zinv_number</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>catalog_ui_policy_action_12598b68972071102d7ebf56f053afd2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 08:44:35</sys_updated_on>
+        <table/>
+        <ui_policy display_value="Make 'enter_the_zinv_number' visible depending on 'do_you_have_a_zinv_number'">80498b28972071102d7ebf56f053afaa</ui_policy>
+        <variable>enter_the_zinv_number</variable>
+        <variable_set/>
+        <visible>true</visible>
+    </catalog_ui_policy_action>
+</record_update>

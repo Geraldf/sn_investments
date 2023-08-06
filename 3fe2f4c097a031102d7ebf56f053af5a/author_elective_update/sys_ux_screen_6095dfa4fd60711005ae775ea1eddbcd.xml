@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_screen">
+    <sys_ux_screen action="DELETE">
+        <active>true</active>
+        <app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config>
+        <description/>
+        <event_mappings>[ {
+  "eventMappingId" : "ckfmaaairddaaaaffjddhhhdiwqbkiwr",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "x_557984_ks_inve_0.NOW_UXF_PAGE#ADD_NOTIFICATIONS_RELAY_6095dfa4496071108ad77a615e4198d6",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "x_557984_ks_inve_0.NOW_UXF_PAGE#ADD_NOTIFICATIONS_RELAY_6095dfa4496071108ad77a615e4198d6",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : {
+      "apiName" : "sn_uxf_page.NOW_UXF_PAGE#ADD_NOTIFICATIONS",
+      "payload" : {
+        "type" : "MAP_CONTAINER",
+        "container" : {
+          "items" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "items" ]
+            }
+          }
+        }
+      },
+      "sysId" : "49fe7d575f983bb3f8eea3fa8d40694c"
+    },
+    "operation" : null,
+    "targetId" : "ckfmaaairddaaaaffiddhhhdoiasehhlj",
+    "type" : "EVENT"
+  } ]
+} ]</event_mappings>
+        <macroponent display_value="Preferences">6095dfa4496071108ad77a615e4198d6</macroponent>
+        <macroponent_config>{
+  "label" : {
+    "type" : "TRANSLATION_LITERAL",
+    "value" : {
+      "code" : null,
+      "message" : "",
+      "comment" : ""
+    }
+  },
+  "bare" : {
+    "type" : "JSON_LITERAL",
+    "value" : true
+  },
+  "scrollable" : {
+    "type" : "JSON_LITERAL",
+    "value" : "none"
+  },
+  "headerLevel" : {
+    "type" : "JSON_LITERAL",
+    "value" : "2"
+  },
+  "headingOnlyVisibleToScreenReaders" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "interceptNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "propagateNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  }
+}</macroponent_config>
+        <name>Preferences Default</name>
+        <order>0</order>
+        <parent_macroponent display_value="Settings Page">b09513e4606071107d950fbb750bbc1a</parent_macroponent>
+        <required_translations>[ ]</required_translations>
+        <rollback_screen/>
+        <screen_condition/>
+        <screen_type display_value="Preferences">349513e4d7607110b4288a0c386c051b</screen_type>
+        <sys_class_name>sys_ux_screen</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:03</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>6095dfa4fd60711005ae775ea1eddbcd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Preferences Default</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_screen_6095dfa4fd60711005ae775ea1eddbcd</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:03</sys_updated_on>
+    </sys_ux_screen>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_screen_6095dfa4fd60711005ae775ea1eddbcd</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_screen"><sys_ux_screen action="INSERT_OR_UPDATE"><active>true</active><app_config display_value="KS Investment Requests Config">6c95dfa4976071102d7ebf56f053afa2</app_config><description/><event_mappings>[ {
+  "eventMappingId" : "ckfmaaairddaaaaffjddhhhdiwqbkiwr",
+  "isConfiguration" : false,
+  "offRowStorageId" : null,
+  "sourceEventApiName" : "x_557984_ks_inve_0.NOW_UXF_PAGE#ADD_NOTIFICATIONS_RELAY_6095dfa4496071108ad77a615e4198d6",
+  "sourceEventCorrelationId" : null,
+  "sourceEventDefinition" : {
+    "apiName" : "x_557984_ks_inve_0.NOW_UXF_PAGE#ADD_NOTIFICATIONS_RELAY_6095dfa4496071108ad77a615e4198d6",
+    "id" : null,
+    "type" : "UXEVENT"
+  },
+  "sourceEventSysId" : null,
+  "targets" : [ {
+    "broker" : null,
+    "clientScript" : null,
+    "conditional" : null,
+    "declarativeAction" : null,
+    "event" : {
+      "apiName" : "sn_uxf_page.NOW_UXF_PAGE#ADD_NOTIFICATIONS",
+      "payload" : {
+        "type" : "MAP_CONTAINER",
+        "container" : {
+          "items" : {
+            "type" : "EVENT_PAYLOAD_BINDING",
+            "binding" : {
+              "address" : [ "items" ]
+            }
+          }
+        }
+      },
+      "sysId" : "49fe7d575f983bb3f8eea3fa8d40694c"
+    },
+    "operation" : null,
+    "targetId" : "ckfmaaairddaaaaffiddhhhdoiasehhlj",
+    "type" : "EVENT"
+  } ]
+} ]</event_mappings><macroponent display_value="Preferences">6095dfa4496071108ad77a615e4198d6</macroponent><macroponent_config>{
+  "label" : {
+    "type" : "TRANSLATION_LITERAL",
+    "value" : {
+      "code" : null,
+      "message" : "",
+      "comment" : ""
+    }
+  },
+  "bare" : {
+    "type" : "JSON_LITERAL",
+    "value" : true
+  },
+  "scrollable" : {
+    "type" : "JSON_LITERAL",
+    "value" : "none"
+  },
+  "headerLevel" : {
+    "type" : "JSON_LITERAL",
+    "value" : "2"
+  },
+  "headingOnlyVisibleToScreenReaders" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "interceptNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  },
+  "propagateNotifications" : {
+    "type" : "JSON_LITERAL",
+    "value" : false
+  }
+}</macroponent_config><name>Preferences Default</name><order>0</order><parent_macroponent display_value="Settings Page">b09513e4606071107d950fbb750bbc1a</parent_macroponent><required_translations>[ ]</required_translations><rollback_screen/><screen_condition/><screen_type display_value="Preferences">349513e4d7607110b4288a0c386c051b</screen_type><sys_class_name>sys_ux_screen</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-06 09:38:03</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>6095dfa4fd60711005ae775ea1eddbcd</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Preferences Default</sys_name><sys_overrides/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_screen_6095dfa4fd60711005ae775ea1eddbcd</sys_update_name><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-06 09:38:03</sys_updated_on></sys_ux_screen></record_update>]]></payload>
+        <payload_hash>1442628983</payload_hash>
+        <record_name>Preferences Default</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:01:03</sys_created_on>
+        <sys_id>333de83c97a471102d7ebf56f053af70</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb94a3a60000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:01:03</sys_updated_on>
+        <type>UX Screen</type>
+        <update_guid>ff3de83c4aa471101e3d0da109b4cc6f</update_guid>
+        <update_guid_history>ff3de83c4aa471101e3d0da109b4cc6f:1442628983</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 16:01:03</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_screen">sys_ux_screen</sys_db_object>
+        <sys_id>01996fecd0a04be98004c4d13a83f279</sys_id>
+        <sys_metadata>6095dfa4fd60711005ae775ea1eddbcd</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Preferences Default</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_screen_6095dfa4fd60711005ae775ea1eddbcd</sys_update_name>
+        <sys_update_version display_value="sys_ux_screen_6095dfa4fd60711005ae775ea1eddbcd">333de83c97a471102d7ebf56f053af70</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 16:01:03</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

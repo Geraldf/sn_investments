@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_page_property">
+    <sys_ux_page_property action="DELETE">
+        <choices/>
+        <description/>
+        <name>chrome_header</name>
+        <page display_value="KS Investment Requests">6895dfa4976071102d7ebf56f053afa2</page>
+        <required_translations>[]</required_translations>
+        <route display_value="">389513e4236071105e868b1dc2ebd917</route>
+        <suffix/>
+        <sys_class_name>sys_ux_page_property</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2023-08-06 09:38:03</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>global</sys_domain_path>
+        <sys_id>6095dfa4d36071106f7ba78954f3ced3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>chrome_header</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_page_property_6095dfa4d36071106f7ba78954f3ced3</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-06 09:38:03</sys_updated_on>
+        <type>json</type>
+        <unique_name>x_557984_ks_inve_0.6895dfa4976071102d7ebf56f053afa2.route.chrome_header.389513e4236071105e868b1dc2ebd917</unique_name>
+        <value>{&#13;
+    "privatePage":{&#13;
+       "searchEnabled": false&#13;
+    }&#13;
+}&#13;
+</value>
+    </sys_ux_page_property>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_page_property_6095dfa4d36071106f7ba78954f3ced3</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_page_property"><sys_ux_page_property action="INSERT_OR_UPDATE"><choices/><description/><name>chrome_header</name><page display_value="KS Investment Requests">6895dfa4976071102d7ebf56f053afa2</page><required_translations>[]</required_translations><route display_value="">389513e4236071105e868b1dc2ebd917</route><suffix/><sys_class_name>sys_ux_page_property</sys_class_name><sys_created_by>system</sys_created_by><sys_created_on>2023-08-06 09:38:03</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>global</sys_domain_path><sys_id>6095dfa4d36071106f7ba78954f3ced3</sys_id><sys_mod_count>0</sys_mod_count><sys_name>chrome_header</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_page_property_6095dfa4d36071106f7ba78954f3ced3</sys_update_name><sys_updated_by>system</sys_updated_by><sys_updated_on>2023-08-06 09:38:03</sys_updated_on><type>json</type><unique_name>x_557984_ks_inve_0.6895dfa4976071102d7ebf56f053afa2.route.chrome_header.389513e4236071105e868b1dc2ebd917</unique_name><value>{&#13;
+    "privatePage":{&#13;
+       "searchEnabled": false&#13;
+    }&#13;
+}&#13;
+</value></sys_ux_page_property></record_update>]]></payload>
+        <payload_hash>1746355280</payload_hash>
+        <record_name>chrome_header</record_name>
+        <reverted_from/>
+        <source/>
+        <source_table>sys_upgrade_history</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:32:28</sys_created_on>
+        <sys_id>1f3b443c972471102d7ebf56f053afb6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189cb0c9ce40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:32:28</sys_updated_on>
+        <type>UX Page Property</type>
+        <update_guid>db3b443cf32471109bf4ad498a9b84b6</update_guid>
+        <update_guid_history>db3b443cf32471109bf4ad498a9b84b6:1746355280</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-06 13:32:28</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_page_property">sys_ux_page_property</sys_db_object>
+        <sys_id>608507a5775c44c6ab211fc2e31b33e1</sys_id>
+        <sys_metadata>6095dfa4d36071106f7ba78954f3ced3</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>chrome_header</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_page_property_6095dfa4d36071106f7ba78954f3ced3</sys_update_name>
+        <sys_update_version display_value="sys_ux_page_property_6095dfa4d36071106f7ba78954f3ced3">1f3b443c972471102d7ebf56f053afb6</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-06 13:32:28</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
