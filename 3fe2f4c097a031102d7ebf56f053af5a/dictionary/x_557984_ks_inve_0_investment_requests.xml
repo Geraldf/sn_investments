@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="1304b03497e471102d7ebf56f053af81" extends="task" label="Investment Requests" max_length="40" name="x_557984_ks_inve_0_investment_requests" text_index="true" type="collection">
+        <element default="801" label="Investment Value" max_length="20" name="investment_value" type="currency"/>
+        <element label="ZINV Number" max_length="40" name="zinv_number" type="string"/>
+    </element>
+</database>

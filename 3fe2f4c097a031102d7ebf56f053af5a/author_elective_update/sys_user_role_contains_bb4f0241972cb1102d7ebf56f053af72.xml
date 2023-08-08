@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+    <sys_user_role_contains action="DELETE">
+        <contains display_value="canvas_user" name="canvas_user">8536f54bc713330072b211d4d8c26080</contains>
+        <role display_value="x_557984_ks_inve_0.user" name="x_557984_ks_inve_0.user">f7e2f4c097a031102d7ebf56f053af65</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-07 17:47:59</sys_created_on>
+        <sys_id>bb4f0241972cb1102d7ebf56f053af72</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>canvas_user.x_557984_ks_inve_0.user</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_user_role_contains_bb4f0241972cb1102d7ebf56f053af72</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-07 17:47:59</sys_updated_on>
+    </sys_user_role_contains>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_user_role_contains_bb4f0241972cb1102d7ebf56f053af72</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains"><sys_user_role_contains action="INSERT_OR_UPDATE"><contains display_value="canvas_user" name="canvas_user">8536f54bc713330072b211d4d8c26080</contains><role display_value="x_557984_ks_inve_0.user" name="x_557984_ks_inve_0.user">f7e2f4c097a031102d7ebf56f053af65</role><sys_class_name>sys_user_role_contains</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-07 17:47:59</sys_created_on><sys_id>bb4f0241972cb1102d7ebf56f053af72</sys_id><sys_mod_count>0</sys_mod_count><sys_name>canvas_user.x_557984_ks_inve_0.user</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_user_role_contains_bb4f0241972cb1102d7ebf56f053af72</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-07 17:47:59</sys_updated_on></sys_user_role_contains></record_update>]]></payload>
+        <payload_hash>126946155</payload_hash>
+        <record_name>canvas_user.x_557984_ks_inve_0.user</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-07 17:47:59</sys_created_on>
+        <sys_id>bb4f0241972cb1102d7ebf56f053af77</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189d11ce6130000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-07 17:47:59</sys_updated_on>
+        <type>Contained Role</type>
+        <update_guid>bf4f0241952cb1101ce29fb99b699076</update_guid>
+        <update_guid_history>bf4f0241952cb1101ce29fb99b699076:126946155</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-07 17:53:47</sys_created_on>
+        <sys_db_object display_value="" name="sys_user_role_contains">sys_user_role_contains</sys_db_object>
+        <sys_id>10f2948ad8314f8092771e705ab46900</sys_id>
+        <sys_metadata>bb4f0241972cb1102d7ebf56f053af72</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>canvas_user.x_557984_ks_inve_0.user</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_user_role_contains_bb4f0241972cb1102d7ebf56f053af72</sys_update_name>
+        <sys_update_version display_value="sys_user_role_contains_bb4f0241972cb1102d7ebf56f053af72">bb4f0241972cb1102d7ebf56f053af77</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-07 17:53:47</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
