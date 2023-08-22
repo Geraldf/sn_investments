@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>investcards</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>InvestCards</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function () {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+  data.items = [];
+  data.table = "sc_cat_item";
+
+  var items = new GlideRecord(data.table);
+  items.query();
+  while (items.next()) {
+    var item = {
+      sys_id: items.sys_id + "",
+      title: items.name + "",
+      short_description: items.short_description + "",
+      image_url: getItemPicture(items.sys_id),
+    };
+    console.log("test" + item);
+    data.items.push(item);
+  }
+  console.log(data.items);
+
+  function getItemPicture(itemID) {
+    var picture = new GlideRecord("sys_attachment");
+    picture.addEncodedQuery("table_sys_id=" + itemID + "^file_name=picture");
+    picture.query();
+    if (picture.next()) {
+      return picture.sys_id + ".iix";
+    } else return "false";
+  }
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 12:11:05</sys_created_on>
+        <sys_id>93bb77fe97e031102d7ebf56f053af48</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>InvestCards</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sp_widget_93bb77fe97e031102d7ebf56f053af48</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 12:13:15</sys_updated_on>
+        <template><![CDATA[<div class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="item in data.items" ng-if="item.image_url != 'false'">
+        <div class="thumbnail">
+            <img src="/{{::item.image_url}}" style="height:100px" alt="...">
+            <div class="caption">
+                <h3 style="height:60px">{{::item.title}}</h3>
+                <p style="height:60px">{{::item.short_description}}</p>
+                <p><a href="/sp?id=sc_cat_item&sys_id={{::item.sys_id}}" class="btn btn-primary" role="button">Order
+                        Now</a> </p>
+            </div>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sp_widget_93bb77fe97e031102d7ebf56f053af48</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css/&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;investcards&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;InvestCards&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function () {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+  data.items = [];
+  data.table = "sc_cat_item";
+
+  var items = new GlideRecord(data.table);
+  items.query();
+  while (items.next()) {
+    var item = {
+      sys_id: items.sys_id + "",
+      title: items.name + "",
+      short_description: items.short_description + "",
+      image_url: getItemPicture(items.sys_id),
+    };
+    console.log("test" + item);
+    data.items.push(item);
+  }
+  console.log(data.items);
+
+  function getItemPicture(itemID) {
+    var picture = new GlideRecord("sys_attachment");
+    picture.addEncodedQuery("table_sys_id=" + itemID + "^file_name=picture");
+    picture.query();
+    if (picture.next()) {
+      return picture.sys_id + ".iix";
+    } else return "false";
+  }
+})();
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-13 12:11:05&lt;/sys_created_on&gt;&lt;sys_id&gt;93bb77fe97e031102d7ebf56f053af48&lt;/sys_id&gt;&lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;&lt;sys_name&gt;InvestCards&lt;/sys_name&gt;&lt;sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="KS Investment Requests"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_93bb77fe97e031102d7ebf56f053af48&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-08-13 12:13:15&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="row"&gt;
+    &lt;div class="col-sm-6 col-md-4" ng-repeat="item in data.items" ng-if="item.image_url != 'false'"&gt;
+        &lt;div class="thumbnail"&gt;
+            &lt;img src="/{{::item.image_url}}" style="height:100px" alt="..."&gt;
+            &lt;div class="caption"&gt;
+                &lt;h3 style="height:60px"&gt;{{::item.title}}&lt;/h3&gt;
+                &lt;p style="height:60px"&gt;{{::item.short_description}}&lt;/p&gt;
+                &lt;p&gt;&lt;a href="/sp?id=sc_cat_item&amp;sys_id={{::item.sys_id}}" class="btn btn-primary" role="button"&gt;Order
+                        Now&lt;/a&gt; &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>2094081497</payload_hash>
+        <record_name>InvestCards</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 12:13:15</sys_created_on>
+        <sys_id>cb3c3ffe97e031102d7ebf56f053af86</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189eed098300000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 12:13:15</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>033c3ffeefe0311058acaa8ffec01d86</update_guid>
+        <update_guid_history>033c3ffeefe0311058acaa8ffec01d86:2094081497,491cbffe9ce0311039c9b218ddfa3f1c:672595819,2bbb77fe59e03110a7c08865e2de1549:1208176855</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="InvestCards">486b728d9774b1102d7ebf56f053af00</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-20 07:16:12</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>95a9fad57f1c44309ec9123126c8d3e4</sys_id>
+        <sys_metadata>93bb77fe97e031102d7ebf56f053af48</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>InvestCards</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sp_widget_93bb77fe97e031102d7ebf56f053af48</sys_update_name>
+        <sys_update_version display_value="sp_widget_93bb77fe97e031102d7ebf56f053af48">cb3c3ffe97e031102d7ebf56f053af86</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-20 07:16:12</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

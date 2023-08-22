@@ -3,7 +3,7 @@
         <active>true</active>
         <applies_extended>false</applies_extended>
         <condition/>
-        <description/>
+        <description>Updates the AssignedTo field to the current user, if empty. </description>
         <field/>
         <global>true</global>
         <isolate_script>true</isolate_script>
@@ -12,8 +12,10 @@
         <order/>
         <script><![CDATA[function onLoad() {
     //Type appropriate comment here, and begin script below
+	// Autgerald.fuchs@karlstorz.com
+	// August 9th 2023
     if (g_form.getValue('assigned_to') == "") {
-        g_form.setValue('assigned_to', g_user.userID)
+        g_form.setValue('assigned_to', g_user.userID);
     }
 
 }]]></script>
@@ -23,7 +25,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>3a26c1bc97e471102d7ebf56f053af5a</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>Assign to Me</sys_name>
         <sys_overrides/>
         <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
@@ -31,7 +33,7 @@
         <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
         <sys_update_name>sys_script_client_3a26c1bc97e471102d7ebf56f053af5a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-08-06 18:43:08</sys_updated_on>
+        <sys_updated_on>2023-08-09 14:43:11</sys_updated_on>
         <table>x_557984_ks_inve_0_investment_requests</table>
         <type>onLoad</type>
         <ui_type>10</ui_type>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_page_property">
+    <sys_ux_page_property action="INSERT_OR_UPDATE">
+        <choices/>
+        <description/>
+        <name>chrome_header</name>
+        <page display_value="Invest">5dbcbc28973031102d7ebf56f053af23</page>
+        <required_translations>[ {
+  "message" : "Configure",
+  "comment" : ""
+}, {
+  "message" : "Logout",
+  "comment" : ""
+}, {
+  "message" : "UserMenu",
+  "comment" : ""
+} ]</required_translations>
+        <route/>
+        <suffix/>
+        <sys_class_name>sys_ux_page_property</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-18 08:45:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>global</sys_domain_path>
+        <sys_id>9ebc3c68973031102d7ebf56f053af8d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>chrome_header</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_page_property_9ebc3c68973031102d7ebf56f053af8d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-20 12:01:25</sys_updated_on>
+        <type>json</type>
+        <unique_name>x_557984_ks_inve_0.5dbcbc28973031102d7ebf56f053af23.root.chrome_header</unique_name>
+        <value>{
+  "privatePage": {
+    "searchEnabled": true,
+    "userPrefsEnabled": true,
+     "logoRoute": {
+      "type": "route",
+      "value": {
+        "route": "home",
+        "fields": {}
+      }
+    },
+    "globalTools": {
+      "collapsingMenuId": 0,
+      "primaryItems": [
+        {
+          "label": "UserMenu",
+          "icon": "user",
+          "type": "menu",
+          "primaryDisplay": "icon",
+          "value": {
+            "children": [
+              {
+                "condition": {
+                  "roles": [
+                    "admin"
+                  ]
+                },
+                "label": {
+                  "translatable": true,
+                  "message": "Configure"
+                },
+                "type": "navigation",
+                "position": 200,
+                "primaryDisplay": "none",
+                "value": {
+                  "type": "external",
+                  "opensWindow": "true",
+                  "value": {
+                    "href": "/nav_to.do?uri=/sys_ux_app_config.do?sys_id=c5bbbde2c3121010f46b42583c40dd06"
+                  }
+                }
+              },
+              {
+                "label": {
+                  "translatable": true,
+                  "message": "Logout"
+                },
+                "position": 500,
+                "type": "navigation",
+                "value": {
+                  "type": "AUTH_ROUTE_BINDING",
+                  "binding": {
+                    "address": [
+                      "logout"
+                    ],
+                    "params": {
+                      "reload": true
+                    },
+                    "default": "/logout.do"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "secondaryItems": []
+    }
+  },
+  "publicPage": {
+    "menuEnabled": true,
+    "logoRoute": {
+      "type": "route",
+      "value": {
+        "route": "home",
+        "fields": {}
+      }
+    }
+  }
+}</value>
+    </sys_ux_page_property>
+    <sys_translated_text action="delete_multiple" query="documentkey=9ebc3c68973031102d7ebf56f053af8d"/>
+</record_update>

@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_macroponent">
+    <sys_ux_macroponent action="INSERT_OR_UPDATE">
+        <associated_types/>
+        <category>page</category>
+        <component_dependencies/>
+        <composition>[ {
+  "elementId" : "container_1",
+  "elementLabel" : "Container 1",
+  "propertyValues" : {
+    "ariaRegionHeadingLevel" : {
+      "type" : "JSON_LITERAL",
+      "value" : "1"
+    },
+    "hideEmptyStateUi" : {
+      "type" : "JSON_LITERAL",
+      "value" : true
+    },
+    "ariaRegionName" : {
+      "type" : "TRANSLATION_LITERAL",
+      "value" : {
+        "code" : null,
+        "message" : "",
+        "comment" : ""
+      }
+    },
+    "includeAriaHeading" : {
+      "type" : "JSON_LITERAL",
+      "value" : false
+    },
+    "type" : {
+      "type" : "JSON_LITERAL",
+      "value" : "section"
+    },
+    "ariaRole" : {
+      "type" : "JSON_LITERAL",
+      "value" : ""
+    }
+  },
+  "eventMappings" : [ ],
+  "slot" : null,
+  "definition" : {
+    "id" : "d356d14b6e293a3020a244b63d278d8f",
+    "type" : "MACROPONENT"
+  },
+  "overrides" : {
+    "composition" : [ {
+      "elementId" : "rich_text_1",
+      "elementLabel" : "Rich text 1",
+      "propertyValues" : {
+        "html" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "&lt;p&gt;&lt;strong&gt;&lt;span style=\"font-family: arial, helvetica, sans-serif; font-size: 18pt;\"&gt;Welcome to the Invest Request Portal!&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;",
+            "comment" : ""
+          }
+        }
+      },
+      "eventMappings" : [ ],
+      "slot" : null,
+      "definition" : {
+        "id" : "2d56f06d55f46bbd4e79b5e624beb940",
+        "type" : "MACROPONENT"
+      },
+      "overrides" : null,
+      "isHidden" : {
+        "type" : "JSON_LITERAL",
+        "value" : null
+      },
+      "isHero" : false,
+      "extensionPoints" : [ ],
+      "isNonDestructive" : false,
+      "items" : [ ],
+      "styles" : null
+    }, {
+      "elementId" : "button_1",
+      "elementLabel" : "Button 1",
+      "propertyValues" : {
+        "size" : {
+          "type" : "JSON_LITERAL",
+          "value" : "md"
+        },
+        "variant" : {
+          "type" : "JSON_LITERAL",
+          "value" : "secondary"
+        },
+        "icon" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "disabled" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "label" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "Create New Investment Request",
+            "comment" : ""
+          }
+        },
+        "tooltipContent" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "Enter a label",
+            "comment" : ""
+          }
+        },
+        "configAria" : {
+          "type" : "MAP_CONTAINER",
+          "container" : { }
+        }
+      },
+      "eventMappings" : [ ],
+      "slot" : null,
+      "definition" : {
+        "id" : "d37ce8abca89d02905fed903c8e34d8e",
+        "type" : "MACROPONENT"
+      },
+      "overrides" : null,
+      "isHidden" : {
+        "type" : "JSON_LITERAL",
+        "value" : null
+      },
+      "isHero" : false,
+      "extensionPoints" : [ ],
+      "isNonDestructive" : false,
+      "items" : [ ],
+      "styles" : null
+    } ],
+    "layout" : {
+      "default" : {
+        "children" : null,
+        "isInline" : null,
+        "items" : [{"element_id":"rich_text_1","styles":{}},{"element_id":"button_1","styles":{}}],
+        "root" : null,
+        "rules" : null,
+        "styles" : {"flex-direction":"column","align-items":"center","display":"flex","grid-template-columns":"1fr 1fr","grid-template-rows":"1fr 1fr","grid-auto-rows":"1fr","grid-auto-columns":"1fr","grid-auto-flow":"row"},
+        "templateId" : "5832fd4d53c31010e6bcddeeff7b12db",
+        "type" : "flex"
+      },
+      "version" : "3.0.0"
+    }
+  },
+  "isHidden" : {
+    "type" : "JSON_LITERAL",
+    "value" : null
+  },
+  "isHero" : false,
+  "extensionPoints" : [ ],
+  "isNonDestructive" : false,
+  "items" : [ ],
+  "styles" : {
+    "background" : "rgb(var(--ks-default--banner-color))",
+    "width" : "100%"
+  }
+}, {
+  "elementId" : "container_2",
+  "elementLabel" : "Container 2",
+  "propertyValues" : {
+    "ariaRegionHeadingLevel" : {
+      "type" : "JSON_LITERAL",
+      "value" : "1"
+    },
+    "hideEmptyStateUi" : {
+      "type" : "JSON_LITERAL",
+      "value" : true
+    },
+    "ariaRegionName" : {
+      "type" : "TRANSLATION_LITERAL",
+      "value" : {
+        "code" : null,
+        "message" : "",
+        "comment" : ""
+      }
+    },
+    "includeAriaHeading" : {
+      "type" : "JSON_LITERAL",
+      "value" : false
+    },
+    "type" : {
+      "type" : "JSON_LITERAL",
+      "value" : "section"
+    },
+    "ariaRole" : {
+      "type" : "JSON_LITERAL",
+      "value" : ""
+    }
+  },
+  "eventMappings" : [ ],
+  "slot" : null,
+  "definition" : {
+    "id" : "d356d14b6e293a3020a244b63d278d8f",
+    "type" : "MACROPONENT"
+  },
+  "overrides" : {
+    "composition" : [ {
+      "elementId" : "single_score_1",
+      "elementLabel" : "Single score 1",
+      "propertyValues" : {
+        "standardFormatData" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "showFilterIcon" : {
+          "type" : "JSON_LITERAL",
+          "value" : true
+        },
+        "dateFormat" : {
+          "type" : "JSON_LITERAL",
+          "value" : "default"
+        },
+        "showMaximumRange" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "emptyStateAlignment" : {
+          "type" : "JSON_LITERAL",
+          "value" : "vertical-centered"
+        },
+        "scoreType" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "showFirstGroupAggregate" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "emptyStateHeading" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "No data available.",
+            "comment" : ""
+          }
+        },
+        "showForecast" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showZero" : {
+          "type" : "JSON_LITERAL",
+          "value" : true
+        },
+        "sortBy" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "showTotalValue" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "dataSources" : {
+          "type" : "LIST_CONTAINER",
+          "container" : [ {
+            "type" : "MAP_CONTAINER",
+            "container" : {
+              "isDatabaseView" : {
+                "type" : "JSON_LITERAL",
+                "value" : false
+              },
+              "allowRealTime" : {
+                "type" : "JSON_LITERAL",
+                "value" : true
+              },
+              "label" : {
+                "type" : "TRANSLATION_LITERAL",
+                "value" : {
+                  "code" : null,
+                  "message" : "Investment Requests",
+                  "comment" : ""
+                }
+              },
+              "sourceType" : {
+                "type" : "JSON_LITERAL",
+                "value" : "table"
+              },
+              "tableOrViewName" : {
+                "type" : "JSON_LITERAL",
+                "value" : "x_557984_ks_inve_0_investment_requests"
+              },
+              "filterQuery" : {
+                "type" : "JSON_LITERAL",
+                "value" : ""
+              },
+              "reportSourceSysId" : {
+                "type" : "JSON_LITERAL",
+                "value" : null
+              },
+              "preferredVisualizations" : {
+                "type" : "JSON_LITERAL",
+                "value" : [ "d24d53f60350de7a652caf3188a46ed2" ]
+              },
+              "id" : {
+                "type" : "JSON_LITERAL",
+                "value" : "dGFibGV4XzU1Nzk4NF9rc19pbnZlXzBfaW52ZXN0bWVudF9yZXF1ZXN0czE2OTI0MjY5MzUyMzU="
+              },
+              "dataCategories" : {
+                "type" : "JSON_LITERAL",
+                "value" : [ "trend", "group", "simple" ]
+              }
+            }
+          } ]
+        },
+        "period" : {
+          "type" : "JSON_LITERAL",
+          "value" : "M"
+        },
+        "showChange" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "configVersion" : {
+          "type" : "JSON_LITERAL",
+          "value" : "23.0.0-ci-SNAPSHOT"
+        },
+        "showSubAggregate" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showSecondGroupAggregate" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showMetricLabel" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "headingPosition" : {
+          "type" : "JSON_LITERAL",
+          "value" : "top"
+        },
+        "showHeaderSeparator" : {
+          "type" : "JSON_LITERAL",
+          "value" : true
+        },
+        "showSparkline" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showTarget" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "telemetry" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "metrics" : {
+          "type" : "LIST_CONTAINER",
+          "container" : [ {
+            "type" : "MAP_CONTAINER",
+            "container" : {
+              "dataSource" : {
+                "type" : "JSON_LITERAL",
+                "value" : "dGFibGV4XzU1Nzk4NF9rc19pbnZlXzBfaW52ZXN0bWVudF9yZXF1ZXN0czE2OTI0MjY5MzUyMzU="
+              },
+              "id" : {
+                "type" : "JSON_LITERAL",
+                "value" : "ZEdGaWJHVjRYelUxTnprNE5GOXJjMTlwYm5abFh6QmZhVzUyWlhOMGJXVnVkRjl5WlhGMVpYTjBjekUyT1RJME1qWTVNelV5TXpVPTE2OTI0MjY5MzY0MjU="
+              },
+              "aggregateFunction" : {
+                "type" : "JSON_LITERAL",
+                "value" : "COUNT"
+              },
+              "numberFormat" : {
+                "type" : "JSON_LITERAL",
+                "value" : {
+                  "customFormat" : false
+                }
+              },
+              "axisId" : {
+                "type" : "JSON_LITERAL",
+                "value" : "primary"
+              }
+            }
+          } ]
+        },
+        "showChangeFrom" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "chartSize" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "headerTitle" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "My Open Invests",
+            "comment" : ""
+          }
+        },
+        "applyDateRange" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "formats" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "sortByOrder" : {
+          "type" : "JSON_LITERAL",
+          "value" : "desc"
+        },
+        "enableCustomEmptyState" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showThreshold" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showScoreDate" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "hideMatrixAggregate" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "description" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "trendBy" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "numberOfPeriods" : {
+          "type" : "JSON_LITERAL",
+          "value" : 3
+        },
+        "scoreIcon" : {
+          "type" : "JSON_LITERAL",
+          "value" : "activity-fill"
+        },
+        "groupBy" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "title" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "iconStyle" : {
+          "type" : "JSON_LITERAL",
+          "value" : "background"
+        },
+        "showTrend" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "enableRealTimeUpdate" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showScoreUpdateTime" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showForecastRange" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showAbsolutePeriod" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "dataCategory" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "scoreSize" : {
+          "type" : "JSON_LITERAL",
+          "value" : "md"
+        },
+        "followFilters" : {
+          "type" : "JSON_LITERAL",
+          "value" : true
+        },
+        "useRelativeScoreTime" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "startTime" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "showTotalAggregate" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showChangePercentage" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showHeader" : {
+          "type" : "JSON_LITERAL",
+          "value" : true
+        },
+        "bareBorder" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "dataPassthrough" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "showConfidenceBand" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showComment" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "refreshFrequency" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "wrapTitle" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "showBorder" : {
+          "type" : "JSON_LITERAL",
+          "value" : true
+        },
+        "colorConfig" : {
+          "type" : "JSON_LITERAL",
+          "value" : {
+            "type" : "default"
+          }
+        },
+        "filterConfigurations" : {
+          "type" : "STATE_BINDING",
+          "binding" : {
+            "address" : [ "parFilters" ]
+          }
+        },
+        "showGapPercentage" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "backgroundRefreshInterval" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "showDataPassthrough" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "sparklineStyle" : {
+          "type" : "JSON_LITERAL",
+          "value" : "area"
+        },
+        "emptyStateContent" : {
+          "type" : "JSON_LITERAL",
+          "value" : "There are no scores available for the selected criteria. Contact your admin for more info."
+        },
+        "newReporting" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "emptyStateIllustration" : {
+          "type" : "JSON_LITERAL",
+          "value" : "no-data"
+        },
+        "endTime" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "enableDrilldown" : {
+          "type" : "JSON_LITERAL",
+          "value" : true
+        }
+      },
+      "eventMappings" : [ ],
+      "slot" : null,
+      "definition" : {
+        "id" : "d24d53f60350de7a652caf3188a46ed2",
+        "type" : "MACROPONENT"
+      },
+      "overrides" : null,
+      "isHidden" : {
+        "type" : "JSON_LITERAL",
+        "value" : null
+      },
+      "isHero" : false,
+      "extensionPoints" : [ ],
+      "isNonDestructive" : false,
+      "items" : [ ],
+      "styles" : null
+    }, {
+      "elementId" : "data_row_1",
+      "elementLabel" : "OpenInvestsData",
+      "propertyValues" : {
+        "noDataMessage" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "No content to display.",
+            "comment" : ""
+          }
+        },
+        "data" : {
+          "type" : "JSON_LITERAL",
+          "value" : {
+            "page_cursor" : "e2JlY2E4ZTYyNWIwMjEwMTA4NDhiMjg1ODJkODFjNzYzPTI5LCA3NDRiODJhMjViMDIxMDEwODQ4YjI4NTgyZDgxYzc1Zj0yMDAsIDAxYjQzNWEwNzMyMTEwMTBjMzQyZDVmZGJkZjZhN2UzPTExfQ",
+            "page_size" : 20,
+            "page_number" : 0,
+            "is_last_page" : false,
+            "all_actions" : [ {
+              "assignmentId" : "d46f400473211010c342d5fdbdf6a7cf",
+              "name" : "navigation",
+              "label" : "Navigation",
+              "actionType" : "uxf_client_action",
+              "actionDispatch" : "NAVIGATION",
+              "actionPayload" : "{\r\n \"table\": \"{{table}}\",\r\n \"sysId\": \"{{sys_id}}\",\r\n \"url\": \"{{navigation_url}}\"\r\n}"
+            }, {
+              "assignmentId" : "e3a173c073151010c342d5fdbdf6a7a2",
+              "name" : "call_number",
+              "label" : "Call Number",
+              "actionType" : "uxf_client_action",
+              "actionDispatch" : "HOME_PHONE_CALL",
+              "actionPayload" : "{\r\n\t\"phoneNumber\": \"{{home_phone}}\"\r\n}"
+            } ],
+            "selected_filter" : "",
+            "items" : [ {
+              "template" : "now-card-evam-record",
+              "propValues" : {
+                "highlightedHeaderLabel" : "Vice President",
+                "textHeaderLabel" : "Development",
+                "titleLabel" : "Manifah Masood",
+                "imageURL" : "1792fbe1d701120035ae23c7ce6103e4.iix",
+                "subtitle" : "manifah.masood",
+                "subtitleAvatarName" : "Manifah Masood",
+                "subtitleAvatarURL" : "ab490666c312120048f4d5dc64d3aee8.iix",
+                "detailValueOne" : "manifah.masood@example.com",
+                "detailValueTwo" : "",
+                "detailValueThree" : "",
+                "highlightedHeaderIcon" : "clock-outline",
+                "highlightedHeaderBkgColor" : "moderate",
+                "subtitleIcon" : "calendar-fill",
+                "imageType" : "image",
+                "subtitleImageType" : "avatar",
+                "detailLabelOne" : "Email address",
+                "detailLabelTwo" : "Works for",
+                "detailLabelThree" : "Location/address",
+                "mainActions" : [ {
+                  "assignmentId" : "42fd3e5273511010c342d5fdbdf6a70e",
+                  "name" : "activate_user",
+                  "label" : "Activate",
+                  "actionType" : "server_script",
+                  "icon" : "Button",
+                  "buttonType" : "primary",
+                  "actionDispatch" : "",
+                  "serverScript" : "current.active = true;\ncurrent.update();",
+                  "confirmationRequired" : false,
+                  "confirmationMessage" : "",
+                  "actionPayload" : "",
+                  "actionPayloadMap" : [ ]
+                }, {
+                  "assignmentId" : "e3a173c073151010c342d5fdbdf6a7a2",
+                  "name" : "call_number",
+                  "label" : "Call Number",
+                  "actionType" : "uxf_client_action",
+                  "icon" : "",
+                  "buttonType" : "primary",
+                  "actionDispatch" : "HOME_PHONE_CALL",
+                  "serverScript" : "",
+                  "confirmationRequired" : false,
+                  "confirmationMessage" : "",
+                  "actionPayload" : {
+                    "phoneNumber" : ""
+                  }
+                } ],
+                "clickAction" : {
+                  "assignmentId" : "d46f400473211010c342d5fdbdf6a7cf",
+                  "name" : "navigation",
+                  "label" : "Navigation",
+                  "actionType" : "uxf_client_action",
+                  "icon" : "",
+                  "buttonType" : "primary",
+                  "actionDispatch" : "NAVIGATION",
+                  "serverScript" : "",
+                  "confirmationRequired" : false,
+                  "confirmationMessage" : "",
+                  "actionPayload" : {
+                    "table" : "sys_user",
+                    "sysId" : "1832fbe1d701120035ae23c7ce610369",
+                    "url" : ""
+                  }
+                },
+                "model" : {
+                  "name" : "Manifah Masood",
+                  "email" : "manifah.masood@example.com",
+                  "avatar" : "ab490666c312120048f4d5dc64d3aee8.iix",
+                  "mobile_phone" : "",
+                  "time_zone" : "Europe/London",
+                  "title" : "Vice President",
+                  "photo" : "1792fbe1d701120035ae23c7ce6103e4.iix",
+                  "user_name" : "manifah.masood",
+                  "location.name" : "",
+                  "company.name" : "",
+                  "department.name" : "Development",
+                  "sysId" : "1832fbe1d701120035ae23c7ce610369",
+                  "sys_id" : "1832fbe1d701120035ae23c7ce610369",
+                  "table" : "sys_user"
+                }
+              },
+              "buttonType" : "primary",
+              "actionDispatch" : "NAVIGATION",
+              "serverScript" : "",
+              "confirmationRequired" : false,
+              "confirmationMessage" : "",
+              "actionPayload" : {
+                "table" : "sc_cat_item",
+                "sysId" : "f514e9e64fcf42c0bde324af0210c766",
+                "url" : ""
+              },
+              "model" : {
+                "name" : "OS X Mavericks",
+                "price" : "$0.00",
+                "category.title" : "Software",
+                "vendor.name" : "",
+                "icon" : "0f823d404f889200086eeed18110c70f.iix",
+                "picture" : "616db9444f889200086eeed18110c70e.iix",
+                "short_description" : "OS X Mavericks (version 10.9.x) is Apple's tenth\n\t\t\tmajor release of OS X, for Macs\n\t\t",
+                "model.display_name" : "",
+                "sys_class_name" : "Catalog Item",
+                "delivery_time" : "2 Days",
+                "sysId" : "f514e9e64fcf42c0bde324af0210c766",
+                "sys_id" : "f514e9e64fcf42c0bde324af0210c766",
+                "table" : "sc_cat_item"
+              }
+            } ],
+            "available_filters" : [ {
+              "sys_id" : "",
+              "label" : "Default"
+            }, {
+              "sys_id" : "c10d1e42737e10108d991e666bf6a761",
+              "label" : "Active entities"
+            }, {
+              "sys_id" : "808ed682737e10108d991e666bf6a793",
+              "label" : "Assigned to me"
+            }, {
+              "sys_id" : "1213fb41733210108d991e666bf6a77a",
+              "label" : "Recently updated"
+            } ]
+          }
+        },
+        "daClientActionContract" : {
+          "type" : "JSON_LITERAL",
+          "value" : null
+        },
+        "cardHeightHorizontal" : {
+          "type" : "JSON_LITERAL",
+          "value" : "md"
+        },
+        "noBox" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "title" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "My Invests",
+            "comment" : ""
+          }
+        },
+        "layout" : {
+          "type" : "JSON_LITERAL",
+          "value" : "horizontal"
+        },
+        "maxVisibleCardsHorizontal" : {
+          "type" : "JSON_LITERAL",
+          "value" : "4"
+        },
+        "dataBrokerIsLoading" : {
+          "type" : "JSON_LITERAL",
+          "value" : false
+        },
+        "titleStyleVariant" : {
+          "type" : "JSON_LITERAL",
+          "value" : "header-primary"
+        },
+        "titleHeadingLevel" : {
+          "type" : "JSON_LITERAL",
+          "value" : "1"
+        },
+        "viewAllLinkLabel" : {
+          "type" : "TRANSLATION_LITERAL",
+          "value" : {
+            "code" : null,
+            "message" : "View All",
+            "comment" : ""
+          }
+        },
+        "minCardPixelWidth" : {
+          "type" : "JSON_LITERAL",
+          "value" : 254
+        }
+      },
+      "eventMappings" : [ ],
+      "slot" : "",
+      "definition" : {
+        "id" : "fae56519b74e7995b69ae7cf66e280f9",
+        "type" : "MACROPONENT"
+      },
+      "overrides" : null,
+      "isHidden" : {
+        "type" : "JSON_LITERAL",
+        "value" : null
+      },
+      "isHero" : false,
+      "extensionPoints" : [ ],
+      "isNonDestructive" : false,
+      "items" : [ ],
+      "styles" : null
+    } ],
+    "layout" : {
+      "default" : {
+        "children" : null,
+        "isInline" : null,
+        "items" : [{"element_id":"single_score_1","styles":{}},{"element_id":"data_row_1","styles":{}}],
+        "root" : null,
+        "rules" : null,
+        "styles" : {"flex-direction":"row","display":"grid","grid-template-columns":"1fr 5fr","grid-template-rows":"1fr","grid-auto-rows":"1fr","grid-auto-columns":"1fr","align-items":"center"},
+        "templateId" : "5832fd4d53c31010e6bcddeeff7b12db",
+        "type" : "grid"
+      },
+      "version" : "3.0.0"
+    }
+  },
+  "isHidden" : {
+    "type" : "JSON_LITERAL",
+    "value" : null
+  },
+  "isHero" : false,
+  "extensionPoints" : [ ],
+  "isNonDestructive" : false,
+  "items" : [ ],
+  "styles" : null
+} ]</composition>
+        <da_relay_models/>
+        <data>[ {
+  "cachePolicy" : null,
+  "definition" : {
+    "id" : "b997a84053021010cbc2ddeeff7b1228",
+    "type" : "COMPOSITE"
+  },
+  "dependencies" : { },
+  "elementId" : "look_up_records_1",
+  "elementLabel" : "Look Up Records 1",
+  "eventMappings" : [ ],
+  "inputValues" : {
+    "table" : {
+      "type" : "JSON_LITERAL",
+      "value" : "x_557984_ks_inve_0_investment_requests"
+    },
+    "encodedQuery" : {
+      "type" : "JSON_LITERAL",
+      "value" : ""
+    },
+    "returnFields" : {
+      "type" : "JSON_LITERAL",
+      "value" : "investmentvalue,description"
+    },
+    "orderBy" : {
+      "type" : "JSON_LITERAL",
+      "value" : ""
+    },
+    "sortType" : {
+      "type" : "JSON_LITERAL",
+      "value" : "asc"
+    },
+    "limit" : {
+      "type" : "JSON_LITERAL",
+      "value" : "1000"
+    },
+    "offset" : {
+      "type" : "JSON_LITERAL",
+      "value" : null
+    },
+    "queryCategory" : {
+      "type" : "JSON_LITERAL",
+      "value" : ""
+    },
+    "returnFieldMetadata" : {
+      "type" : "JSON_LITERAL",
+      "value" : false
+    }
+  },
+  "readEvaluationMode" : "EAGER"
+} ]</data>
+        <description/>
+        <dispatched_events/>
+        <ext_controller_dep/>
+        <extends display_value="Page Template">19be392623033300f4b4c50947bf65ba</extends>
+        <extension_point/>
+        <handled_events/>
+        <interactions/>
+        <interfaces/>
+        <internal_event_mappings>{ }</internal_event_mappings>
+        <layout>{
+  "default" : {
+    "children" : null,
+    "isInline" : null,
+    "items" : [{"element_id":"container_1","styles":{"background":"rgb(var(--now-color--neutral-1))","width":"100%"}},{"element_id":"container_2","styles":{"width":"100%"}}],
+    "root" : null,
+    "rules" : null,
+    "styles" : {"flex-direction":"column"},
+    "templateId" : "5832fd4d53c31010e6bcddeeff7b12db",
+    "type" : "flex"
+  },
+  "version" : "3.0.0"
+}</layout>
+        <macroponent_dependencies/>
+        <name>Default</name>
+        <output_prop_mapping/>
+        <props>[ ]</props>
+        <required_translations>[ {
+  "message" : "&lt;p&gt;&lt;strong&gt;&lt;span style=\"font-family: arial, helvetica, sans-serif; font-size: 18pt;\"&gt;Welcome to the Invest Request Portal!&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;",
+  "comment" : ""
+}, {
+  "message" : "Activate",
+  "comment" : ""
+}, {
+  "message" : "Active entities",
+  "comment" : ""
+}, {
+  "message" : "Assigned to me",
+  "comment" : ""
+}, {
+  "message" : "Call Number",
+  "comment" : ""
+}, {
+  "message" : "Create New Investment Request",
+  "comment" : ""
+}, {
+  "message" : "Default",
+  "comment" : ""
+}, {
+  "message" : "Enter a label",
+  "comment" : ""
+}, {
+  "message" : "Investment Requests",
+  "comment" : ""
+}, {
+  "message" : "My Invests",
+  "comment" : ""
+}, {
+  "message" : "My Open Invests",
+  "comment" : ""
+}, {
+  "message" : "Navigation",
+  "comment" : ""
+}, {
+  "message" : "No content to display.",
+  "comment" : ""
+}, {
+  "message" : "No data available.",
+  "comment" : ""
+}, {
+  "message" : "Recently updated",
+  "comment" : ""
+}, {
+  "message" : "View All",
+  "comment" : ""
+} ]</required_translations>
+        <root_component/>
+        <root_component_config>{ }</root_component_config>
+        <root_component_definition/>
+        <schema_version>1.0.0</schema_version>
+        <state_properties>[ ]</state_properties>
+        <sys_class_name>sys_ux_macroponent</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-18 08:46:13</sys_created_on>
+        <sys_id>5bccb8a8973031102d7ebf56f053afb5</sys_id>
+        <sys_mod_count>33</sys_mod_count>
+        <sys_name>Default</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_macroponent_5bccb8a8973031102d7ebf56f053afb5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-20 12:35:51</sys_updated_on>
+    </sys_ux_macroponent>
+    <sys_translated_text action="delete_multiple" query="documentkey=5bccb8a8973031102d7ebf56f053afb5"/>
+</record_update>

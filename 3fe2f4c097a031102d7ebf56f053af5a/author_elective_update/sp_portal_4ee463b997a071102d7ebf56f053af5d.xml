@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_portal">
+    <sp_portal action="DELETE">
+        <css_variables/>
+        <dark_theme/>
+        <default>false</default>
+        <enable_ais>false</enable_ais>
+        <enable_favorites>false</enable_favorites>
+        <hide_portal_name>false</hide_portal_name>
+        <homepage/>
+        <icon/>
+        <kb_knowledge_base/>
+        <kb_knowledge_page/>
+        <login_page/>
+        <logo/>
+        <notfound_page/>
+        <quick_start_config/>
+        <sc_catalog/>
+        <sc_catalog_page/>
+        <sc_category_page/>
+        <search_application/>
+        <search_results_configuration/>
+        <sp_chat_queue/>
+        <sp_rectangle_menu/>
+        <sys_class_name>sp_portal</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 07:57:55</sys_created_on>
+        <sys_id>4ee463b997a071102d7ebf56f053af5d</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Investment Request Portal</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sp_portal_4ee463b997a071102d7ebf56f053af5d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 11:33:55</sys_updated_on>
+        <theme/>
+        <title>Investment Request Portal</title>
+        <ts_index_group/>
+        <url_suffix>invest</url_suffix>
+    </sp_portal>
+    <sys_translated_text action="DELETE" query="documentkey=4ee463b997a071102d7ebf56f053af5d"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sp_portal_4ee463b997a071102d7ebf56f053af5d</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_portal"><sp_portal action="INSERT_OR_UPDATE"><css_variables/><dark_theme/><default>false</default><enable_ais>false</enable_ais><enable_favorites>false</enable_favorites><hide_portal_name>false</hide_portal_name><homepage/><icon/><kb_knowledge_base/><kb_knowledge_page/><login_page/><logo/><notfound_page/><quick_start_config/><sc_catalog/><sc_catalog_page/><sc_category_page/><search_application/><search_results_configuration/><sp_chat_queue/><sp_rectangle_menu/><sys_class_name>sp_portal</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-10 07:57:55</sys_created_on><sys_id>4ee463b997a071102d7ebf56f053af5d</sys_id><sys_mod_count>7</sys_mod_count><sys_name>Investment Request Portal</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sp_portal_4ee463b997a071102d7ebf56f053af5d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-10 11:33:55</sys_updated_on><theme/><title>Investment Request Portal</title><ts_index_group/><url_suffix>invest</url_suffix></sp_portal><sys_translated_text action="delete_multiple" query="documentkey=4ee463b997a071102d7ebf56f053af5d"/></record_update>]]></payload>
+        <payload_hash>-1645738379</payload_hash>
+        <record_name>Investment Request Portal</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 18:34:38</sys_created_on>
+        <sys_id>71835983976831102d7ebf56f053afa2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189f02dc4150000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 18:34:38</sys_updated_on>
+        <type>Service Portal</type>
+        <update_guid>7576588a2b6471100628198078ad3a06</update_guid>
+        <update_guid_history>7576588a2b6471100628198078ad3a06:1991193305,7576588a2b6471100628198078ad3a06:1991193305,4226184abc647110a21bdf6141da90e4:-698381200,32e5108ab06471107d6f48481770f196:-1147724727,d8d59c4a9e647110e4ee9464487c10cb:-698381200,c0b51c4a73647110924dfb702c4ade76:580606259,6f85504af564711078f2d46ce653f843:-1147724727,a1a4540a17647110f0e9551c5786c2e7:1991193305,a905a3b951a071102a8bfd2c6e3256c8:-1645738379</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Investment Request Portal">381415c3976831102d7ebf56f053af0e</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 18:37:02</sys_created_on>
+        <sys_db_object display_value="" name="sp_portal">sp_portal</sys_db_object>
+        <sys_id>2c39da045cd1437797389590b70f96f1</sys_id>
+        <sys_metadata>4ee463b997a071102d7ebf56f053af5d</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Investment Request Portal</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sp_portal_4ee463b997a071102d7ebf56f053af5d</sys_update_name>
+        <sys_update_version display_value="sp_portal_4ee463b997a071102d7ebf56f053af5d">71835983976831102d7ebf56f053afa2</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 18:37:02</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,2473 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function hrmTodosSummaryController($scope, $rootScope, $sanitize, spUtil, $window, $sce, $timeout, spAriaUtil) {
+    var c = this;
+    c.loaded = {};
+    c.loadingMore = {};
+    c.todoDisplayed = {};
+    c.selectedTodo = {};
+    c.stopLoadMore = {};
+    c.isMobileLeftPanelOpen = true;
+    c.limit = c.data.queryLimit - 1;
+    c.mobileDevice = c.data.isMobile || ($window.innerWidth < 767);
+    c.currentTab = c.data.tabs[0].name; // Sets default current Tab
+    c.accessibility = spAriaUtil.isAccessibilityEnabled();
+    c.currentPageTitle = $scope.page.title;
+    c.filtersData = [];
+    c.selectedFiltersFromTodoPage = [];
+
+    var todoDetailTitle = 'To-do detail';
+    var resizeTime;
+    var resizeTimeout = false;
+    var delta = 500;
+    $window.addEventListener('resize', function(event) {
+        resizeTime = new Date();
+        if (resizeTimeout === false) {
+            resizeTimeout = true;
+            $timeout(isMobileDevice, delta);
+        }
+
+        handlePageTitleOnResize();
+    });
+
+    function handlePageTitleOnResize() {
+        if (isTodoDetail() && c.currentPageTitle !== todoDetailTitle) {
+            setPageTitle(todoDetailTitle);
+        } else if ($window.innerWidth > 767 && !c.data.onTicketPage && c.currentPageTitle == todoDetailTitle) {
+            setPageTitle($scope.page.title);
+        }
+    }
+
+    function isTodoDetail() {
+        return $window.innerWidth < 767 && !c.data.onTicketPage && !c.data.todoSummaryLeftPanel;
+    }
+
+    function isMobileDevice() {
+        if (new Date() - resizeTime < delta) {
+            $timeout(isMobileDevice, delta);
+        } else {
+            c.mobileDevice = c.data.isMobile || ($window.innerWidth < 767);
+            resizeTimeout = false;
+        }
+    }
+
+    c.getDelegatedByText = function(delegatorName) {
+        return $scope.data.i18n.DELEGATED_BY.replace('{}', delegatorName);
+    };
+
+    // instead  of adding more recordWatcher, listen to change from HRM To-Dos Task Item widget
+    $scope.$on('updateDelegateRecord', function($event) {
+        $event.stopPropagation();
+        loadData(getMyTodos);
+    });
+
+    $scope.$on('sn_ex_sp.applyFilters', function($event, data) {
+        $event.stopPropagation();
+        c.data.action = "loadFilteredTodos";
+        c.data.filtersData = data;
+        c.loadingMore[c.data.defaultTab] = true;
+        c.todoDisplayed[c.data.defaultTab] = [];
+        c.server.update().then(function() {
+            getMyTodos();
+            c.loadingMore[c.data.defaultTab] = false;
+            c.filtersData = c.data.filtersData;
+            c.selectedFiltersFromTodoPage = c.data.selectedFiltersFromTodoPage;
+        });
+    });
+
+    function announceTodoDisplayed(todo, isTabSwitch) {
+        isTabSwitch = isTabSwitch || false;
+        $rootScope.$broadcast('sn_hr_sp.todoDisplayed', todo, isTabSwitch);
+    }
+
+    // get the task-line-item widget template
+    function loadTodoWidget(index, finalTodoList, tab) {
+        finalTodoList[index].currentIndex = index;
+        finalTodoList[index].totalTodos = finalTodoList.length;
+
+        if (finalTodoList[index].taskConfigurationSysId && finalTodoList[index].taskConfigurationSysId !== '') {
+            var taskObj = {
+                taskSysId: finalTodoList[index].sysId,
+                taskConfigurationSysId: finalTodoList[index].taskConfigurationSysId,
+                Url: finalTodoList[index].url,
+                widgetSpan: 9,
+                tableName: finalTodoList[index].tableName,
+                tabName: finalTodoList[index].tab
+            };
+            spUtil.get("task-configuration", taskObj).then(function(response) {
+                finalTodoList[index].todoLineWidget = response;
+
+                createApprovalWatcher(taskObj.taskSysId);
+
+                if (!c.mobileDevice) {
+                    $scope.$applyAsync(function() {
+                        angular.element('#' + c.todoDisplayed[tab][index].sysId + '_todo_link').focus();
+                    });
+                }
+
+                $scope.$applyAsync(function() {
+                    if (tab == c.currentTab)
+                        announceTodoDisplayed(finalTodoList[index]);
+                });
+            });
+        } else {
+            spUtil.get("hrm-todos-line-item", finalTodoList[index]).then(function(response) {
+                finalTodoList[index].todoLineWidget = response;
+
+                createAttachmentWatcher(response.data.sysId);
+                createApprovalWatcher(response.data.sysId);
+
+                if (!c.mobileDevice) {
+                    $scope.$applyAsync(function() {
+                        angular.element('#' + c.todoDisplayed[tab][index].sysId + '_todo_link').focus();
+                    });
+                }
+                $scope.$applyAsync(function() {
+                    if (tab == c.currentTab)
+                        announceTodoDisplayed(finalTodoList[index]);
+                });
+            });
+        }
+    }
+
+    function selectTodo(finalTodoList, tab) {
+        // If array position exists, open to-do
+        if (finalTodoList[c.selectedTodo[tab]]) {
+            finalTodoList[c.selectedTodo[tab]].isOpen = true;
+            // if there's no selected to-do, open the first one
+        } else if (finalTodoList.length > 0 && !c.selectedTodo[tab]) {
+            if (!(c.data.onTicketPage && c.data.hideTodoSummary)) {
+                //If mobile view then reload the task list
+                if(c.mobileDevice)
+                    c.backToTaskList();
+                finalTodoList[0].isOpen = true;
+                c.selectedTodo[tab] = 0;
+            }
+            // If array position does not exist, and not the first one, select the last to-do		
+        } else if (!finalTodoList[c.selectedTodo[tab]] && c.selectedTodo[tab] > 0) {
+            c.selectedTodo[tab] = _.findLastIndex(finalTodoList);
+        }
+    }
+
+    c.trustAsHtml = function(htmlContent) {
+        return $sce.trustAsHtml($sanitize(htmlContent));
+    };
+
+    function getLeftMenuItems(todosToShow, tab, loadMore) {
+        var finalTodoList = _.map(todosToShow, function(todo) {
+            todo.firstLoad = true;
+            todo.isOpen = false; // Default
+            return todo;
+        });
+
+        c.loaded[tab] = true;
+
+        if (!loadMore) {
+            selectTodo(finalTodoList, tab);
+            if (!(c.data.onTicketPage && c.data.hideTodoSummary)) {
+                loadTodoWidget(c.selectedTodo[tab], finalTodoList, tab);
+            }
+        }
+
+        return finalTodoList;
+    }
+
+    $scope.$on('sn_hr_sp.todoSummaryDetail', function(e, data) {
+        if (data == null || data.parent != c.data.parentCaseId || !c.data.onTicketPage)
+            return;
+        c.data.hideTodoSummary = false;
+        if (data.todoId != '')
+            c.openTodo(data.todoId);
+    });
+
+    c.hasPreviousTodo = function() {
+        return hasNextOrPreviousTodo(false);
+    };
+
+    c.hasNextTodo = function() {
+        return hasNextOrPreviousTodo(true);
+    };
+
+    function hasNextOrPreviousTodo(next) {
+        var todos, index, value;
+        todos = c.todoDisplayed[c.currentTab];
+        index = c.selectedTodo[c.currentTab];
+        value = (next) ? index + 1 : index - 1;
+        if (todos[value]) {
+            return true;
+        }
+        return false;
+    }
+
+    function getPreviousOrNextTodo(next) {
+        var todos, index, sysId, value;
+        todos = c.todoDisplayed[c.currentTab];
+        index = c.selectedTodo[c.currentTab];
+        value = (next) ? index + 1 : index - 1;
+        if (todos[value]) {
+            sysId = todos[value].sysId;
+        } else {
+            sysId = todos[_.findLastIndex(todos)].sysId;
+        }
+        c.openTodo(sysId, c.currentTab);
+    }
+
+    c.getPreviousTodo = function() {
+        if (c.hasPreviousTodo()) {
+            return getPreviousOrNextTodo();
+        }
+    };
+
+    c.getNextTodo = function() {
+        return getPreviousOrNextTodo(true);
+    };
+
+    function find(sysId, tab) {
+        return _.find(c.todoDisplayed[tab], {
+            sysId: sysId
+        });
+    }
+
+    function setOpenStatus(sysId, tab) {
+        if (c.selectedTodo.hasOwnProperty(tab)) {
+            c.todoDisplayed[tab][c.selectedTodo[tab]].isOpen = false;
+        }
+        var todo = find(sysId, tab);
+        todo.isOpen = true;
+        c.selectedTodo[tab] = _.findIndex(c.todoDisplayed[tab], {
+            sysId: sysId
+        });
+    }
+
+    function announceIsOpen(sysId, index) {
+        $scope.$applyAsync(function() {
+            $rootScope.$broadcast("sn_hr_sp.todoSummaryOpened", {
+                parent: c.data.parentCaseId,
+                todoSelected: sysId,
+                currentTodoIndex: index
+            });
+        });
+    }
+
+    /**
+     * Element el is considered in viewport when any part of the element is visible in the viewport.
+     * Use offset to indicate how much of the element may be in view to consider the full element in view
+     * ie. If we set offset = elem.offsetHeight then the element would be considered out of view unless
+     * the entire element was visible in the view port.
+     */
+    function isElementInViewport(el, offset) {
+        offset = offset || 0;
+        var rect = el.getBoundingClientRect();
+        var bottom = (window.innerHeight || document.documentElement.clientHeight) + el.offsetHeight - offset;
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= bottom &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    c.openTodo = function(sysId, tab) {
+        if (c.data.onTicketPage) { // Ticket page does not use tabs
+            tab = c.data.defaultTab;
+        }
+
+        $rootScope.$broadcast('sp.update.breadcrumbs', [{
+            label: c.data.txt.breadcrumb,
+            url: "javascript:void(0)"
+        }]);
+
+        setOpenStatus(sysId, tab);
+        var index = _.findIndex(c.todoDisplayed[tab], {
+            sysId: sysId
+        });
+        c.todoDisplayed[tab][index].todoLineWidget = undefined;
+        loadTodoWidget(index, c.todoDisplayed[tab], tab);
+
+        c.data.todoSummaryLeftPanel = false;
+        if (!c.data.onTicketPage && c.mobileDevice) {
+            setPageTitle(todoDetailTitle);
+        }
+
+        if (c.data.onTicketPage) {
+            announceIsOpen(sysId, index);
+        }
+
+        // scroll down to current
+        if (!c.mobileDevice) {
+            $timeout(function() {
+                // Used when out of view port todo is programatically focused
+                var selectedTodoElem = angular.element('#' + c.todoDisplayed[tab][index].sysId + '_task_lineitem_summary');
+                if (typeof jQuery === "function" && selectedTodoElem instanceof jQuery) {
+                    selectedTodoElem = selectedTodoElem[0];
+                }
+                if (selectedTodoElem && !isElementInViewport(selectedTodoElem))
+                    selectedTodoElem.scrollIntoView();
+            }, 0, false);
+        }
+    };
+
+    c.backToTaskList = function() {
+        c.data.hideTodoSummary = true;
+        $rootScope.$broadcast("sn_hr_sp.todoSummaryDetail", {
+            parent: c.data.parentCaseId,
+            todoId: ''
+        });
+        $rootScope.$broadcast("sn_hr_sp.todoSummaryOpened", {
+            parent: c.data.parentCaseId,
+            todoSelected: '',
+            currentTodoIndex: 0
+        });
+    }
+
+    c.openTodosSummaryList = function() {
+        if (c.data.onTicketPage) {
+            c.backToTaskList();
+        } else {
+            c.data.todoSummaryLeftPanel = true;
+            setPageTitle($scope.page.title);
+        }
+    }
+
+    function setPageTitle(prefix) {
+        c.currentPageTitle = prefix;
+        $(document).prop('title', prefix + ' - ' + $scope.portal.title);
+    }
+
+    function loadData(callback) {
+        c.data.includeTodo = getLinkedTodoParam();
+        c.data.action = "loadTodos";
+        if(c.selectedFiltersFromTodoPage.applyFilters){
+            c.data.selectedFiltersFromTodoPage = c.selectedFiltersFromTodoPage;
+        }  
+        c.server.update().then(callback);
+    }
+
+    function hasChanged(w, dbEventDetails) {
+
+        var tableName = w.data.table_name || w.table_name;
+        var operation = w.data.operation || w.operation;
+        var changes = w.data.changes || [];
+        dbEventDetails = dbEventDetails || {};
+
+        //set the record watcher for all the fields other than comments and worknotes
+        if (changes.length == 1 && ((_.includes(changes, 'comments')) || _.includes(changes, 'work_notes')))
+            return false;
+        if (changes.length == 2 && _.includes(changes, 'comments') && _.includes(changes, 'work_notes'))
+            return false;
+        if (changes.length == 1 && _.includes(changes, 'state') && dbEventDetails.isTaskSurvey)
+            return false;
+        if (operation === 'update' && changes.length === 0) // change in relationships
+            return false;
+        if (tableName === 'sys_attachment' && operation === 'update' && changes.length === 0) // change in relationships
+            return false;
+        if (tableName === 'sys_attachment' && operation === 'update' && changes[0] === 'file_name') // attachment renaming
+            return false;
+        if (tableName === 'sys_attachment' && changes.length <= 2 && _.includes(['state', 'image_width', 'image_height', 'average_image_color'], changes[0])) // img feature detection
+            return false;
+        return true;
+    }
+
+    c.lastInstanceNotified = null;
+    spUtil.recordWatch($scope, "sn_hr_core_task", "active=true", function(updateInfo) {
+        // broadcast the sn_lp.task_completed event if the updated task have triggered conditions configured in Listening Posts
+        if (updateInfo.data.action === "exit" && updateInfo.data.changes && updateInfo.data.changes.indexOf('state') != -1) {
+            c.server.get({
+                action: "addNotification",
+                taskId: updateInfo.data.sys_id,
+                table: updateInfo.data.table_name
+            }).then(function(response) {
+                response.action = undefined;
+                if (response.data.taskInfo && response.data.taskInfo.taskId && c.lastInstanceNotified !== response.data.taskInfo.taskId) {
+                    c.lastInstanceNotified = response.data.taskInfo.taskId;
+                    var taskInfo = {
+                        taskId: response.data.taskInfo.taskId,
+                        taskDescription: response.data.taskInfo.taskDescription
+                    }
+                    $rootScope.$broadcast("sn_lp.task_completed", taskInfo);
+                }
+
+            });
+        }
+    });
+
+    function update(watcher) {
+        // cheap sync pre-filter just in case `watcher` has enough info to skip this iteration
+        if (!hasChanged(watcher, {}))
+            return;
+
+        // only the latest change triggers the actual refresh
+        clearTimeout(update.timer);
+        update.timer = setTimeout(function() {
+            var isLocalChange = c.data.onTicketPage || watcher.data.table_name === 'sys_attachment' || watcher.table_name === 'sys_attachment';
+            if (isLocalChange) {
+                _executeSidePanelUpdate(watcher);
+            } else {
+                _executeFullPageUpdate(watcher);
+            }
+        }, 300);
+
+    }
+    update.timer = null;
+    update.surveys = {};
+
+    function _getDbEventDetails(watcher) {
+
+        var tableName = watcher.data.table_name;
+        var sysId = watcher.data.sys_id;
+
+        if (tableName === 'sys_attachment') {
+            return Promise.resolve({
+                isTaskSurvey: false
+            });
+        }
+
+        if (update.surveys.hasOwnProperty(sysId)) {
+            return Promise.resolve({
+                isTaskSurvey: update.surveys[sysId]
+            })
+        }
+
+        return c.server.get({
+            action: "checkTaskType",
+            sysId: sysId,
+            table: tableName
+        }).then(function(response) {
+            response.action = undefined;
+            update.surveys[sysId] = response.data.isTaskSurvey;
+            return Promise.resolve({
+                isTaskSurvey: response.data.isTaskSurvey
+            });
+        });
+
+    }
+
+    function _executeSidePanelUpdate(watcher) {
+
+        var selectedIndex = c.selectedTodo[c.currentTab];
+        var selectedTicket = c.todoDisplayed[c.currentTab][selectedIndex];
+        commitToDom(function() {
+            selectedTicket.isOpen = false;
+        }).then(function() {
+            c.openTodo(selectedTicket.sysId, c.currentTab);
+        });
+    }
+
+    function _executeFullPageUpdate(watcher) {
+
+        $rootScope.$broadcast('sp.update.breadcrumbs', [{
+            label: c.data.txt.breadcrumb,
+            url: "javascript:void(0)"
+        }]);
+
+        _getDbEventDetails(watcher).then(function(dbEventDetails) {
+            c.isTaskSurvey = dbEventDetails.isTaskSurvey;
+
+            if (!hasChanged(watcher, dbEventDetails))
+                return;
+
+            _.each(c.loaded, function(value, key) {
+                c.loaded[key] = false;
+            });
+            c.todoDisplayed = {};
+
+            loadData(function() {
+                loadTodos();
+            });
+        });
+    }
+
+    function createAttachmentWatcher(taskSysId) {
+        if (createAttachmentWatcher.watchers[taskSysId]) return;
+        createAttachmentWatcher.watchers[taskSysId] = true;
+        spUtil.recordWatch(
+            $scope,
+            'sys_attachment',
+            'table_sys_id=' + taskSysId,
+            update
+        );
+    }
+    createAttachmentWatcher.watchers = {};
+
+    $rootScope.$on('list.updated', function(e, r) {
+        // ignore sys_attachment to avoid unnecessary call to loadData
+        if (r.table_name === 'sys_attachment' || c.data.onTicketPage)
+            return;
+
+        r.data = r;
+        update(r);
+    });
+
+    function loadRecordWatchers(watchers, scope) {
+        if (watchers.length > 0) {
+            _.each(watchers, function(watcher) {
+                spUtil.recordWatch(scope, watcher.table, watcher.filter, update);
+            });
+        }
+    }
+
+    function loadWatchers() {
+        loadRecordWatchers(c.data.watchers, $scope);
+        if (c.mobileDevice && c.data.onTicketPage) {
+            c.data.todoSummaryLeftPanel = false;
+        }
+    }
+
+    function loadTodos() {
+        _.each(c.data.todosToShow.recordsToShow, function(todos, tab) {
+            c.todoDisplayed[tab] = getLeftMenuItems(todos, tab);
+        });
+
+        // Handle no results, and empty state
+        _.each(c.data.tabs, function(tab) {
+            if (!c.data.todosToShow.recordsToShow[tab.name] || (c.data.todosToShow.recordsToShow[tab.name] && c.data.todosToShow.recordsToShow[tab.name].length<1) || !c.todoDisplayed[tab.name]) {
+                c.todoDisplayed[tab.name] = [];
+                c.loaded[tab.name] = true;
+            } else if (c.todoDisplayed[tab.name].length > c.limit) // When the page is reloaded, show 'show more' button.
+                c.stopLoadMore[tab.name] = false;
+
+        })
+    }
+
+    function searchTodoInTab(todoSysId, tab) {
+        var todosToSearch = c.data.todosToShow.recordsToShow[tab];
+        if (todosToSearch)
+            for (var i = 0; i < todosToSearch.length; i++)
+                if (todosToSearch[i].sysId === todoSysId)
+                    return true;
+        return false;
+    }
+
+    function getLinkedTodoParam() {
+        var result = new RegExp('[\?&]todo=([^&#]*)').exec(window.location.href);
+        if (result == null)
+            return "";
+        return decodeURI(result[1]) || "";
+    }
+
+    function openLinkedTodo() {
+        var todoSysId = getLinkedTodoParam();
+        if (todoSysId) {
+            for (var tabIdx = 0; tabIdx < c.data.tabs.length; tabIdx++)
+                if (searchTodoInTab(todoSysId, c.data.tabs[tabIdx].name)) {
+                    c.currentTab = c.data.tabs[tabIdx].name;
+                    c.openTodo(todoSysId, c.data.tabs[tabIdx].name);
+                    break;
+                }
+        }
+    }
+
+    function getMyTodos() {
+        loadWatchers();
+        loadTodos();
+        openLinkedTodo();
+    }
+
+    c.processGetMoreTodos = function(tab) {
+        var todosToShow = c.data.todosToShow.recordsToShow[tab];
+        if (!todosToShow) {
+            c.stopLoadMore[tab] = true;
+        }
+        var todoList = getLeftMenuItems(todosToShow, tab, true);
+        c.todoDisplayed[tab] = c.todoDisplayed[tab].concat(todoList);
+    }
+
+    c.fetchMoreRecords = function(tab) {
+        c.loadingMore[tab] = true;
+        c.data.action = "loadMoreTodos";
+        c.data.excludeList = _.map(c.todoDisplayed[tab], 'sysId');
+        c.data.selectedFiltersFromTodoPage = c.selectedFiltersFromTodoPage;
+        c.server.update().then(function() {
+            c.processGetMoreTodos(tab);
+            c.loadingMore[tab] = false;
+        });
+    }
+
+    function commitToDom(taskFn) {
+        return new Promise(function(resolve) {
+            // execute the change
+            taskFn();
+            $timeout(function() {
+                // wait 1 tick, then run a digest, then resolve, then run another digest
+                $timeout(resolve);
+            });
+        });
+    }
+
+    // start of the server call.
+    if (c.data.async && !c.data.onTicketPage) {
+        loadData(getMyTodos);
+    } else {
+        getMyTodos();
+    }
+
+    /**  Making tabs accessible **/
+
+    $scope.$applyAsync(function() {
+        new Tab("todo-panel");
+    });
+
+    function Tab(id) {
+        this._id = id;
+        this.$tpanel = $('#' + id);
+        this.$tabs = this.$tpanel.find('.tab');
+        this.$panels = this.$tpanel.find('.tab-pane');
+        this.bindHandlers();
+        this.init();
+    }
+
+    createApprovalWatcher.watchers = {};
+
+    function createApprovalWatcher(sysId) {
+        if (createApprovalWatcher.watchers[sysId]) return;
+        createApprovalWatcher.watchers[sysId] = true;
+        spUtil.recordWatch(
+            $scope,
+            'sysapproval_approver',
+            'sys_id=' + sysId,
+            update
+        );
+    }
+
+    Tab.prototype.keys = {
+        left: 37,
+        right: 39
+    };
+    Tab.prototype.init = function() {
+        var $tab = this.$tabs.filter('.active');
+        this.$tpanel.find('#' + $tab.find('a').attr('aria-controls')).addClass('active in').attr('aria-hidden', 'false');
+    }
+    Tab.prototype.switchTabs = function($curTab, $newTab) {
+        var $curLink = $curTab.find('a'),
+            $newLink = $newTab.find('a');
+        c.currentTab = $newLink.attr('aria-controls');
+        var newTodoIndex = c.selectedTodo[c.currentTab];
+        if(!c.mobileDevice) {
+          if (newTodoIndex != undefined && c.todoDisplayed[c.currentTab][newTodoIndex] && c.todoDisplayed[c.currentTab][newTodoIndex].sysId)
+              c.openTodo(c.todoDisplayed[c.currentTab][newTodoIndex].sysId, c.currentTab);
+          if (c.data.todosToShow && c.data.todosToShow.recordsToShow && c.data.todosToShow.recordsToShow[c.currentTab] && c.data.todosToShow.recordsToShow[c.currentTab][newTodoIndex])
+              announceTodoDisplayed(c.data.todosToShow.recordsToShow[c.currentTab][newTodoIndex], true);
+        }
+
+        $newTab.addClass('active');
+        $newLink.attr('aria-selected', 'true');
+        this.$tpanel.find('#' + $curLink.attr('aria-controls')).removeClass('active in').attr('aria-hidden', 'true');
+        this.$tpanel.find('#' + $curLink.attr('aria-controls') + "-content").removeClass('active in').attr('aria-hidden', 'true');
+        this.$tpanel.find('#' + $newLink.attr('aria-controls')).addClass('active in').attr('aria-hidden', 'false');
+        this.$tpanel.find('#' + $newLink.attr('aria-controls') + "-content").addClass('active in').attr('aria-hidden', 'false');
+        $newLink.attr('tabindex', '0');
+        $newLink.focus();
+    }
+    Tab.prototype.bindHandlers = function() {
+        var self = this;
+        this.$tabs.keydown(function(e) {
+            return self.handleTabKeyDown($(this), e);
+        });
+        this.$tabs.click(function(e) {
+            return self.handleTabClick($(this), e);
+        });
+    }
+    Tab.prototype.moveToPreviousOrNext = function(e, $tab, next) {
+        var $newTab, tabIndex;
+        tabIndex = this.$tabs.index($tab);
+        var index = (next) ? this.$tabs.length - 1 : 0;
+        if (tabIndex === index) {
+            $newTab = (next) ? this.$tabs.first() : this.$tabs.last();
+        } else {
+            var newIndex = (next) ? tabIndex + 1 : tabIndex - 1;
+            $newTab = this.$tabs.eq(newIndex);
+        }
+        this.switchTabs($tab, $newTab);
+        e.preventDefault();
+        return false;
+    }
+    Tab.prototype.handleTabKeyDown = function($tab, e) {
+        if (e.keyCode == this.keys.left) {
+            this.moveToPreviousOrNext(e, $tab);
+        } else if (e.keyCode == this.keys.right) {
+            this.moveToPreviousOrNext(e, $tab, true);
+        }
+    }
+    Tab.prototype.handleTabClick = function($tab, e) {
+        var $oldTab = this.$tpanel.find('.tab.active');
+        this.switchTabs($oldTab, $tab);
+    }
+    /**  Making tabs accessible **/
+    $scope.isSignPadVisible = false;
+    $scope.$on('mobile-showSignPad', function(event, args) {
+        $scope.isSignPadVisible = !$scope.isSignPadVisible;
+    })
+
+    $scope.showSignPad = function() {
+        $rootScope.$broadcast('mobile-showSignPad');
+    }
+
+    $scope.backToListKeyDown = function(event) {
+        if (event.keyCode == 13 || event.keyCode == 32)
+            c.backToTaskList();
+    }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.todo-left-panel{
+  background-color: $body-bg;
+}
+
+@media (min-width: 767px) {
+  #todo-left-panel .tab-content {
+    position: absolute;
+    overflow-y: auto;
+    top: 43px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  #todo-left-panel .tab-content.large-nav {
+    top: 60px;
+  }
+}
+
+.back-button-mobile{
+  padding-top: 5px;
+}
+.todos-list-item.panel {
+  background-color: transparent;
+}
+
+.todos-widget-mobile{
+  padding-bottom: 20px;
+}
+
+.completed-to-do {
+  background-color: lighten($color-grey,15%) !important;
+}
+
+.arrow-mobile{
+  padding: 20px;
+}
+
+.back-to-tasklist {
+  text-transform: capitalize;
+  cursor: pointer;
+  .m-r-sm {
+    font-size: 1.44rem;
+  }
+}
+
+.isDisabled {
+  color: $text-muted;
+  cursor: none;
+  opacity: 0.5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.panel-heading.panel-border-bottom {
+  border-bottom: 1px solid $border;
+}
+
+.todos-list .todos-list-item .panel-heading {
+  min-height: 62px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h2.page-title {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  color: $color-darkest;
+}
+
+.content-wrap {
+  min-height: 387px !important;
+  border-radius: 4px;
+}
+
+
+.b-b {
+  border-bottom: 1px solid $border; 
+}
+
+.inline {
+  vertical-align: middle; 
+}
+
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.todo-right-native {
+  min-height: fit-content;
+}
+
+.mobile-todo-panel {
+  min-height: calc(100vh - 180px);
+}
+
+.load-more-button{
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-message{
+  padding: (3*$sp-space--3xl + $sp-space--lg) 0;
+  p {
+    margin: 0;
+    color: $text-tertiary;
+  }
+  .content-wrap {
+     min-height: fit-content !important;
+  }
+  .empty-state-icon {
+    width: 42px;
+    height: 55px;
+  }
+  .empty-state-title {
+    font-size: 1.8rem;
+    margin: 1.2rem 0 0 !important;
+  }
+  .empty-state-message{
+    margin-top: $sp-space--md;
+  }
+}
+
+.loading-indicator-fetchmore {
+  text-align: center;
+  border-top: none;
+  padding: 21px 0;
+}
+
+.loading-indicator {
+  text-align: center;
+  margin: 300px 0;
+}
+
+.back-padding {
+  padding-right: 0.5rem;
+}
+
+.ticket-back-padding {
+  padding-right: 0.275rem;
+}
+
+.nav-tabs {
+  border: none;
+  margin: auto 0;  
+  display: flex;
+  flex-direction: row;
+  overflow: hidden; 
+  overflow-x: auto;
+  background-color: $body-bg;
+  border-bottom: 1px solid $border;
+
+  li:last-child {
+    margin-right:0px; 
+  }
+
+  li {
+    flex:1;
+    white-space: nowrap;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+    margin-right: 2px;
+    a {
+      border: none !important;
+      border-radius: 0;
+      margin-right: 0px;
+      cursor: pointer;
+
+      &amp;:focus, &amp;:hover {
+        color: #0B322C;
+      } 
+
+      &amp;:focus {
+        outline: 0;
+        background-color: $brand-primary-lightest;
+      }
+    }
+
+
+    &amp;:hover {
+      border-bottom-color: $color-disabled;
+    }
+
+    &amp;.active {
+      border-bottom-color: $select-primary;
+    }
+  }
+}
+
+.todos-list {
+  padding: 10px 15px;
+  border-bottom: 1px solid $border;
+
+  .todo-summary-delegates {
+    text-align: right;
+    color: #757676;
+    i {
+      padding-top: 2px;
+    }
+  }
+
+  &amp;.selected {
+    background-color: $list-group-disabled-bg;
+  }
+}
+
+.todos-list-accessibility {
+  border-left: 3px solid $body-bg;
+  &amp;.selected {
+    background-color: $body-bg;
+    border-left : 3px solid $brand-primary;
+  }
+}
+
+.tab-pane {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  &amp;.active {
+    display: block;
+  }
+}
+
+.todo-summary-cell {
+  position: relative;
+  margin-bottom: 0;
+  border: none;
+  box-shadow:none;
+  .todo-summary-body {
+    display: flex;
+    align-items:center;
+    min-height:82px;
+    .todo-summary-details {
+      overflow: hidden;
+      text-align: left !important;
+      .task-title {
+        font-size: 1.5rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        a{
+          color: $brand-primary-darker;
+        }
+			}
+      .case-title {
+        font-size: 1.4rem;
+        text-overflow: ellipsis;
+        color:$color-darkest;
+        overflow: hidden;
+      }
+      .text-muted {
+        font-size: 1.4rem;
+      }
+      .todo-status {
+        padding-top:10px;
+      }
+      .fa-check-circle {
+        padding-right: 1px;
+        padding-left: 1px;
+      }
+    }
+    .todo-summary-icon {
+      display: flex;
+      vertical-align: middle;
+      font-size: 1.82rem;
+      justify-content: center;
+      .fa-level-up {
+        color: $gray-light;
+        transform: rotate(90deg);
+        vertical-align: -webkit-baseline-middle;
+        margin-right: 15px;
+      } 
+    }
+  }
+}
+
+
+/*Increasing width for childern tasks*/
+.todo-summary-body{
+  .indent-xsm {
+    padding-left: 48px !important;
+  }
+
+  .indent-xs {
+    padding-left: 0px;
+  }
+}
+
+
+/* IE Fixes */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+  .todo-summary-body {
+    .indent-xs {
+      width: 5em;
+    }	
+  }
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>invest_summary</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Invest Summary</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {	
+	//Check if current task is survey
+	data.isTaskSurvey = false;
+	var filters = $sp.getParameter('filters');
+	data.selectedFiltersFromTodoPage = []; 
+	if (input && input.action == 'checkTaskType'){
+		var gr = new GlideRecordSecure(input.table);
+		if (gr.get(input.sysId) && gr.hr_task_type == 'take_survey')
+			data.isTaskSurvey = true;
+	} if(input && input.action == 'addNotification' && new GlidePluginManager().isActive('sn_lp')) {
+		var pulseUtils = new sn_lp.PulseUtilsAjax();
+		data.taskInfo = pulseUtils.checkForTriggeredConditions ? pulseUtils.checkForTriggeredConditions(input.table, input.taskId) : {};
+	}
+	
+	// translated text
+	data.i18n = {
+		DELEGATED: gs.getMessage("Delegated"),
+		DELEGATED_BY: gs.getMessage("Delegated by: {}")
+	};
+
+	data.isMobile = gs.isMobile();
+	data.todoSummaryLeftPanel = true;
+	data.todosToShow = {
+			recordsToShow : {},
+			recordWatchers : []
+	};
+	data.watchers =[];	
+	data.async = (input && input.onTicketPage) ? false : true;
+	
+	var util = new sn_hr_sp.todoPageUtils();
+	data.tabs = util.getTabs();	
+ 	data.defaultTab = data.tabs[0].name;
+	data.queryLimit = todoPageUtils.QUERY_LIMIT;
+
+	data.todosFilters = $sp.getWidget('todos-filters', {});
+	
+	data.txt = {
+		empty: {},
+		onComplete: gs.getMessage('All tasks are Complete'),
+		title: gs.getMessage('My tasks'),
+		breadcrumb: gs.getMessage('My tasks')
+	};
+	data.txt.empty[data.defaultTab] = {
+		title: gs.getMessage("You don't have any task right now.")
+	};
+
+	data.txt.empty.completed = {
+		title: gs.getMessage("You don't have any completed task right now.")
+	};
+	
+	if (input && input.action == "loadFromTicketPage") {
+		data.todosToShow.recordsToShow = util.splitInTabs(new sn_hr_sp.hr_PortalUtil().processRecordsForSummary(input.recordsToShow), data.defaultTab);
+		data.todosToShow.recordWatchers = input.recordWatchers;
+		data.watchers = data.todosToShow.recordWatchers||[];
+		data.onTodoPage = false;
+		data.onTicketPage = true;
+		data.parentCaseId = input.parent;
+		data.activitySetName = input.activitySetName;
+		data.selectedTodo = input.todoSelected;
+		data.currentTodoIndex = (data.todosToShow.recordsToShow[data.defaultTab] && data.todosToShow.recordsToShow[data.defaultTab].length > input.currentTodoIndex) ? input.currentTodoIndex: 0;
+		data.hideTodoSummary = input.hideTodoSummary;
+	} else if (input && input.action == "loadTodos") {
+		data.onTodoPage = true;
+		data.onTicketPage = false;
+		if(input.selectedFiltersFromTodoPage){
+			data.todosToShow = util.getMyTodos(data.queryLimit, [], input.includeTodo,undefined,undefined,input.selectedFiltersFromTodoPage.finalFilterConditions,input.selectedFiltersFromTodoPage.applyFilters);
+		} else{
+			data.todosToShow = util.getMyTodos(data.queryLimit, [], input.includeTodo);
+		}
+		   
+		data.watchers = data.todosToShow.recordWatchers||[];
+	} else if (input && input.action == "loadFilteredTodos") {
+		data.selectedFiltersFromTodoPage = util.fetchSelectedFilters(input.filtersData);
+		data.onTodoPage = true;
+		data.onTicketPage = false;
+		data.todosToShow = util.getMyTodos(data.queryLimit, [], input.includeTodo,undefined,undefined,data.selectedFiltersFromTodoPage.finalFilterConditions,data.selectedFiltersFromTodoPage.applyFilters);
+		data.watchers = data.todosToShow.recordWatchers||[];
+	} else if (input && input.action == "insertOrUpdateTodoRecord") {
+		var noOfRecords = Math.ceil(input.currentCount/data.queryLimit)*data.queryLimit;
+		if(noOfRecords < (todoPageUtils.QUERY_LIMIT*2))
+			noOfRecords = todoPageUtils.QUERY_LIMIT*2;
+		data.onTodoPage = true;
+		data.onTicketPage = false;
+		data.newTodosList = util.getMyTodos(noOfRecords,undefined,undefined,undefined,undefined,data.selectedFiltersFromTodoPage);
+	} else if (input && input.action == "loadMoreTodos") {
+		data.todosToShow = util.getMyTodos(data.queryLimit,input.excludeList,undefined,undefined,undefined,input.selectedFiltersFromTodoPage.finalFilterConditions,input.selectedFiltersFromTodoPage.applyFilters);
+	} else if (input && input.action == "loadFillerTodos"){
+		data.fillerTodosList = util.getMyTodos(input.fillerCount, input.fillerExcludeList,undefined,undefined,undefined,data.selectedFiltersFromTodoPage.finalFilterConditions,data.selectedFiltersFromTodoPage.applyFilters);
+	}
+
+	Object.keys(data.todosToShow.recordsToShow).forEach(function(tab) {
+		(data.todosToShow.recordsToShow[tab] || []).forEach(function(todo) {
+			if (!todo.displayValueList) return;
+			todo.displayValueList = todo.displayValueList.map(function (displayValue) {
+				return GlideSecurityUtils.escapeScript(displayValue);
+			});
+		});
+	});
+	
+	if (data.onTicketPage) {
+		data.txt.empty[data.defaultTab].message = gs.getMessage('All tasks are Complete');
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 11:46:07</sys_created_on>
+        <sys_id>6506bb7e976031102d7ebf56f053af43</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Invest Summary</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sp_widget_6506bb7e976031102d7ebf56f053af43</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 11:46:07</sys_updated_on>
+        <template><![CDATA[<div class="todos-widget" ng-class="{'todos-widget-mobile': !c.data.onTicketPage && c.mobileDevice}">
+  <h2 class="page-title" ng-if="( (!data.onTicketPage && !c.mobileDevice) || (!data.onTicketPage && c.mobileDevice && c.data.todoSummaryLeftPanel))" ng-bind="::c.data.txt.title"></h2>
+  <sp-widget widget="c.data.todosFilters"></sp-widget>
+  <div class="visible-xs back-button-mobile padder-b" ng-if="(c.mobileDevice && !c.data.todoSummaryLeftPanel && !isSignPadVisible)">
+    <a ng-click="c.openTodosSummaryList()" href class="close-task"><i class="fa fa-chevron-left" ng-class="{'back-padding': !c.data.onTicketPage, 'ticket-back-padding': c.data.onTicketPage}"></i>${Back}</a>
+    <div class="pull-right" ng-if="c.todoDisplayed[c.currentTab].length > 1">
+      <a href ng-click="c.getPreviousTodo()" ng-class="{'isDisabled':!c.hasPreviousTodo()}" data-toggle="tooltip" title="Open Previous To-do" aria-label="Open Previous Todo" class="arrow-mobile" tabindex="{{c.hasPreviousTodo() ? '0' : '-1'}}"><i class="fa fa-arrow-up"></i></a>
+      <a href ng-click="c.getNextTodo()" ng-class="{'isDisabled':!c.hasNextTodo()}" data-toggle="tooltip" title="Open Next To-do" aria-label="Open Next Todo" class="arrow-mobile" tabindex="{{c.hasNextTodo() ? '0' : '-1'}}"><i class="fa fa-arrow-down"></i></a>
+    </div>
+  </div>
+  <div class="visible-xs back-button-mobile padder-b" ng-if="(c.mobileDevice && isSignPadVisible)">
+    <a ng-click="showSignPad()" href="javascript:void(0)" class="close-task"><i class="fa fa-chevron-left" ng-class="{'back-padding': !data.onTicketPage, 'ticket-back-padding': data.onTicketPage}"></i>${Back}</a>
+
+  </div>
+  <div id="todo-panel" class="content-wrap b row-eq-height" ng-class="{'mobile-todo-panel': c.mobileDevice}"> 
+    <div id="todo-left-panel" class="col-md-3 col-sm-3 col-lg-3 col-xs-12 no-padder todo-left-panel" ng-show="(!c.mobileDevice || c.mobileDevice && c.data.todoSummaryLeftPanel)">
+      <div ng-if="c.data.onTicketPage" class="panel-heading panel-border-bottom">
+        <h4><a ng-click="c.backToTaskList()" ng-keydown="backToListKeyDown($event)" class="back-to-tasklist" aria-label="{{data.activitySetName}}" tabindex="0" href="javascript:void(0)">
+          <i class="fa fa-chevron-left m-r-sm" aria-label="Back to to-dos list"></i> {{data.activitySetName}}
+          </a></h4>
+      </div>
+      <div>
+        <ul class="nav nav-tabs" ng-if="!c.data.onTicketPage" role="tablist">
+          <li ng-class="{'active': (c.currentTab == tab.name)}" ng-repeat="tab in ::c.data.tabs" class="tab" role="presentation">
+            <a id="tab{{$index}}" data-toggle="tab" data-target="#{{::tab.name}}, #{{::tab.name}}-content" role="tab" ng-bind="tab.label" aria-controls="{{::tab.name}}" aria-label="{{::tab.name}} to-dos" tabindex="{{(c.currentTab == tab.name) ? 0 : -1}}" aria-selected="{{(c.currentTab == tab.name) ? 'true' : 'false'}}"></a>
+          </li>
+        </ul>
+        <div class="tab-content clearfix" ng-class="{'large-nav': c.data.onTicketPage}" aria-live="polite" role="tabpanel">
+          <ul id="{{::tab.name}}" class="tab-pane" ng-class="{'in active': (c.currentTab == tab.name)}" ng-repeat="tab in ::c.data.tabs" role="tablist" aria-labelledby="{{tab.name}}" aria-hidden="false">
+            <li ng-repeat="todo in c.todoDisplayed[tab.name]" role="tab"
+            	ng-click="c.openTodo(todo.sysId, tab.name);" 
+            	ng-class="{'todos-list': !c.accessibility, 'todos-list-accessibility': c.accessibility, selected: (!c.mobileDevice && todo.isOpen),'completed-to-do': (data.onTicketPage && todo.isCompleted && !todo.isOpen) }" 
+            	id="{{todo.sysId}}_task_lineitem_summary" 
+            	aria-pressed="{{!c.mobileDevice && todo.isOpen}}">
+              <div ng-if="todo.delegates.length > 0 || (todo.delegator && todo.delegator.name)" 
+                   class="todo-summary-delegates">
+                <span tabindex="0" 
+                      aria-label="{{ (todo.delegator && todo.delegator.name) ? c.getDelegatedByText(todo.delegator.name) : todo.delegates }}" 
+                      uib-tooltip="{{ (todo.delegator && todo.delegator.name) ? c.getDelegatedByText(todo.delegator.name) : todo.delegates }}" 
+                      tooltip-placement="top" 
+                      tooltip-append-to-body="true">
+                  <i class="fa fa-sm"
+                     ng-class="(todo.delegator && todo.delegator.name) ? 'fa-arrow-circle-o-left' : 'fa-arrow-circle-o-right'"></i>
+                  <span ng-bind="::data.i18n.DELEGATED"></span>
+                </span>
+              </div>
+              <div ng-include="'hrm-todos-header-widget.html'"></div> 
+            </li>
+            <li ng-if="c.loadingMore[tab.name] || !c.loaded[tab.name]" class="loading-indicator-fetchmore">
+              <span class="fa fa-spinner fa-spin" aria-hidden="true" name="spinner" spin="true"></span>
+              ${Loading}...
+            </li>            
+            <li ng-if="c.loaded[tab.name] && !c.stopLoadMore[tab.name] && !c.data.onTicketPage && c.todoDisplayed[tab.name].length > c.limit" class="load-more-button">
+              <button ng-click="c.fetchMoreRecords(tab.name);" class="btn btn-default">${Show more}</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="todo-right-panel" class="col-md-9 col-sm-9 col-lg-9 col-xs-12 b-l no-padder" ng-class="{'todo-right-native':!c.mobileDevice}" ng-if="!c.mobileDevice || (c.mobileDevice && !c.data.todoSummaryLeftPanel) || (c.mobileDevice && c.todoDisplayed[c.currentTab].length == 0)">
+      <div id="{{::tab.name}}-content" class="tab-pane" ng-class="{'in active': (c.currentTab == tab.name)}" ng-repeat="tab in ::c.data.tabs" role="tabpanel" tab-index="0" aria-labelledby="{{tab.name}}" aria-hidden="false">              
+        <div ng-if="!c.selectedFiltersFromTodoPage.applyFilters && !c.loadingMore[tab.name] && !c.todoDisplayed[tab.name].length && c.loaded[tab.name]" class="panel-heading text-center empty-message">
+          <p><i class="fa fa-3x fa-check-circle success empty-state-icon"></i></p>
+          <h3 class= "empty-state-title" ng-if="!c.todoDisplayed[tab.name].length" ng-bind="c.data.txt.empty[tab.name] ? c.data.txt.empty[tab.name].title : c.data.txt.empty[data.defaultTab].title"></h3>
+          <h4 class= "empty-state-title" ng-if="c.todoDisplayed[tab.name].length" ng-bind="c.data.txt.onComplete"></h4>
+        </div>
+        <div ng-if="c.selectedFiltersFromTodoPage.applyFilters && !c.loadingMore[tab.name] && !c.todoDisplayed[tab.name].length && c.loaded[tab.name]" class="panel-heading text-center empty-message">
+          <p><i class="fa fa-3x fa-times-circle-o empty-state-icon"></i></p>
+          <h3 class= "empty-state-title" ng-if="!c.todoDisplayed[tab.name].length">${No results match your criteria}</h3>
+          <h4 class= "empty-state-title" ng-if="c.todoDisplayed[tab.name].length" ng-bind="c.data.txt.onComplete"></h4>
+          <p ng-if="!c.todoDisplayed[tab.name].length && !c.data.onTicketPage" class= "empty-state-message status">${Try removing some filters}</p>
+        </div>
+        <div ng-if="c.todoDisplayed[tab.name].length && todoLine.isOpen" class="task-content" ng-repeat="todoLine in c.todoDisplayed[tab.name]">
+          <div ng-if="todoLine.todoLineWidget">
+            <sp-widget widget="todoLine.todoLineWidget"></sp-widget>
+          </div>
+          <div class="loading-indicator" ng-if="!todoLine.todoLineWidget">
+            <span class="fa fa-spinner fa-spin" aria-hidden="true" name="spinner" spin="true"></span>
+            ${Loading}...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sp_widget_6506bb7e976031102d7ebf56f053af43</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function hrmTodosSummaryController($scope, $rootScope, $sanitize, spUtil, $window, $sce, $timeout, spAriaUtil) {
+    var c = this;
+    c.loaded = {};
+    c.loadingMore = {};
+    c.todoDisplayed = {};
+    c.selectedTodo = {};
+    c.stopLoadMore = {};
+    c.isMobileLeftPanelOpen = true;
+    c.limit = c.data.queryLimit - 1;
+    c.mobileDevice = c.data.isMobile || ($window.innerWidth &lt; 767);
+    c.currentTab = c.data.tabs[0].name; // Sets default current Tab
+    c.accessibility = spAriaUtil.isAccessibilityEnabled();
+    c.currentPageTitle = $scope.page.title;
+    c.filtersData = [];
+    c.selectedFiltersFromTodoPage = [];
+
+    var todoDetailTitle = 'To-do detail';
+    var resizeTime;
+    var resizeTimeout = false;
+    var delta = 500;
+    $window.addEventListener('resize', function(event) {
+        resizeTime = new Date();
+        if (resizeTimeout === false) {
+            resizeTimeout = true;
+            $timeout(isMobileDevice, delta);
+        }
+
+        handlePageTitleOnResize();
+    });
+
+    function handlePageTitleOnResize() {
+        if (isTodoDetail() &amp;&amp; c.currentPageTitle !== todoDetailTitle) {
+            setPageTitle(todoDetailTitle);
+        } else if ($window.innerWidth &gt; 767 &amp;&amp; !c.data.onTicketPage &amp;&amp; c.currentPageTitle == todoDetailTitle) {
+            setPageTitle($scope.page.title);
+        }
+    }
+
+    function isTodoDetail() {
+        return $window.innerWidth &lt; 767 &amp;&amp; !c.data.onTicketPage &amp;&amp; !c.data.todoSummaryLeftPanel;
+    }
+
+    function isMobileDevice() {
+        if (new Date() - resizeTime &lt; delta) {
+            $timeout(isMobileDevice, delta);
+        } else {
+            c.mobileDevice = c.data.isMobile || ($window.innerWidth &lt; 767);
+            resizeTimeout = false;
+        }
+    }
+
+    c.getDelegatedByText = function(delegatorName) {
+        return $scope.data.i18n.DELEGATED_BY.replace('{}', delegatorName);
+    };
+
+    // instead  of adding more recordWatcher, listen to change from HRM To-Dos Task Item widget
+    $scope.$on('updateDelegateRecord', function($event) {
+        $event.stopPropagation();
+        loadData(getMyTodos);
+    });
+
+    $scope.$on('sn_ex_sp.applyFilters', function($event, data) {
+        $event.stopPropagation();
+        c.data.action = "loadFilteredTodos";
+        c.data.filtersData = data;
+        c.loadingMore[c.data.defaultTab] = true;
+        c.todoDisplayed[c.data.defaultTab] = [];
+        c.server.update().then(function() {
+            getMyTodos();
+            c.loadingMore[c.data.defaultTab] = false;
+            c.filtersData = c.data.filtersData;
+            c.selectedFiltersFromTodoPage = c.data.selectedFiltersFromTodoPage;
+        });
+    });
+
+    function announceTodoDisplayed(todo, isTabSwitch) {
+        isTabSwitch = isTabSwitch || false;
+        $rootScope.$broadcast('sn_hr_sp.todoDisplayed', todo, isTabSwitch);
+    }
+
+    // get the task-line-item widget template
+    function loadTodoWidget(index, finalTodoList, tab) {
+        finalTodoList[index].currentIndex = index;
+        finalTodoList[index].totalTodos = finalTodoList.length;
+
+        if (finalTodoList[index].taskConfigurationSysId &amp;&amp; finalTodoList[index].taskConfigurationSysId !== '') {
+            var taskObj = {
+                taskSysId: finalTodoList[index].sysId,
+                taskConfigurationSysId: finalTodoList[index].taskConfigurationSysId,
+                Url: finalTodoList[index].url,
+                widgetSpan: 9,
+                tableName: finalTodoList[index].tableName,
+                tabName: finalTodoList[index].tab
+            };
+            spUtil.get("task-configuration", taskObj).then(function(response) {
+                finalTodoList[index].todoLineWidget = response;
+
+                createApprovalWatcher(taskObj.taskSysId);
+
+                if (!c.mobileDevice) {
+                    $scope.$applyAsync(function() {
+                        angular.element('#' + c.todoDisplayed[tab][index].sysId + '_todo_link').focus();
+                    });
+                }
+
+                $scope.$applyAsync(function() {
+                    if (tab == c.currentTab)
+                        announceTodoDisplayed(finalTodoList[index]);
+                });
+            });
+        } else {
+            spUtil.get("hrm-todos-line-item", finalTodoList[index]).then(function(response) {
+                finalTodoList[index].todoLineWidget = response;
+
+                createAttachmentWatcher(response.data.sysId);
+                createApprovalWatcher(response.data.sysId);
+
+                if (!c.mobileDevice) {
+                    $scope.$applyAsync(function() {
+                        angular.element('#' + c.todoDisplayed[tab][index].sysId + '_todo_link').focus();
+                    });
+                }
+                $scope.$applyAsync(function() {
+                    if (tab == c.currentTab)
+                        announceTodoDisplayed(finalTodoList[index]);
+                });
+            });
+        }
+    }
+
+    function selectTodo(finalTodoList, tab) {
+        // If array position exists, open to-do
+        if (finalTodoList[c.selectedTodo[tab]]) {
+            finalTodoList[c.selectedTodo[tab]].isOpen = true;
+            // if there's no selected to-do, open the first one
+        } else if (finalTodoList.length &gt; 0 &amp;&amp; !c.selectedTodo[tab]) {
+            if (!(c.data.onTicketPage &amp;&amp; c.data.hideTodoSummary)) {
+                //If mobile view then reload the task list
+                if(c.mobileDevice)
+                    c.backToTaskList();
+                finalTodoList[0].isOpen = true;
+                c.selectedTodo[tab] = 0;
+            }
+            // If array position does not exist, and not the first one, select the last to-do		
+        } else if (!finalTodoList[c.selectedTodo[tab]] &amp;&amp; c.selectedTodo[tab] &gt; 0) {
+            c.selectedTodo[tab] = _.findLastIndex(finalTodoList);
+        }
+    }
+
+    c.trustAsHtml = function(htmlContent) {
+        return $sce.trustAsHtml($sanitize(htmlContent));
+    };
+
+    function getLeftMenuItems(todosToShow, tab, loadMore) {
+        var finalTodoList = _.map(todosToShow, function(todo) {
+            todo.firstLoad = true;
+            todo.isOpen = false; // Default
+            return todo;
+        });
+
+        c.loaded[tab] = true;
+
+        if (!loadMore) {
+            selectTodo(finalTodoList, tab);
+            if (!(c.data.onTicketPage &amp;&amp; c.data.hideTodoSummary)) {
+                loadTodoWidget(c.selectedTodo[tab], finalTodoList, tab);
+            }
+        }
+
+        return finalTodoList;
+    }
+
+    $scope.$on('sn_hr_sp.todoSummaryDetail', function(e, data) {
+        if (data == null || data.parent != c.data.parentCaseId || !c.data.onTicketPage)
+            return;
+        c.data.hideTodoSummary = false;
+        if (data.todoId != '')
+            c.openTodo(data.todoId);
+    });
+
+    c.hasPreviousTodo = function() {
+        return hasNextOrPreviousTodo(false);
+    };
+
+    c.hasNextTodo = function() {
+        return hasNextOrPreviousTodo(true);
+    };
+
+    function hasNextOrPreviousTodo(next) {
+        var todos, index, value;
+        todos = c.todoDisplayed[c.currentTab];
+        index = c.selectedTodo[c.currentTab];
+        value = (next) ? index + 1 : index - 1;
+        if (todos[value]) {
+            return true;
+        }
+        return false;
+    }
+
+    function getPreviousOrNextTodo(next) {
+        var todos, index, sysId, value;
+        todos = c.todoDisplayed[c.currentTab];
+        index = c.selectedTodo[c.currentTab];
+        value = (next) ? index + 1 : index - 1;
+        if (todos[value]) {
+            sysId = todos[value].sysId;
+        } else {
+            sysId = todos[_.findLastIndex(todos)].sysId;
+        }
+        c.openTodo(sysId, c.currentTab);
+    }
+
+    c.getPreviousTodo = function() {
+        if (c.hasPreviousTodo()) {
+            return getPreviousOrNextTodo();
+        }
+    };
+
+    c.getNextTodo = function() {
+        return getPreviousOrNextTodo(true);
+    };
+
+    function find(sysId, tab) {
+        return _.find(c.todoDisplayed[tab], {
+            sysId: sysId
+        });
+    }
+
+    function setOpenStatus(sysId, tab) {
+        if (c.selectedTodo.hasOwnProperty(tab)) {
+            c.todoDisplayed[tab][c.selectedTodo[tab]].isOpen = false;
+        }
+        var todo = find(sysId, tab);
+        todo.isOpen = true;
+        c.selectedTodo[tab] = _.findIndex(c.todoDisplayed[tab], {
+            sysId: sysId
+        });
+    }
+
+    function announceIsOpen(sysId, index) {
+        $scope.$applyAsync(function() {
+            $rootScope.$broadcast("sn_hr_sp.todoSummaryOpened", {
+                parent: c.data.parentCaseId,
+                todoSelected: sysId,
+                currentTodoIndex: index
+            });
+        });
+    }
+
+    /**
+     * Element el is considered in viewport when any part of the element is visible in the viewport.
+     * Use offset to indicate how much of the element may be in view to consider the full element in view
+     * ie. If we set offset = elem.offsetHeight then the element would be considered out of view unless
+     * the entire element was visible in the view port.
+     */
+    function isElementInViewport(el, offset) {
+        offset = offset || 0;
+        var rect = el.getBoundingClientRect();
+        var bottom = (window.innerHeight || document.documentElement.clientHeight) + el.offsetHeight - offset;
+        return (
+            rect.top &gt;= 0 &amp;&amp;
+            rect.left &gt;= 0 &amp;&amp;
+            rect.bottom &lt;= bottom &amp;&amp;
+            rect.right &lt;= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    c.openTodo = function(sysId, tab) {
+        if (c.data.onTicketPage) { // Ticket page does not use tabs
+            tab = c.data.defaultTab;
+        }
+
+        $rootScope.$broadcast('sp.update.breadcrumbs', [{
+            label: c.data.txt.breadcrumb,
+            url: "javascript:void(0)"
+        }]);
+
+        setOpenStatus(sysId, tab);
+        var index = _.findIndex(c.todoDisplayed[tab], {
+            sysId: sysId
+        });
+        c.todoDisplayed[tab][index].todoLineWidget = undefined;
+        loadTodoWidget(index, c.todoDisplayed[tab], tab);
+
+        c.data.todoSummaryLeftPanel = false;
+        if (!c.data.onTicketPage &amp;&amp; c.mobileDevice) {
+            setPageTitle(todoDetailTitle);
+        }
+
+        if (c.data.onTicketPage) {
+            announceIsOpen(sysId, index);
+        }
+
+        // scroll down to current
+        if (!c.mobileDevice) {
+            $timeout(function() {
+                // Used when out of view port todo is programatically focused
+                var selectedTodoElem = angular.element('#' + c.todoDisplayed[tab][index].sysId + '_task_lineitem_summary');
+                if (typeof jQuery === "function" &amp;&amp; selectedTodoElem instanceof jQuery) {
+                    selectedTodoElem = selectedTodoElem[0];
+                }
+                if (selectedTodoElem &amp;&amp; !isElementInViewport(selectedTodoElem))
+                    selectedTodoElem.scrollIntoView();
+            }, 0, false);
+        }
+    };
+
+    c.backToTaskList = function() {
+        c.data.hideTodoSummary = true;
+        $rootScope.$broadcast("sn_hr_sp.todoSummaryDetail", {
+            parent: c.data.parentCaseId,
+            todoId: ''
+        });
+        $rootScope.$broadcast("sn_hr_sp.todoSummaryOpened", {
+            parent: c.data.parentCaseId,
+            todoSelected: '',
+            currentTodoIndex: 0
+        });
+    }
+
+    c.openTodosSummaryList = function() {
+        if (c.data.onTicketPage) {
+            c.backToTaskList();
+        } else {
+            c.data.todoSummaryLeftPanel = true;
+            setPageTitle($scope.page.title);
+        }
+    }
+
+    function setPageTitle(prefix) {
+        c.currentPageTitle = prefix;
+        $(document).prop('title', prefix + ' - ' + $scope.portal.title);
+    }
+
+    function loadData(callback) {
+        c.data.includeTodo = getLinkedTodoParam();
+        c.data.action = "loadTodos";
+        if(c.selectedFiltersFromTodoPage.applyFilters){
+            c.data.selectedFiltersFromTodoPage = c.selectedFiltersFromTodoPage;
+        }  
+        c.server.update().then(callback);
+    }
+
+    function hasChanged(w, dbEventDetails) {
+
+        var tableName = w.data.table_name || w.table_name;
+        var operation = w.data.operation || w.operation;
+        var changes = w.data.changes || [];
+        dbEventDetails = dbEventDetails || {};
+
+        //set the record watcher for all the fields other than comments and worknotes
+        if (changes.length == 1 &amp;&amp; ((_.includes(changes, 'comments')) || _.includes(changes, 'work_notes')))
+            return false;
+        if (changes.length == 2 &amp;&amp; _.includes(changes, 'comments') &amp;&amp; _.includes(changes, 'work_notes'))
+            return false;
+        if (changes.length == 1 &amp;&amp; _.includes(changes, 'state') &amp;&amp; dbEventDetails.isTaskSurvey)
+            return false;
+        if (operation === 'update' &amp;&amp; changes.length === 0) // change in relationships
+            return false;
+        if (tableName === 'sys_attachment' &amp;&amp; operation === 'update' &amp;&amp; changes.length === 0) // change in relationships
+            return false;
+        if (tableName === 'sys_attachment' &amp;&amp; operation === 'update' &amp;&amp; changes[0] === 'file_name') // attachment renaming
+            return false;
+        if (tableName === 'sys_attachment' &amp;&amp; changes.length &lt;= 2 &amp;&amp; _.includes(['state', 'image_width', 'image_height', 'average_image_color'], changes[0])) // img feature detection
+            return false;
+        return true;
+    }
+
+    c.lastInstanceNotified = null;
+    spUtil.recordWatch($scope, "sn_hr_core_task", "active=true", function(updateInfo) {
+        // broadcast the sn_lp.task_completed event if the updated task have triggered conditions configured in Listening Posts
+        if (updateInfo.data.action === "exit" &amp;&amp; updateInfo.data.changes &amp;&amp; updateInfo.data.changes.indexOf('state') != -1) {
+            c.server.get({
+                action: "addNotification",
+                taskId: updateInfo.data.sys_id,
+                table: updateInfo.data.table_name
+            }).then(function(response) {
+                response.action = undefined;
+                if (response.data.taskInfo &amp;&amp; response.data.taskInfo.taskId &amp;&amp; c.lastInstanceNotified !== response.data.taskInfo.taskId) {
+                    c.lastInstanceNotified = response.data.taskInfo.taskId;
+                    var taskInfo = {
+                        taskId: response.data.taskInfo.taskId,
+                        taskDescription: response.data.taskInfo.taskDescription
+                    }
+                    $rootScope.$broadcast("sn_lp.task_completed", taskInfo);
+                }
+
+            });
+        }
+    });
+
+    function update(watcher) {
+        // cheap sync pre-filter just in case `watcher` has enough info to skip this iteration
+        if (!hasChanged(watcher, {}))
+            return;
+
+        // only the latest change triggers the actual refresh
+        clearTimeout(update.timer);
+        update.timer = setTimeout(function() {
+            var isLocalChange = c.data.onTicketPage || watcher.data.table_name === 'sys_attachment' || watcher.table_name === 'sys_attachment';
+            if (isLocalChange) {
+                _executeSidePanelUpdate(watcher);
+            } else {
+                _executeFullPageUpdate(watcher);
+            }
+        }, 300);
+
+    }
+    update.timer = null;
+    update.surveys = {};
+
+    function _getDbEventDetails(watcher) {
+
+        var tableName = watcher.data.table_name;
+        var sysId = watcher.data.sys_id;
+
+        if (tableName === 'sys_attachment') {
+            return Promise.resolve({
+                isTaskSurvey: false
+            });
+        }
+
+        if (update.surveys.hasOwnProperty(sysId)) {
+            return Promise.resolve({
+                isTaskSurvey: update.surveys[sysId]
+            })
+        }
+
+        return c.server.get({
+            action: "checkTaskType",
+            sysId: sysId,
+            table: tableName
+        }).then(function(response) {
+            response.action = undefined;
+            update.surveys[sysId] = response.data.isTaskSurvey;
+            return Promise.resolve({
+                isTaskSurvey: response.data.isTaskSurvey
+            });
+        });
+
+    }
+
+    function _executeSidePanelUpdate(watcher) {
+
+        var selectedIndex = c.selectedTodo[c.currentTab];
+        var selectedTicket = c.todoDisplayed[c.currentTab][selectedIndex];
+        commitToDom(function() {
+            selectedTicket.isOpen = false;
+        }).then(function() {
+            c.openTodo(selectedTicket.sysId, c.currentTab);
+        });
+    }
+
+    function _executeFullPageUpdate(watcher) {
+
+        $rootScope.$broadcast('sp.update.breadcrumbs', [{
+            label: c.data.txt.breadcrumb,
+            url: "javascript:void(0)"
+        }]);
+
+        _getDbEventDetails(watcher).then(function(dbEventDetails) {
+            c.isTaskSurvey = dbEventDetails.isTaskSurvey;
+
+            if (!hasChanged(watcher, dbEventDetails))
+                return;
+
+            _.each(c.loaded, function(value, key) {
+                c.loaded[key] = false;
+            });
+            c.todoDisplayed = {};
+
+            loadData(function() {
+                loadTodos();
+            });
+        });
+    }
+
+    function createAttachmentWatcher(taskSysId) {
+        if (createAttachmentWatcher.watchers[taskSysId]) return;
+        createAttachmentWatcher.watchers[taskSysId] = true;
+        spUtil.recordWatch(
+            $scope,
+            'sys_attachment',
+            'table_sys_id=' + taskSysId,
+            update
+        );
+    }
+    createAttachmentWatcher.watchers = {};
+
+    $rootScope.$on('list.updated', function(e, r) {
+        // ignore sys_attachment to avoid unnecessary call to loadData
+        if (r.table_name === 'sys_attachment' || c.data.onTicketPage)
+            return;
+
+        r.data = r;
+        update(r);
+    });
+
+    function loadRecordWatchers(watchers, scope) {
+        if (watchers.length &gt; 0) {
+            _.each(watchers, function(watcher) {
+                spUtil.recordWatch(scope, watcher.table, watcher.filter, update);
+            });
+        }
+    }
+
+    function loadWatchers() {
+        loadRecordWatchers(c.data.watchers, $scope);
+        if (c.mobileDevice &amp;&amp; c.data.onTicketPage) {
+            c.data.todoSummaryLeftPanel = false;
+        }
+    }
+
+    function loadTodos() {
+        _.each(c.data.todosToShow.recordsToShow, function(todos, tab) {
+            c.todoDisplayed[tab] = getLeftMenuItems(todos, tab);
+        });
+
+        // Handle no results, and empty state
+        _.each(c.data.tabs, function(tab) {
+            if (!c.data.todosToShow.recordsToShow[tab.name] || (c.data.todosToShow.recordsToShow[tab.name] &amp;&amp; c.data.todosToShow.recordsToShow[tab.name].length&lt;1) || !c.todoDisplayed[tab.name]) {
+                c.todoDisplayed[tab.name] = [];
+                c.loaded[tab.name] = true;
+            } else if (c.todoDisplayed[tab.name].length &gt; c.limit) // When the page is reloaded, show 'show more' button.
+                c.stopLoadMore[tab.name] = false;
+
+        })
+    }
+
+    function searchTodoInTab(todoSysId, tab) {
+        var todosToSearch = c.data.todosToShow.recordsToShow[tab];
+        if (todosToSearch)
+            for (var i = 0; i &lt; todosToSearch.length; i++)
+                if (todosToSearch[i].sysId === todoSysId)
+                    return true;
+        return false;
+    }
+
+    function getLinkedTodoParam() {
+        var result = new RegExp('[\?&amp;]todo=([^&amp;#]*)').exec(window.location.href);
+        if (result == null)
+            return "";
+        return decodeURI(result[1]) || "";
+    }
+
+    function openLinkedTodo() {
+        var todoSysId = getLinkedTodoParam();
+        if (todoSysId) {
+            for (var tabIdx = 0; tabIdx &lt; c.data.tabs.length; tabIdx++)
+                if (searchTodoInTab(todoSysId, c.data.tabs[tabIdx].name)) {
+                    c.currentTab = c.data.tabs[tabIdx].name;
+                    c.openTodo(todoSysId, c.data.tabs[tabIdx].name);
+                    break;
+                }
+        }
+    }
+
+    function getMyTodos() {
+        loadWatchers();
+        loadTodos();
+        openLinkedTodo();
+    }
+
+    c.processGetMoreTodos = function(tab) {
+        var todosToShow = c.data.todosToShow.recordsToShow[tab];
+        if (!todosToShow) {
+            c.stopLoadMore[tab] = true;
+        }
+        var todoList = getLeftMenuItems(todosToShow, tab, true);
+        c.todoDisplayed[tab] = c.todoDisplayed[tab].concat(todoList);
+    }
+
+    c.fetchMoreRecords = function(tab) {
+        c.loadingMore[tab] = true;
+        c.data.action = "loadMoreTodos";
+        c.data.excludeList = _.map(c.todoDisplayed[tab], 'sysId');
+        c.data.selectedFiltersFromTodoPage = c.selectedFiltersFromTodoPage;
+        c.server.update().then(function() {
+            c.processGetMoreTodos(tab);
+            c.loadingMore[tab] = false;
+        });
+    }
+
+    function commitToDom(taskFn) {
+        return new Promise(function(resolve) {
+            // execute the change
+            taskFn();
+            $timeout(function() {
+                // wait 1 tick, then run a digest, then resolve, then run another digest
+                $timeout(resolve);
+            });
+        });
+    }
+
+    // start of the server call.
+    if (c.data.async &amp;&amp; !c.data.onTicketPage) {
+        loadData(getMyTodos);
+    } else {
+        getMyTodos();
+    }
+
+    /**  Making tabs accessible **/
+
+    $scope.$applyAsync(function() {
+        new Tab("todo-panel");
+    });
+
+    function Tab(id) {
+        this._id = id;
+        this.$tpanel = $('#' + id);
+        this.$tabs = this.$tpanel.find('.tab');
+        this.$panels = this.$tpanel.find('.tab-pane');
+        this.bindHandlers();
+        this.init();
+    }
+
+    createApprovalWatcher.watchers = {};
+
+    function createApprovalWatcher(sysId) {
+        if (createApprovalWatcher.watchers[sysId]) return;
+        createApprovalWatcher.watchers[sysId] = true;
+        spUtil.recordWatch(
+            $scope,
+            'sysapproval_approver',
+            'sys_id=' + sysId,
+            update
+        );
+    }
+
+    Tab.prototype.keys = {
+        left: 37,
+        right: 39
+    };
+    Tab.prototype.init = function() {
+        var $tab = this.$tabs.filter('.active');
+        this.$tpanel.find('#' + $tab.find('a').attr('aria-controls')).addClass('active in').attr('aria-hidden', 'false');
+    }
+    Tab.prototype.switchTabs = function($curTab, $newTab) {
+        var $curLink = $curTab.find('a'),
+            $newLink = $newTab.find('a');
+        c.currentTab = $newLink.attr('aria-controls');
+        var newTodoIndex = c.selectedTodo[c.currentTab];
+        if(!c.mobileDevice) {
+          if (newTodoIndex != undefined &amp;&amp; c.todoDisplayed[c.currentTab][newTodoIndex] &amp;&amp; c.todoDisplayed[c.currentTab][newTodoIndex].sysId)
+              c.openTodo(c.todoDisplayed[c.currentTab][newTodoIndex].sysId, c.currentTab);
+          if (c.data.todosToShow &amp;&amp; c.data.todosToShow.recordsToShow &amp;&amp; c.data.todosToShow.recordsToShow[c.currentTab] &amp;&amp; c.data.todosToShow.recordsToShow[c.currentTab][newTodoIndex])
+              announceTodoDisplayed(c.data.todosToShow.recordsToShow[c.currentTab][newTodoIndex], true);
+        }
+
+        $newTab.addClass('active');
+        $newLink.attr('aria-selected', 'true');
+        this.$tpanel.find('#' + $curLink.attr('aria-controls')).removeClass('active in').attr('aria-hidden', 'true');
+        this.$tpanel.find('#' + $curLink.attr('aria-controls') + "-content").removeClass('active in').attr('aria-hidden', 'true');
+        this.$tpanel.find('#' + $newLink.attr('aria-controls')).addClass('active in').attr('aria-hidden', 'false');
+        this.$tpanel.find('#' + $newLink.attr('aria-controls') + "-content").addClass('active in').attr('aria-hidden', 'false');
+        $newLink.attr('tabindex', '0');
+        $newLink.focus();
+    }
+    Tab.prototype.bindHandlers = function() {
+        var self = this;
+        this.$tabs.keydown(function(e) {
+            return self.handleTabKeyDown($(this), e);
+        });
+        this.$tabs.click(function(e) {
+            return self.handleTabClick($(this), e);
+        });
+    }
+    Tab.prototype.moveToPreviousOrNext = function(e, $tab, next) {
+        var $newTab, tabIndex;
+        tabIndex = this.$tabs.index($tab);
+        var index = (next) ? this.$tabs.length - 1 : 0;
+        if (tabIndex === index) {
+            $newTab = (next) ? this.$tabs.first() : this.$tabs.last();
+        } else {
+            var newIndex = (next) ? tabIndex + 1 : tabIndex - 1;
+            $newTab = this.$tabs.eq(newIndex);
+        }
+        this.switchTabs($tab, $newTab);
+        e.preventDefault();
+        return false;
+    }
+    Tab.prototype.handleTabKeyDown = function($tab, e) {
+        if (e.keyCode == this.keys.left) {
+            this.moveToPreviousOrNext(e, $tab);
+        } else if (e.keyCode == this.keys.right) {
+            this.moveToPreviousOrNext(e, $tab, true);
+        }
+    }
+    Tab.prototype.handleTabClick = function($tab, e) {
+        var $oldTab = this.$tpanel.find('.tab.active');
+        this.switchTabs($oldTab, $tab);
+    }
+    /**  Making tabs accessible **/
+    $scope.isSignPadVisible = false;
+    $scope.$on('mobile-showSignPad', function(event, args) {
+        $scope.isSignPadVisible = !$scope.isSignPadVisible;
+    })
+
+    $scope.showSignPad = function() {
+        $rootScope.$broadcast('mobile-showSignPad');
+    }
+
+    $scope.backToListKeyDown = function(event) {
+        if (event.keyCode == 13 || event.keyCode == 32)
+            c.backToTaskList();
+    }
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.todo-left-panel{
+  background-color: $body-bg;
+}
+
+@media (min-width: 767px) {
+  #todo-left-panel .tab-content {
+    position: absolute;
+    overflow-y: auto;
+    top: 43px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  #todo-left-panel .tab-content.large-nav {
+    top: 60px;
+  }
+}
+
+.back-button-mobile{
+  padding-top: 5px;
+}
+.todos-list-item.panel {
+  background-color: transparent;
+}
+
+.todos-widget-mobile{
+  padding-bottom: 20px;
+}
+
+.completed-to-do {
+  background-color: lighten($color-grey,15%) !important;
+}
+
+.arrow-mobile{
+  padding: 20px;
+}
+
+.back-to-tasklist {
+  text-transform: capitalize;
+  cursor: pointer;
+  .m-r-sm {
+    font-size: 1.44rem;
+  }
+}
+
+.isDisabled {
+  color: $text-muted;
+  cursor: none;
+  opacity: 0.5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.panel-heading.panel-border-bottom {
+  border-bottom: 1px solid $border;
+}
+
+.todos-list .todos-list-item .panel-heading {
+  min-height: 62px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h2.page-title {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  color: $color-darkest;
+}
+
+.content-wrap {
+  min-height: 387px !important;
+  border-radius: 4px;
+}
+
+
+.b-b {
+  border-bottom: 1px solid $border; 
+}
+
+.inline {
+  vertical-align: middle; 
+}
+
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.todo-right-native {
+  min-height: fit-content;
+}
+
+.mobile-todo-panel {
+  min-height: calc(100vh - 180px);
+}
+
+.load-more-button{
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-message{
+  padding: (3*$sp-space--3xl + $sp-space--lg) 0;
+  p {
+    margin: 0;
+    color: $text-tertiary;
+  }
+  .content-wrap {
+     min-height: fit-content !important;
+  }
+  .empty-state-icon {
+    width: 42px;
+    height: 55px;
+  }
+  .empty-state-title {
+    font-size: 1.8rem;
+    margin: 1.2rem 0 0 !important;
+  }
+  .empty-state-message{
+    margin-top: $sp-space--md;
+  }
+}
+
+.loading-indicator-fetchmore {
+  text-align: center;
+  border-top: none;
+  padding: 21px 0;
+}
+
+.loading-indicator {
+  text-align: center;
+  margin: 300px 0;
+}
+
+.back-padding {
+  padding-right: 0.5rem;
+}
+
+.ticket-back-padding {
+  padding-right: 0.275rem;
+}
+
+.nav-tabs {
+  border: none;
+  margin: auto 0;  
+  display: flex;
+  flex-direction: row;
+  overflow: hidden; 
+  overflow-x: auto;
+  background-color: $body-bg;
+  border-bottom: 1px solid $border;
+
+  li:last-child {
+    margin-right:0px; 
+  }
+
+  li {
+    flex:1;
+    white-space: nowrap;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+    margin-right: 2px;
+    a {
+      border: none !important;
+      border-radius: 0;
+      margin-right: 0px;
+      cursor: pointer;
+
+      &amp;amp;:focus, &amp;amp;:hover {
+        color: #0B322C;
+      } 
+
+      &amp;amp;:focus {
+        outline: 0;
+        background-color: $brand-primary-lightest;
+      }
+    }
+
+
+    &amp;amp;:hover {
+      border-bottom-color: $color-disabled;
+    }
+
+    &amp;amp;.active {
+      border-bottom-color: $select-primary;
+    }
+  }
+}
+
+.todos-list {
+  padding: 10px 15px;
+  border-bottom: 1px solid $border;
+
+  .todo-summary-delegates {
+    text-align: right;
+    color: #757676;
+    i {
+      padding-top: 2px;
+    }
+  }
+
+  &amp;amp;.selected {
+    background-color: $list-group-disabled-bg;
+  }
+}
+
+.todos-list-accessibility {
+  border-left: 3px solid $body-bg;
+  &amp;amp;.selected {
+    background-color: $body-bg;
+    border-left : 3px solid $brand-primary;
+  }
+}
+
+.tab-pane {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  &amp;amp;.active {
+    display: block;
+  }
+}
+
+.todo-summary-cell {
+  position: relative;
+  margin-bottom: 0;
+  border: none;
+  box-shadow:none;
+  .todo-summary-body {
+    display: flex;
+    align-items:center;
+    min-height:82px;
+    .todo-summary-details {
+      overflow: hidden;
+      text-align: left !important;
+      .task-title {
+        font-size: 1.5rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        a{
+          color: $brand-primary-darker;
+        }
+			}
+      .case-title {
+        font-size: 1.4rem;
+        text-overflow: ellipsis;
+        color:$color-darkest;
+        overflow: hidden;
+      }
+      .text-muted {
+        font-size: 1.4rem;
+      }
+      .todo-status {
+        padding-top:10px;
+      }
+      .fa-check-circle {
+        padding-right: 1px;
+        padding-left: 1px;
+      }
+    }
+    .todo-summary-icon {
+      display: flex;
+      vertical-align: middle;
+      font-size: 1.82rem;
+      justify-content: center;
+      .fa-level-up {
+        color: $gray-light;
+        transform: rotate(90deg);
+        vertical-align: -webkit-baseline-middle;
+        margin-right: 15px;
+      } 
+    }
+  }
+}
+
+
+/*Increasing width for childern tasks*/
+.todo-summary-body{
+  .indent-xsm {
+    padding-left: 48px !important;
+  }
+
+  .indent-xs {
+    padding-left: 0px;
+  }
+}
+
+
+/* IE Fixes */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+  .todo-summary-body {
+    .indent-xs {
+      width: 5em;
+    }	
+  }
+}
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;invest_summary&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {  }]]&gt;&lt;/link&gt;&lt;name&gt;Invest Summary&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {	
+	//Check if current task is survey
+	data.isTaskSurvey = false;
+	var filters = $sp.getParameter('filters');
+	data.selectedFiltersFromTodoPage = []; 
+	if (input &amp;&amp; input.action == 'checkTaskType'){
+		var gr = new GlideRecordSecure(input.table);
+		if (gr.get(input.sysId) &amp;&amp; gr.hr_task_type == 'take_survey')
+			data.isTaskSurvey = true;
+	} if(input &amp;&amp; input.action == 'addNotification' &amp;&amp; new GlidePluginManager().isActive('sn_lp')) {
+		var pulseUtils = new sn_lp.PulseUtilsAjax();
+		data.taskInfo = pulseUtils.checkForTriggeredConditions ? pulseUtils.checkForTriggeredConditions(input.table, input.taskId) : {};
+	}
+	
+	// translated text
+	data.i18n = {
+		DELEGATED: gs.getMessage("Delegated"),
+		DELEGATED_BY: gs.getMessage("Delegated by: {}")
+	};
+
+	data.isMobile = gs.isMobile();
+	data.todoSummaryLeftPanel = true;
+	data.todosToShow = {
+			recordsToShow : {},
+			recordWatchers : []
+	};
+	data.watchers =[];	
+	data.async = (input &amp;&amp; input.onTicketPage) ? false : true;
+	
+	var util = new sn_hr_sp.todoPageUtils();
+	data.tabs = util.getTabs();	
+ 	data.defaultTab = data.tabs[0].name;
+	data.queryLimit = todoPageUtils.QUERY_LIMIT;
+
+	data.todosFilters = $sp.getWidget('todos-filters', {});
+	
+	data.txt = {
+		empty: {},
+		onComplete: gs.getMessage('All tasks are Complete'),
+		title: gs.getMessage('My tasks'),
+		breadcrumb: gs.getMessage('My tasks')
+	};
+	data.txt.empty[data.defaultTab] = {
+		title: gs.getMessage("You don't have any task right now.")
+	};
+
+	data.txt.empty.completed = {
+		title: gs.getMessage("You don't have any completed task right now.")
+	};
+	
+	if (input &amp;&amp; input.action == "loadFromTicketPage") {
+		data.todosToShow.recordsToShow = util.splitInTabs(new sn_hr_sp.hr_PortalUtil().processRecordsForSummary(input.recordsToShow), data.defaultTab);
+		data.todosToShow.recordWatchers = input.recordWatchers;
+		data.watchers = data.todosToShow.recordWatchers||[];
+		data.onTodoPage = false;
+		data.onTicketPage = true;
+		data.parentCaseId = input.parent;
+		data.activitySetName = input.activitySetName;
+		data.selectedTodo = input.todoSelected;
+		data.currentTodoIndex = (data.todosToShow.recordsToShow[data.defaultTab] &amp;&amp; data.todosToShow.recordsToShow[data.defaultTab].length &gt; input.currentTodoIndex) ? input.currentTodoIndex: 0;
+		data.hideTodoSummary = input.hideTodoSummary;
+	} else if (input &amp;&amp; input.action == "loadTodos") {
+		data.onTodoPage = true;
+		data.onTicketPage = false;
+		if(input.selectedFiltersFromTodoPage){
+			data.todosToShow = util.getMyTodos(data.queryLimit, [], input.includeTodo,undefined,undefined,input.selectedFiltersFromTodoPage.finalFilterConditions,input.selectedFiltersFromTodoPage.applyFilters);
+		} else{
+			data.todosToShow = util.getMyTodos(data.queryLimit, [], input.includeTodo);
+		}
+		   
+		data.watchers = data.todosToShow.recordWatchers||[];
+	} else if (input &amp;&amp; input.action == "loadFilteredTodos") {
+		data.selectedFiltersFromTodoPage = util.fetchSelectedFilters(input.filtersData);
+		data.onTodoPage = true;
+		data.onTicketPage = false;
+		data.todosToShow = util.getMyTodos(data.queryLimit, [], input.includeTodo,undefined,undefined,data.selectedFiltersFromTodoPage.finalFilterConditions,data.selectedFiltersFromTodoPage.applyFilters);
+		data.watchers = data.todosToShow.recordWatchers||[];
+	} else if (input &amp;&amp; input.action == "insertOrUpdateTodoRecord") {
+		var noOfRecords = Math.ceil(input.currentCount/data.queryLimit)*data.queryLimit;
+		if(noOfRecords &lt; (todoPageUtils.QUERY_LIMIT*2))
+			noOfRecords = todoPageUtils.QUERY_LIMIT*2;
+		data.onTodoPage = true;
+		data.onTicketPage = false;
+		data.newTodosList = util.getMyTodos(noOfRecords,undefined,undefined,undefined,undefined,data.selectedFiltersFromTodoPage);
+	} else if (input &amp;&amp; input.action == "loadMoreTodos") {
+		data.todosToShow = util.getMyTodos(data.queryLimit,input.excludeList,undefined,undefined,undefined,input.selectedFiltersFromTodoPage.finalFilterConditions,input.selectedFiltersFromTodoPage.applyFilters);
+	} else if (input &amp;&amp; input.action == "loadFillerTodos"){
+		data.fillerTodosList = util.getMyTodos(input.fillerCount, input.fillerExcludeList,undefined,undefined,undefined,data.selectedFiltersFromTodoPage.finalFilterConditions,data.selectedFiltersFromTodoPage.applyFilters);
+	}
+
+	Object.keys(data.todosToShow.recordsToShow).forEach(function(tab) {
+		(data.todosToShow.recordsToShow[tab] || []).forEach(function(todo) {
+			if (!todo.displayValueList) return;
+			todo.displayValueList = todo.displayValueList.map(function (displayValue) {
+				return GlideSecurityUtils.escapeScript(displayValue);
+			});
+		});
+	});
+	
+	if (data.onTicketPage) {
+		data.txt.empty[data.defaultTab].message = gs.getMessage('All tasks are Complete');
+	}
+
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-13 11:46:07&lt;/sys_created_on&gt;&lt;sys_id&gt;6506bb7e976031102d7ebf56f053af43&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Invest Summary&lt;/sys_name&gt;&lt;sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="KS Investment Requests"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_6506bb7e976031102d7ebf56f053af43&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-08-13 11:46:07&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="todos-widget" ng-class="{'todos-widget-mobile': !c.data.onTicketPage &amp;&amp; c.mobileDevice}"&gt;
+  &lt;h2 class="page-title" ng-if="( (!data.onTicketPage &amp;&amp; !c.mobileDevice) || (!data.onTicketPage &amp;&amp; c.mobileDevice &amp;&amp; c.data.todoSummaryLeftPanel))" ng-bind="::c.data.txt.title"&gt;&lt;/h2&gt;
+  &lt;sp-widget widget="c.data.todosFilters"&gt;&lt;/sp-widget&gt;
+  &lt;div class="visible-xs back-button-mobile padder-b" ng-if="(c.mobileDevice &amp;&amp; !c.data.todoSummaryLeftPanel &amp;&amp; !isSignPadVisible)"&gt;
+    &lt;a ng-click="c.openTodosSummaryList()" href class="close-task"&gt;&lt;i class="fa fa-chevron-left" ng-class="{'back-padding': !c.data.onTicketPage, 'ticket-back-padding': c.data.onTicketPage}"&gt;&lt;/i&gt;${Back}&lt;/a&gt;
+    &lt;div class="pull-right" ng-if="c.todoDisplayed[c.currentTab].length &gt; 1"&gt;
+      &lt;a href ng-click="c.getPreviousTodo()" ng-class="{'isDisabled':!c.hasPreviousTodo()}" data-toggle="tooltip" title="Open Previous To-do" aria-label="Open Previous Todo" class="arrow-mobile" tabindex="{{c.hasPreviousTodo() ? '0' : '-1'}}"&gt;&lt;i class="fa fa-arrow-up"&gt;&lt;/i&gt;&lt;/a&gt;
+      &lt;a href ng-click="c.getNextTodo()" ng-class="{'isDisabled':!c.hasNextTodo()}" data-toggle="tooltip" title="Open Next To-do" aria-label="Open Next Todo" class="arrow-mobile" tabindex="{{c.hasNextTodo() ? '0' : '-1'}}"&gt;&lt;i class="fa fa-arrow-down"&gt;&lt;/i&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="visible-xs back-button-mobile padder-b" ng-if="(c.mobileDevice &amp;&amp; isSignPadVisible)"&gt;
+    &lt;a ng-click="showSignPad()" href="javascript:void(0)" class="close-task"&gt;&lt;i class="fa fa-chevron-left" ng-class="{'back-padding': !data.onTicketPage, 'ticket-back-padding': data.onTicketPage}"&gt;&lt;/i&gt;${Back}&lt;/a&gt;
+
+  &lt;/div&gt;
+  &lt;div id="todo-panel" class="content-wrap b row-eq-height" ng-class="{'mobile-todo-panel': c.mobileDevice}"&gt; 
+    &lt;div id="todo-left-panel" class="col-md-3 col-sm-3 col-lg-3 col-xs-12 no-padder todo-left-panel" ng-show="(!c.mobileDevice || c.mobileDevice &amp;&amp; c.data.todoSummaryLeftPanel)"&gt;
+      &lt;div ng-if="c.data.onTicketPage" class="panel-heading panel-border-bottom"&gt;
+        &lt;h4&gt;&lt;a ng-click="c.backToTaskList()" ng-keydown="backToListKeyDown($event)" class="back-to-tasklist" aria-label="{{data.activitySetName}}" tabindex="0" href="javascript:void(0)"&gt;
+          &lt;i class="fa fa-chevron-left m-r-sm" aria-label="Back to to-dos list"&gt;&lt;/i&gt; {{data.activitySetName}}
+          &lt;/a&gt;&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;ul class="nav nav-tabs" ng-if="!c.data.onTicketPage" role="tablist"&gt;
+          &lt;li ng-class="{'active': (c.currentTab == tab.name)}" ng-repeat="tab in ::c.data.tabs" class="tab" role="presentation"&gt;
+            &lt;a id="tab{{$index}}" data-toggle="tab" data-target="#{{::tab.name}}, #{{::tab.name}}-content" role="tab" ng-bind="tab.label" aria-controls="{{::tab.name}}" aria-label="{{::tab.name}} to-dos" tabindex="{{(c.currentTab == tab.name) ? 0 : -1}}" aria-selected="{{(c.currentTab == tab.name) ? 'true' : 'false'}}"&gt;&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div class="tab-content clearfix" ng-class="{'large-nav': c.data.onTicketPage}" aria-live="polite" role="tabpanel"&gt;
+          &lt;ul id="{{::tab.name}}" class="tab-pane" ng-class="{'in active': (c.currentTab == tab.name)}" ng-repeat="tab in ::c.data.tabs" role="tablist" aria-labelledby="{{tab.name}}" aria-hidden="false"&gt;
+            &lt;li ng-repeat="todo in c.todoDisplayed[tab.name]" role="tab"
+            	ng-click="c.openTodo(todo.sysId, tab.name);" 
+            	ng-class="{'todos-list': !c.accessibility, 'todos-list-accessibility': c.accessibility, selected: (!c.mobileDevice &amp;&amp; todo.isOpen),'completed-to-do': (data.onTicketPage &amp;&amp; todo.isCompleted &amp;&amp; !todo.isOpen) }" 
+            	id="{{todo.sysId}}_task_lineitem_summary" 
+            	aria-pressed="{{!c.mobileDevice &amp;&amp; todo.isOpen}}"&gt;
+              &lt;div ng-if="todo.delegates.length &gt; 0 || (todo.delegator &amp;&amp; todo.delegator.name)" 
+                   class="todo-summary-delegates"&gt;
+                &lt;span tabindex="0" 
+                      aria-label="{{ (todo.delegator &amp;&amp; todo.delegator.name) ? c.getDelegatedByText(todo.delegator.name) : todo.delegates }}" 
+                      uib-tooltip="{{ (todo.delegator &amp;&amp; todo.delegator.name) ? c.getDelegatedByText(todo.delegator.name) : todo.delegates }}" 
+                      tooltip-placement="top" 
+                      tooltip-append-to-body="true"&gt;
+                  &lt;i class="fa fa-sm"
+                     ng-class="(todo.delegator &amp;&amp; todo.delegator.name) ? 'fa-arrow-circle-o-left' : 'fa-arrow-circle-o-right'"&gt;&lt;/i&gt;
+                  &lt;span ng-bind="::data.i18n.DELEGATED"&gt;&lt;/span&gt;
+                &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div ng-include="'hrm-todos-header-widget.html'"&gt;&lt;/div&gt; 
+            &lt;/li&gt;
+            &lt;li ng-if="c.loadingMore[tab.name] || !c.loaded[tab.name]" class="loading-indicator-fetchmore"&gt;
+              &lt;span class="fa fa-spinner fa-spin" aria-hidden="true" name="spinner" spin="true"&gt;&lt;/span&gt;
+              ${Loading}...
+            &lt;/li&gt;            
+            &lt;li ng-if="c.loaded[tab.name] &amp;&amp; !c.stopLoadMore[tab.name] &amp;&amp; !c.data.onTicketPage &amp;&amp; c.todoDisplayed[tab.name].length &gt; c.limit" class="load-more-button"&gt;
+              &lt;button ng-click="c.fetchMoreRecords(tab.name);" class="btn btn-default"&gt;${Show more}&lt;/button&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="todo-right-panel" class="col-md-9 col-sm-9 col-lg-9 col-xs-12 b-l no-padder" ng-class="{'todo-right-native':!c.mobileDevice}" ng-if="!c.mobileDevice || (c.mobileDevice &amp;&amp; !c.data.todoSummaryLeftPanel) || (c.mobileDevice &amp;&amp; c.todoDisplayed[c.currentTab].length == 0)"&gt;
+      &lt;div id="{{::tab.name}}-content" class="tab-pane" ng-class="{'in active': (c.currentTab == tab.name)}" ng-repeat="tab in ::c.data.tabs" role="tabpanel" tab-index="0" aria-labelledby="{{tab.name}}" aria-hidden="false"&gt;              
+        &lt;div ng-if="!c.selectedFiltersFromTodoPage.applyFilters &amp;&amp; !c.loadingMore[tab.name] &amp;&amp; !c.todoDisplayed[tab.name].length &amp;&amp; c.loaded[tab.name]" class="panel-heading text-center empty-message"&gt;
+          &lt;p&gt;&lt;i class="fa fa-3x fa-check-circle success empty-state-icon"&gt;&lt;/i&gt;&lt;/p&gt;
+          &lt;h3 class= "empty-state-title" ng-if="!c.todoDisplayed[tab.name].length" ng-bind="c.data.txt.empty[tab.name] ? c.data.txt.empty[tab.name].title : c.data.txt.empty[data.defaultTab].title"&gt;&lt;/h3&gt;
+          &lt;h4 class= "empty-state-title" ng-if="c.todoDisplayed[tab.name].length" ng-bind="c.data.txt.onComplete"&gt;&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div ng-if="c.selectedFiltersFromTodoPage.applyFilters &amp;&amp; !c.loadingMore[tab.name] &amp;&amp; !c.todoDisplayed[tab.name].length &amp;&amp; c.loaded[tab.name]" class="panel-heading text-center empty-message"&gt;
+          &lt;p&gt;&lt;i class="fa fa-3x fa-times-circle-o empty-state-icon"&gt;&lt;/i&gt;&lt;/p&gt;
+          &lt;h3 class= "empty-state-title" ng-if="!c.todoDisplayed[tab.name].length"&gt;${No results match your criteria}&lt;/h3&gt;
+          &lt;h4 class= "empty-state-title" ng-if="c.todoDisplayed[tab.name].length" ng-bind="c.data.txt.onComplete"&gt;&lt;/h4&gt;
+          &lt;p ng-if="!c.todoDisplayed[tab.name].length &amp;&amp; !c.data.onTicketPage" class= "empty-state-message status"&gt;${Try removing some filters}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div ng-if="c.todoDisplayed[tab.name].length &amp;&amp; todoLine.isOpen" class="task-content" ng-repeat="todoLine in c.todoDisplayed[tab.name]"&gt;
+          &lt;div ng-if="todoLine.todoLineWidget"&gt;
+            &lt;sp-widget widget="todoLine.todoLineWidget"&gt;&lt;/sp-widget&gt;
+          &lt;/div&gt;
+          &lt;div class="loading-indicator" ng-if="!todoLine.todoLineWidget"&gt;
+            &lt;span class="fa fa-spinner fa-spin" aria-hidden="true" name="spinner" spin="true"&gt;&lt;/span&gt;
+            ${Loading}...
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1968126169</payload_hash>
+        <record_name>Invest Summary</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 11:46:07</sys_created_on>
+        <sys_id>6906bb7e976031102d7ebf56f053af45</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189eeb7c1f60000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 11:46:07</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>6d06bb7e6d603110cc1eaa99b66f0644</update_guid>
+        <update_guid_history>6d06bb7e6d603110cc1eaa99b66f0644:1968126169</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Invest Summary">7cd97b7e97e031102d7ebf56f053afe5</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 12:02:43</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>44b6ffce517d4650937e7b23b48d2d64</sys_id>
+        <sys_metadata>6506bb7e976031102d7ebf56f053af43</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Invest Summary</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sp_widget_6506bb7e976031102d7ebf56f053af43</sys_update_name>
+        <sys_update_version display_value="sp_widget_6506bb7e976031102d7ebf56f053af43">6906bb7e976031102d7ebf56f053af45</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 12:02:43</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

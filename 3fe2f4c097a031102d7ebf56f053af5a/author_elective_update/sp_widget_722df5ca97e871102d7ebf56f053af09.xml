@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function(){
+	var c = this;
+	console.log(c);
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>  .Banner {&#13;
+    font-family: Arial, Helvetica, sans-serif;&#13;
+    width: 100%;&#13;
+    min-height: 12rem;&#13;
+    background-color: rgb(58, 162, 247);&#13;
+    color: white;&#13;
+  }&#13;
+&#13;
+  .Banner .HeadText {&#13;
+    padding-left: 1rem;&#13;
+    padding-top: 1rem;&#13;
+    font-size: 24px;&#13;
+  }&#13;
+&#13;
+  .Banner .haeaderImage {&#13;
+    width: 5rem;&#13;
+    display: block;&#13;
+    margin-left: auto;&#13;
+  }&#13;
+&#13;
+  .Banner .greeting {&#13;
+    padding-top: 0.5rem;&#13;
+    padding-left: 1rem;&#13;
+    font-size: 17px;&#13;
+  }</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>ks_people</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>ks People</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.userName = gs.getUserDisplayName();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 19:04:22</sys_created_on>
+        <sys_id>722df5ca97e871102d7ebf56f053af09</sys_id>
+        <sys_mod_count>46</sys_mod_count>
+        <sys_name>ks People</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sp_widget_722df5ca97e871102d7ebf56f053af09</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 09:21:34</sys_updated_on>
+        <template><![CDATA[<div class="Banner">
+  <div class="HeadText">
+    Investment Requests Portal
+  </div>
+  <div class="greeting">Hello, {{data.userName}}
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sp_widget_722df5ca97e871102d7ebf56f053af09</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller = function(){
+	var c = this;
+	console.log(c);
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;  .Banner {&amp;#13;
+    font-family: Arial, Helvetica, sans-serif;&amp;#13;
+    width: 100%;&amp;#13;
+    min-height: 12rem;&amp;#13;
+    background-color: rgb(58, 162, 247);&amp;#13;
+    color: white;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .Banner .HeadText {&amp;#13;
+    padding-left: 1rem;&amp;#13;
+    padding-top: 1rem;&amp;#13;
+    font-size: 24px;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .Banner .haeaderImage {&amp;#13;
+    width: 5rem;&amp;#13;
+    display: block;&amp;#13;
+    margin-left: auto;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .Banner .greeting {&amp;#13;
+    padding-top: 0.5rem;&amp;#13;
+    padding-left: 1rem;&amp;#13;
+    font-size: 17px;&amp;#13;
+  }&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;ks_people&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]&gt;&lt;/link&gt;&lt;name&gt;ks People&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;true&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.userName = gs.getUserDisplayName();
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-08-10 19:04:22&lt;/sys_created_on&gt;&lt;sys_id&gt;722df5ca97e871102d7ebf56f053af09&lt;/sys_id&gt;&lt;sys_mod_count&gt;46&lt;/sys_mod_count&gt;&lt;sys_name&gt;ks People&lt;/sys_name&gt;&lt;sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="KS Investment Requests"&gt;3fe2f4c097a031102d7ebf56f053af5a&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_722df5ca97e871102d7ebf56f053af09&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-08-13 09:21:34&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="Banner"&gt;
+  &lt;div class="HeadText"&gt;
+    Investment Requests Portal
+  &lt;/div&gt;
+  &lt;div class="greeting"&gt;Hello, {{data.userName}}
+
+  &lt;/div&gt;
+
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-507538935</payload_hash>
+        <record_name>ks People</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 09:21:34</sys_created_on>
+        <sys_id>9cf45b7a976031102d7ebf56f053afec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189ee336c190000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 09:21:34</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>d0f45b7ab66031106d633dad7cd3c6ec</update_guid>
+        <update_guid_history>d0f45b7ab66031106d633dad7cd3c6ec:-507538935,a7e49b7ade6031103c1da6045d8de144:-1818717398,79e41b7a726031105764af42412b0392:803639528,58e49b7a1f6031103a6a5d93f542503f:-146107028,6fd4937a54603110ae13dc10760ddfcb:1845719661,a9c41b7a966031103702ed8fbe00838c:568816307,afb49ff6ad6031108c70885cc9c5051a:314197173,32b4937a676031109cc927326eec74c7:-1960596042,f8a49bf6a8603110e217d20de38b94fc:-400890721,ce44533a33603110e2cda09033e28caf:926999243,01ac8f720b6031108015dbc58ce8d9e6:1416873071,188c8b727d603110b7e7a59b004f5317:-1022929716,f65c437248603110edb5e9369913c59d:-1396582794,182ccf32a16031107a8e1de53a0a2314:-29484189,96fbcf32a0603110d6f80b7f0c6a6d06:102309572,bcdb073235603110e34efe953c7d6196:-1134217820,961b0332e6603110aecc0b9e5d8990e2:1053711045,dbdacffe032031104703e2630d1bda78:-1210877450,36ca4bf63b203110ffb1e1e19d574c31:2144755590,7f63837a6120311020d2495740c3cc5f:420568288,9b53837afc20311027f401e017911324:-988525299,f0124fb6f72031104764424a3c852c8a:1917612495,32414bf2cc203110856763df51deff53:1666911181,8f010bb67b2031107ba709670a09ec39:-1859516166,2ff0cb76462031109ec9672e6c992a13:235160922,0f600b762e203110eaf1ee8903dac614:1890074112,174f3e3623203110cb3d1940b2a1b317:698131939,fa0f72362e203110506703654281432b:-1378068669,9cfeb6363d2031102b67fecab20d7a42:775533493,e79e76f2f2203110239406251d587d0c:-938788166,d59efef284203110363f7dc7acff76b4:2015676859,208ebef24820311001c0edd69a048e58:1146708255,39baba26b96cf110d419b087a26dc844:-1023871145,032abee28f6cf11023798aa3282538ea:2131561737,f459bea2a76cf1108a8c49a866c621dc:-2121687384,f919ba62736cf110580482420f3b6543:941637575,cae8f2e2f86cf1103957e060bc974f37:-1249276730,ba518ade2fa8b11093232124a14de417:-75305415,e9e7a5566768b11093f63e57cf1cfa97:-1598338914,68c761962d68b110afb957613ba96ddc:878160403,50976196dd68b110654a1deafba25f4a:-1361298703,7ac561961568b110142614d7c6b76640:1874858426,1815a5563c68b1106d2d3290ab9aa248:-1361298703,a124e516fc68b1108b9afaa9e4e2b63a:-1325380628,a903e1d2dc68b110d0cd78282aa3b480:336405284,0ef2e9927668b11000c3c1ee2609e08f:-1422072478,0c9d7d8ab1e871109a1dd22ec164713e:717816683</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="ks People">953b7e4d9774b1102d7ebf56f053afd5</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-20 07:15:28</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>11d65ee5885643b08dcf8fb09fc69e51</sys_id>
+        <sys_metadata>722df5ca97e871102d7ebf56f053af09</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ks People</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sp_widget_722df5ca97e871102d7ebf56f053af09</sys_update_name>
+        <sys_update_version display_value="sp_widget_722df5ca97e871102d7ebf56f053af09">9cf45b7a976031102d7ebf56f053afec</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-20 07:15:28</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

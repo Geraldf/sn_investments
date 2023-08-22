@@ -1,0 +1,1616 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_rel_widget_clone">
+    <sp_rel_widget_clone action="DELETE">
+        <child display_value="Copy of Employee Profile Header">c42e610e97a871102d7ebf56f053afa1</child>
+        <cloned>2023-08-10 17:56:55</cloned>
+        <last_validated>2023-08-10 17:56:55</last_validated>
+        <parent display_value="Employee Profile Header">67863c0d073330108d6d78e99cd30080</parent>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;sp_widget&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller = function($scope, $element, snAttachmentHandler, i18n, spAriaUtil, spModal) {
+
+    var c = this;
+    c.profileDetails = c.data.profileDetails;
+    c.backgroundBanner = "";
+
+    c.setProfileAvatar = function(avatarID) {
+        if (avatarID) {
+            if (c.profileDetails) {
+                c.profileDetails.profile_picture = avatarID;
+            }
+            c.profilePic = {
+                'background-image': "url('" + avatarID + ".iix')"
+            };
+        } else {
+            if (c.profileDetails) {
+                c.profileDetails.profile_picture = "";
+            }
+            c.profilePic = "";
+        }
+    };
+
+    c.setBannerWithStyle = function(bannerID) {
+        if (bannerID) {
+            c.backgroundBanner = {
+                'background-image': "url('" + bannerID + ".iix')",
+                'background-position': "50% 50%"
+            };
+        }
+    };
+
+    var avatarID = c.profileDetails ? c.profileDetails.profile_picture : c.data.userDetails.profile_picture;
+    c.setProfileAvatar(avatarID);
+
+    if (!c.data.employeeProfileExists) {
+        c.setBannerWithStyle(c.data.defaultBanner);
+        return;
+    }
+
+    c.setBackgroundBanner = function(bannerID) {
+        if (bannerID) {
+            c.profileDetails.background_banner = bannerID;
+            c.setBannerWithStyle(bannerID);
+        } else {
+            c.profileDetails.background_banner = "";
+            if (c.data.defaultBanner) {
+                c.setBannerWithStyle(c.data.defaultBanner);
+            } else {
+                c.backgroundBanner = "";
+            }
+        }
+    };
+
+    c.setBackgroundBanner(c.profileDetails.background_banner);
+
+    c.deleteAttachment = function(attachmentSysId, attachmentType) {
+        return snAttachmentHandler.deleteAttachment(attachmentSysId).then(function() {
+            if (attachmentType === "cover") {
+                c.setBackgroundBanner();
+                c.server.get({
+                    "action": "deleteBanner",
+                    "userID": c.data.sysUserID
+                }).then(function(res) {
+                    spAriaUtil.sendLiveMessage(i18n.getMessage('Profile banner deleted successfully'));
+                });
+            } else if (attachmentType === "profile") {
+                c.setProfileAvatar();
+                c.server.get({
+                    "action": "deleteProfile",
+                    "userID": c.data.sysUserID
+                }).then(function(res) {
+                    spAriaUtil.sendLiveMessage(i18n.getMessage('Profile picture deleted successfully'));
+                });
+            }
+        });
+    };
+
+    c.uploadNewPicture = function($event, id) {
+        $event.stopPropagation();
+        $event.preventDefault();
+        var $el = $element.find('[id=' + id + ']');
+        $el.click();
+    };
+
+    c.deleteBannerPopUp = function() {
+        $scope.modalInstance = $uibModal.open({
+            templateUrl: 'deleteBanner',
+            scope: $scope,
+            size: "xs",
+            controller: function($scope, $uibModalInstance) {
+                $scope.deleteBanner = function() {
+                    c.closePopUp();
+                    $uibModalInstance.close();
+                    c.deleteAttachment(c.profileDetails.background_banner, "banner");
+                };
+                $scope.dismissModal = function() {
+                    $uibModalInstance.close();
+                    c.closePopUp();
+                };
+            }
+        });
+    };
+
+    c.uploadImage = function($event, type, mode) {
+        var description;
+        var placeholderIcon;
+        var broadcastId;
+        var imgToProcess;
+        var isCircularCrop;
+        var imageType;
+        var aspectRatio;
+        var dragMode = "move";
+        var isCropBoxMovable = false;
+        var isCropBoxResizable = false;
+        var viewMode;
+        var autoCropArea;
+
+        if (type === 'cover') {
+            description = "This is a great place for your favorite team photo, or a place to show off furry friends and family members";
+            placeholderIcon = "image";
+            broadcastId = "sn_employee.backgroundBanner";
+            imgToProcess = c.profileDetails.background_banner;
+            isCircularCrop = false;
+            aspectRatio = 4 / 1;
+            viewMode = 3;
+            autoCropArea = 1;
+        } else {
+            description = "Help teammates get to know you by showing them your best smile";
+            placeholderIcon = "user-circle-o";
+            broadcastId = "sn_employee.profilePicture";
+            imgToProcess = c.profileDetails.profile_picture;
+            isCircularCrop = true;
+            aspectRatio = 1;
+            viewMode = 0;
+            autoCropArea = 0.6;
+        }
+        imgToProcess = imgToProcess.replace('url(', '').replace(')', '').replace(/\"/gi, "") + ".iix";
+        imageType = type;
+        spModal.open({
+            size: "lg",
+            backdrop: "static",
+            widget: "employee-center-image-editor",
+            widgetInput: {
+                "description": description,
+                "placeholderIcon": placeholderIcon,
+                "broadcastId": broadcastId,
+                "editorMode": mode,
+                "imgToProcess": imgToProcess,
+                "isCircularCrop": isCircularCrop,
+                "imageType": imageType,
+                "aspectRatio": aspectRatio,
+                "dragMode": dragMode,
+                "isCropBoxMovable": isCropBoxMovable,
+                "isCropBoxResizable": isCropBoxResizable,
+                "viewMode": viewMode,
+                "autoCropArea": autoCropArea
+            },
+            buttons: []
+        });
+    };
+
+    $scope.$on("sn_employee.preferredPronoun", function($evt, data) {
+        c.profileDetails.pronoun = data;
+    });
+
+    $scope.$on("sn_employee.backgroundBanner", function($evt, file) {
+        if (file === null) {
+            c.deleteAttachment(c.profileDetails.background_banner, "cover");
+        } else {
+            snAttachmentHandler.create("sn_employee_profile", c.profileDetails.profile_id).uploadAttachment(file, {
+                sysparm_fieldname: "background_banner"
+            }).then(function(response) {
+                c.setBackgroundBanner(response.sys_id);
+                spAriaUtil.sendLiveMessage(i18n.getMessage('Profile banner updated successfully'));
+            });
+        }
+    });
+
+    $scope.$on("sn_employee.profilePicture", function($evt, file) {
+        if (file === null) {
+            c.deleteAttachment(c.profileDetails.profile_picture, "profile");
+        } else {
+            snAttachmentHandler.create("live_profile", c.profileDetails.live_profile_id).uploadAttachment(file, {
+                sysparm_fieldname: "photo"
+            }).then(function(response) {
+                c.setProfileAvatar(response.sys_id);
+                spAriaUtil.sendLiveMessage(i18n.getMessage('Profile picture updated successfully'));
+            });
+        }
+    });
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;$font-size-base: 16px !default;
+$font-size-xl: 20px !default;
+$font-size-xxl: 30px !default;
+$font-size-3xl: 36px !default;
+
+$font-size-h6: 14px !default;
+$font-size-h2: 24px !default;
+
+$sp-space--xxs: 2px !default;
+$sp-space--xs: 4px !default;
+$sp-space--sm: 8px !default;
+$sp-space--md: 12px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+$sp-space--xxl: 32px !default;
+$sp-space--3xl: 40px !default;
+
+$text-primary: #181A1F !default;
+$text-tertiary: #656E81 !default;
+
+$border-tertiary: #DADDE2 !default;
+$border-radius-small: 2px !default;
+$border-radius-base: 4px !default;
+
+$background-primary: #ffffff !default;
+$background-tertiary: #F0F1F5 !default;
+$input-border-focus: #3c59e7 !default;
+
+$sp-panel-box-shadow:  0 4px 8px 0 rgba(23,40,52,0.08) !default;
+
+
+.teams-available{
+  color: #4BA66B;
+  font-size: 17px;
+}
+
+.teams-busy{
+  color: #EA3C10;
+  font-size: 17px;
+}
+
+.teams-away{
+  color: #E27918;
+  font-size: 17px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+.teams-offline{
+  color: #879394;
+  font-size: 17px;
+}
+
+.teams-logout{
+  color: #656E81;
+  padding-right: 6px;
+  font-size: 17px;
+}
+
+.teams-logout-group{
+  display:flex;
+  justify-content: center;
+}
+
+.teams-presence{
+  padding-left: 6px;
+  color: $text-primary;
+}
+
+.profile-header-container {
+  background: $color-lightest;
+  border-radius: $border-radius-small*3;
+  box-shadow: $sp-panel-box-shadow;
+  padding-bottom: $sp-space--xl;
+  margin-bottom: $sp-space--xxl;
+}
+
+.profile-name {
+  font-size: $font-size-h2;
+  line-height: 26.4px;
+}
+
+.profile-details {
+  font-size: $font-size-h6;
+  margin-top: $sp-space--sm;
+}
+
+.profile-container {
+  margin-top: $sp-space--xl;
+  margin-bottom: $sp-space--xl;
+}
+
+ul {
+  display: contents;
+}
+
+li {
+  display: block;
+
+  a {
+    color: $text-primary;
+  }
+}
+
+.highlight {
+  color: $brand-primary;
+}
+
+li:hover {
+  color: $brand-primary;
+}
+
+.li-upload {
+  cursor: pointer;
+  line-height: 18px;
+  margin-bottom: $sp-space--sm;
+}
+
+.banner-container {
+  background: linear-gradient(180deg, $brand-primary 0%, $brand-primary-darker 100%);
+  background-repeat: no-repeat;
+  border-top-left-radius: $border-radius-small*3;
+  border-top-right-radius: $border-radius-small*3;
+  background-color: $brand-primary;
+  padding-top: 25%;
+}
+
+.profile-avatar-container {
+  margin-top: -73px;
+  width: auto;
+  margin-bottom: $sp-space--md;
+}
+
+.avatar-container .avatar.soloAvatar .sub-avatar div#user-initials {
+  line-height: 400%;
+  font-size: $font-size-3xl;
+  font-weight: normal;
+  color: $text-primary;
+}
+
+.avatar-container.avatar-extra-large {
+  width: $sp-space--xl*6;
+  height: $sp-space--xl*6;
+}
+
+#sub-avatar {
+  background-color: $background-tertiary;
+}
+
+.avatar-container {
+  cursor: default;
+}
+
+.icon-container {
+  height: $sp-space--3xl;
+  width: $sp-space--3xl;
+  background-color: $background-primary;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: calc($sp-space--3xl - $sp-space--xxs);
+  text-align: center;
+  vertical-align: bottom;
+  border: 1px solid transparent;
+}
+
+.icon-container:focus {
+  outline: 1px auto $input-border-focus;
+}
+
+.dp-icon-container {
+  height: $sp-space--xxl;
+  width: $sp-space--xxl;
+  background-color: $background-primary;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: calc($sp-space--xxl - $sp-space--xxs);
+  text-align: center;
+  vertical-align: bottom;
+  position: absolute;
+  top: $sp-space--xxs*55;
+  left: 115px;
+  border: 1px solid $border-tertiary;
+  .fa {
+    font-size: $font-size-base;
+ 	line-height: 18.75px;
+  }
+}
+
+.fa-pencil {
+  color: $text-tertiary;
+}
+
+.fa-camera {
+  color: $text-color;
+}
+
+.topcorner {
+  position: absolute;
+  top: $sp-space--xl;
+  right: $sp-space--xl;
+  .fa {
+    font-size: $font-size-xl;
+  	line-height: 28.13px;
+  }
+}
+
+.upload-remove-banner {
+  min-height: 60px;
+  width: 115px;
+  background-color: $background-tertiary;
+  top: calc($sp-space--md + 2px);
+  position: absolute;
+  right: $sp-space--3xl*2;
+  font-size: $font-size-small;
+  border-radius: $border-radius-base;
+  z-index: 1;
+
+  div {
+    margin-left: $sp-space--sm;
+    margin-top: $sp-space--sm;
+  }
+}
+
+.upload-remove-banner:after {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  left: 100%;
+  top: calc($sp-space--xl + 1px);
+  border: $sp-space--xs solid transparent;
+
+}
+
+.banner-container {
+  background-size: cover;
+}
+
+.profile-details-container {
+  word-wrap: break-word;
+  width: auto;
+  line-height: 15.4px;
+}
+
+.profile-info {
+  background-color: $background-primary;
+  border-radius: $border-radius-small;
+  box-shadow: $sp-panel-box-shadow;
+  margin-bottom: $sp-space--xxl;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .profile-actions{
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: $sp-space--xl;
+  	margin-bottom: $sp-space--xl;
+    .action-container{
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .upload-remove-banner:after {
+    border-left: $sp-space--xs solid $background-tertiary;
+  }
+  .profile-details-container {
+    padding-left: 0px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-avatar-container {
+    margin-top: -55px;
+    margin-bottom: 0px;
+  }
+
+  .profile-details-container {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .profile-info{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:$sp-space--md;
+    .profile-actions{
+      margin-left: inherit;
+    }
+  }
+
+  .avatar-container.avatar-extra-large {
+    width: $sp-space--xs*25;
+    height: $sp-space--xs*25;
+  }
+
+  .avatar-container .avatar.soloAvatar .sub-avatar div#user-initials {
+    line-height: 350%;
+    font-size: $font-size-xxl;
+    height: 100%;
+  }
+
+  .dp-icon-container {
+    top: 60px;
+    left: 90px;
+  }
+
+  .banner-container {
+    aspect-ratio: 4/1;
+  }
+
+  .topcorner {
+    top: $sp-space--md;
+    right: $sp-space--md;
+  }
+
+  .upload-remove-banner {
+    top: 59px;
+    right: $sp-space--xs;
+  }
+
+  .upload-remove-banner:after {
+    border-bottom: 0.4rem solid #ffffff;
+    top: calc(-$sp-space--sm);
+    left: 88px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile-header-container {
+    margin: -15px;
+  }
+}
+
+/* IE specific Classes */
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+  .upload-remove-banner {
+    ul {
+      padding-left: 0;
+    }
+  }
+}&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;employee-profile-header&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+
+    var currentLI = 0;
+    $(document).ready(function() {
+        $(element).on("keypress", "div#uploadBanner", function(e) {
+            e.preventDefault();
+            $("#uploadBanner").blur();
+            resetLiIndex();
+            var listItems = document.querySelectorAll("li.li-upload");
+            if (listItems.length &gt; 0) {
+                setLiElementOnFocus(listItems, currentLI);
+            }
+        });
+        $(document).bind('click', function(event) {
+            var listItems = document.querySelectorAll("li.li-upload");
+            var uploadBanner = document.getElementById('uploadBanner');
+            if (uploadBanner &amp;&amp; !uploadBanner.contains(event.target) &amp;&amp; listItems.length &gt; 0) {
+                resetLiIndex();
+                controller.closePopUp();
+            } else if (uploadBanner &amp;&amp; uploadBanner.contains(event.target)) {
+                resetLiIndex();
+            }
+        });
+        document.addEventListener("keydown", function(event) {
+            var listItems = document.querySelectorAll("li.li-upload");
+            if (listItems.length &gt; 0) {
+
+                switch (event.keyCode) {
+                    case 38: //up arrow key
+                        event.preventDefault();
+                        blurLiElement(listItems, currentLI);
+                        currentLI = currentLI &gt; 0 ? --currentLI : 0;
+                        setLiElementOnFocus(listItems, currentLI);
+                        break;
+                    case 40: //down arrow key
+                        event.preventDefault();
+                        blurLiElement(listItems, currentLI);
+                        currentLI = currentLI &lt; listItems.length - 1 ? ++currentLI : listItems.length - 1;
+                        setLiElementOnFocus(listItems, currentLI);
+                        break;
+                    case 13: //enter key
+                        break;
+                    case 32: //space key
+                        event.preventDefault();
+                        break;
+                    case 27: //esc key, for the upload banner pop up to close
+                        setBannerFocus(listItems, currentLI);
+                        break;
+                    default:
+                        blurLiElement(listItems, currentLI);
+                        resetLiIndex();
+                }
+            }
+        });
+    });
+
+    function resetLiIndex() {
+        currentLI = 0;
+    }
+
+    function blurLiElement(liItems, index) {
+        liItems[index].classList.remove("highlight");
+        liItems[index].blur();
+    }
+
+    function setLiElementOnFocus(liItems, index) {
+        liItems[index].classList.add("highlight");
+        var liItem = $('#upload-remove-banner').find("li.li-upload.highlight");
+        liItem.focus();
+    }
+
+    function setBannerFocus(liItems, index) {
+        blurLiElement(liItems, index);
+        resetLiIndex();
+        $("#uploadBanner").focus();
+        $("#uploadBanner").click();
+    }
+}]]&gt;&lt;/link&gt;&lt;name&gt;Employee Profile Header&lt;/name&gt;&lt;option_schema&gt;[{"name":"show_ms_teams_presence","section":"Presentation","default_value":"true","label":"Show MS Teams Presence","type":"boolean"},{"displayValue":"Action group","name":"action_group","section":"Data","label":"Action Group","type":"reference","value":"sn_ex_sp_action_group","ed":{"reference":"sn_ex_sp_action_group"}}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+
+    if (!input) {
+        data.defaultBanner = '';
+        data.sysUserID = $sp.getParameter("sys_id") || gs.getUserID();
+        var epUtils = new sn_employee.ep_Utils();
+        var epPortalUtils = new sn_employee.ep_portalUtil(data.sysUserID);
+
+        var sysUserGR = epUtils.getSysUserRecord(data.sysUserID);
+        data.userExists = true;
+        if (gs.nil(sysUserGR)) {
+            data.userExists = false;
+            return;
+        }
+        var loggedInSysUserID = gs.getUser().getID();
+        data.isMyProfile = loggedInSysUserID.equals(data.sysUserID);
+
+        var isPluginActive = new GlidePluginManager().isActive('sn_now_teams');
+        data.showPresence = options.show_ms_teams_presence || true;
+
+        if(isPluginActive){
+          if (data.showPresence){
+            var auth = new sn_tcm_collab_hook.MSTeamsCredentialsHelper();
+            if (!auth.isAccessTokenOrRefreshTokenAvailable()) {
+              data.teamsOauthInitiatorURL = auth.getOauthInitiatorURL();
+              data.presenceClass = 'fa fa-info-circle teams-logout';
+              data.teamsOauthInitiatorURL = gs.getProperty('glide.servlet.uri').concat(data.teamsOauthInitiatorURL);
+            } else{
+              var presenceUtil = new sn_tcm_collab_hook.MSTeamsChatUtil();
+              var userRecord = [];
+              var user = {
+                id: data.sysUserID
+              };
+              userRecord.push(user);
+              data.presenceResponse = presenceUtil.getPresence(userRecord, 'id', true);
+              data.userChatURL = 'https://teams.microsoft.com/l/chat/0/0?users='.concat(sysUserGR.getValue('email'));
+
+              if (data.presenceResponse[0].mappedPresence == 'available'){
+                data.presenceClass = 'fa fa-check-circle teams-available';
+                data.mappedPresence = gs.getMessage('Available on Microsoft Teams');
+              } else if (data.presenceResponse[0].mappedPresence == 'busy'){
+                data.presenceClass = 'fa fa-minus-circle teams-busy';
+                data.mappedPresence = gs.getMessage('Busy on Microsoft Teams');
+              } else if (data.presenceResponse[0].mappedPresence == 'away'){
+                data.presenceClass = 'fa fa-minus-circle teams-away';
+                data.mappedPresence = gs.getMessage('Away on Microsoft Teams');
+              } else if (data.presenceResponse[0].mappedPresence == 'offline'){
+                data.presenceClass = 'fa fa-circle-o teams-offline';
+                data.mappedPresence = gs.getMessage('Offline on Microsoft Teams');
+              } else{
+                data.presenceClass = 'fa fa-circle-o teams-offline';
+                data.mappedPresence = gs.getMessage('Unknown on Microsoft Teams');
+              }
+
+              if(data.mappedPresence &amp;&amp; !data.isMyProfile){
+							data.mappedPresence = data.mappedPresence.concat(' - ');
+						  }
+            }
+          }
+        }
+        var liveProfile = epPortalUtils.getLiveProfileDetails(data.sysUserID);
+        var profilePicture = (liveProfile &amp;&amp; liveProfile.getDisplayValue("photo")) ? liveProfile.getValue("photo") : "";
+        data.defaultBanner = epPortalUtils.getDefaultBackgroundBanner();
+
+        var employeeProfileGR = epUtils.getEmployeeProfileRecord(data.sysUserID);
+        data.employeeProfileExists = !gs.nil(employeeProfileGR);
+        data.isEditable = gs.getUserID() === data.sysUserID;
+
+        if (data.employeeProfileExists) {
+            data.profileDetails = epPortalUtils.getEmployeeProfileDetails();
+            data.profileDetails.profile_picture = profilePicture;
+            data.profileDetails.live_profile_id = liveProfile ? liveProfile.getUniqueValue() : "";
+
+        } else {
+            data.userDetails = {};
+            data.userDetails.name = sysUserGR.getDisplayValue('name');
+            data.userDetails.title = sysUserGR.getDisplayValue('title');
+            data.userDetails.department = sysUserGR.getDisplayValue('department');
+            data.userDetails.profile_picture = profilePicture;
+            data.userDetails.initials = (sysUserGR.getDisplayValue('first_name').charAt(0) || '') + (sysUserGR.getDisplayValue('last_name').charAt(0) || '');
+        }
+
+			data.actionWidgetData = $sp.getWidget("action-widget",{table: 'sys_user', context:data.sysUserID, action_group: options.action_group});
+		}
+
+    if (input) {
+      if (input.action == "deleteBanner")
+        new sn_employee.ep_portalUtil(input.userID).deleteEmployeeProfileBanner();
+      else if (input.action == "deleteProfile")
+        new sn_employee.ep_portalUtil(input.userID).deleteEmployeeProfilePicture();
+    }
+
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-11-11 16:01:59&lt;/sys_created_on&gt;&lt;sys_id&gt;67863c0d073330108d6d78e99cd30080&lt;/sys_id&gt;&lt;sys_mod_count&gt;1071&lt;/sys_mod_count&gt;&lt;sys_name&gt;Employee Profile Header&lt;/sys_name&gt;&lt;sys_package display_value="Employee Profile" source="sn_employee"&gt;1e95bac2738f001001b566b90ff6a7cd&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Employee Profile"&gt;1e95bac2738f001001b566b90ff6a7cd&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_67863c0d073330108d6d78e99cd30080&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-06-09 17:57:06&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div ng-if="data.userExists" class="profile-header-container"&gt;
+    &lt;!-- Employee profile banner --&gt;
+    &lt;div class="banner-container col-xs-12" ng-style="c.backgroundBanner"&gt;
+        &lt;div ng-if="data.employeeProfileExists &amp;&amp; c.profileDetails.background_banner &amp;&amp; data.isEditable" id="uploadBanner" ng-click="c.uploadImage($event, 'cover', 'edit')"
+            tabindex="0" aria-label="${Edit cover image}" class="icon-container topcorner" data-toggle="tooltip" data-placement="top" data-title="${Edit cover image}"&gt;
+            &lt;i class="fa fa-pencil fa-lg" data-container="body"&gt;&lt;/i&gt;
+        &lt;/div&gt;
+        &lt;div ng-if="data.employeeProfileExists &amp;&amp; !c.profileDetails.background_banner &amp;&amp; data.isEditable" ng-click="c.uploadImage($event, 'cover', 'new')"
+tabindex="0" aria-label="${Add a cover image}" class="icon-container topcorner" data-toggle="tooltip" data-placement="top" data-title="${Add a cover image}"&gt;
+            &lt;i class="fa fa-camera fa-lg" data-container="body"&gt;&lt;/i&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Employee profile avatar and details --&gt;
+    &lt;div class="profile-info col-xs-12"&gt;
+        &lt;div class="profile-avatar-container col-sm-2 col-xs-12 col-md-2"&gt;
+            &lt;div class="avatar-extra-large avatar-container" style="cursor:default;"&gt;
+                &lt;div class="avatar soloAvatar bottom"&gt;
+                    &lt;div class="sub-avatar" id="sub-avatar" ng-style="c.profilePic"&gt;
+                        &lt;div id="user-initials" ng-if="!c.profilePic"&gt;{{c.profileDetails.initials || data.userDetails.initials}}&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div ng-if="data.employeeProfileExists &amp;&amp; data.isEditable &amp;&amp; c.profileDetails.profile_picture" ng-click="c.uploadImage($event, 'profile' , 'edit')"
+                aria-label="${Edit profile image}" tabindex="0" class="dp-icon-container" data-toggle="tooltip" data-placement="bottom" data-title="${Edit profile image}"&gt;
+                &lt;i class="fa fa-pencil fa-xs" data-container="body"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;div ng-if="data.employeeProfileExists &amp;&amp; data.isEditable &amp;&amp; !c.profileDetails.profile_picture" ng-click="c.uploadImage($event, 'profile' ,'new')"
+                aria-label="${Add a profile image}" tabindex="0" class="dp-icon-container" data-toggle="tooltip" data-placement="bottom" data-title="${Add a profile image}"&gt;
+                &lt;i class="fa fa-camera fa-xs" data-container="body"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="profile-details-container col-sm-10 col-xs-12 col-md-10"&gt;
+          &lt;div class="profile-container"&gt;
+            &lt;div class="profile-name"&gt;
+                &lt;span&gt;{{c.profileDetails.name || data.userDetails.name}} &lt;span
+                        ng-if="c.profileDetails.pronoun"&gt;({{c.profileDetails.pronoun}})&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="profile-details"&gt;
+                &lt;span&gt;{{c.profileDetails.role || data.userDetails.title}}&lt;span ng-if="c.profileDetails.role &amp;&amp; c.profileDetails.department || data.userDetails.title"&gt;,
+                    &lt;/span&gt;{{c.profileDetails.department || data.userDetails.department}}&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class="profile-details" ng-if="data.showPresence == 'true'"&gt;
+              &lt;div ng-if="c.data.presenceResponse"&gt;
+                &lt;span class="{{c.data.presenceClass}}" /&gt;
+                &lt;span class="teams-presence"&gt;{{c.data.mappedPresence}}&lt;/span&gt;
+                &lt;a href="{{data.userChatURL}}" target="_blank" ng-if="!data.isMyProfile" aria-label="${Connect on Microsoft Teams}"&gt;${Connect}&lt;/a&gt;
+              &lt;/div&gt;
+              &lt;div ng-if="c.data.teamsOauthInitiatorURL"&gt;
+                &lt;div class="teams-logout-group"&gt;
+                  &lt;div tabindex="0" data-toggle="tooltip" data-placement="top" data-title="${After successful login, please refresh the page to start viewing the status
+}" role="img" aria-label="${After successful login, please refresh the page to start viewing the status
+}"&gt;
+                    &lt;span class="{{c.data.presenceClass}}"/&gt;
+                  &lt;/div&gt;
+                  &lt;a href="{{c.data.teamsOauthInitiatorURL}}" target="_blank"&gt;${Login to view Microsoft Teams status}&lt;/a&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;div class="profile-actions" &gt;
+        &lt;sp-widget widget="c.data.actionWidgetData"&gt;&lt;/sp-widget&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;</payload>
+        <sys_class_name>sp_rel_widget_clone</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 17:56:55</sys_created_on>
+        <sys_id>882e610e97a871102d7ebf56f053afa5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>c42e610e97a871102d7ebf56f053afa1</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sp_rel_widget_clone_882e610e97a871102d7ebf56f053afa5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 17:56:55</sys_updated_on>
+    </sp_rel_widget_clone>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sp_rel_widget_clone_882e610e97a871102d7ebf56f053afa5</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_rel_widget_clone"><sp_rel_widget_clone action="INSERT_OR_UPDATE"><child display_value="Copy of Employee Profile Header">c42e610e97a871102d7ebf56f053afa1</child><cloned>2023-08-10 17:56:55</cloned><last_validated>2023-08-10 17:56:55</last_validated><parent display_value="Employee Profile Header">67863c0d073330108d6d78e99cd30080</parent><payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;sp_widget&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller = function($scope, $element, snAttachmentHandler, i18n, spAriaUtil, spModal) {
+
+    var c = this;
+    c.profileDetails = c.data.profileDetails;
+    c.backgroundBanner = "";
+
+    c.setProfileAvatar = function(avatarID) {
+        if (avatarID) {
+            if (c.profileDetails) {
+                c.profileDetails.profile_picture = avatarID;
+            }
+            c.profilePic = {
+                'background-image': "url('" + avatarID + ".iix')"
+            };
+        } else {
+            if (c.profileDetails) {
+                c.profileDetails.profile_picture = "";
+            }
+            c.profilePic = "";
+        }
+    };
+
+    c.setBannerWithStyle = function(bannerID) {
+        if (bannerID) {
+            c.backgroundBanner = {
+                'background-image': "url('" + bannerID + ".iix')",
+                'background-position': "50% 50%"
+            };
+        }
+    };
+
+    var avatarID = c.profileDetails ? c.profileDetails.profile_picture : c.data.userDetails.profile_picture;
+    c.setProfileAvatar(avatarID);
+
+    if (!c.data.employeeProfileExists) {
+        c.setBannerWithStyle(c.data.defaultBanner);
+        return;
+    }
+
+    c.setBackgroundBanner = function(bannerID) {
+        if (bannerID) {
+            c.profileDetails.background_banner = bannerID;
+            c.setBannerWithStyle(bannerID);
+        } else {
+            c.profileDetails.background_banner = "";
+            if (c.data.defaultBanner) {
+                c.setBannerWithStyle(c.data.defaultBanner);
+            } else {
+                c.backgroundBanner = "";
+            }
+        }
+    };
+
+    c.setBackgroundBanner(c.profileDetails.background_banner);
+
+    c.deleteAttachment = function(attachmentSysId, attachmentType) {
+        return snAttachmentHandler.deleteAttachment(attachmentSysId).then(function() {
+            if (attachmentType === "cover") {
+                c.setBackgroundBanner();
+                c.server.get({
+                    "action": "deleteBanner",
+                    "userID": c.data.sysUserID
+                }).then(function(res) {
+                    spAriaUtil.sendLiveMessage(i18n.getMessage('Profile banner deleted successfully'));
+                });
+            } else if (attachmentType === "profile") {
+                c.setProfileAvatar();
+                c.server.get({
+                    "action": "deleteProfile",
+                    "userID": c.data.sysUserID
+                }).then(function(res) {
+                    spAriaUtil.sendLiveMessage(i18n.getMessage('Profile picture deleted successfully'));
+                });
+            }
+        });
+    };
+
+    c.uploadNewPicture = function($event, id) {
+        $event.stopPropagation();
+        $event.preventDefault();
+        var $el = $element.find('[id=' + id + ']');
+        $el.click();
+    };
+
+    c.deleteBannerPopUp = function() {
+        $scope.modalInstance = $uibModal.open({
+            templateUrl: 'deleteBanner',
+            scope: $scope,
+            size: "xs",
+            controller: function($scope, $uibModalInstance) {
+                $scope.deleteBanner = function() {
+                    c.closePopUp();
+                    $uibModalInstance.close();
+                    c.deleteAttachment(c.profileDetails.background_banner, "banner");
+                };
+                $scope.dismissModal = function() {
+                    $uibModalInstance.close();
+                    c.closePopUp();
+                };
+            }
+        });
+    };
+
+    c.uploadImage = function($event, type, mode) {
+        var description;
+        var placeholderIcon;
+        var broadcastId;
+        var imgToProcess;
+        var isCircularCrop;
+        var imageType;
+        var aspectRatio;
+        var dragMode = "move";
+        var isCropBoxMovable = false;
+        var isCropBoxResizable = false;
+        var viewMode;
+        var autoCropArea;
+
+        if (type === 'cover') {
+            description = "This is a great place for your favorite team photo, or a place to show off furry friends and family members";
+            placeholderIcon = "image";
+            broadcastId = "sn_employee.backgroundBanner";
+            imgToProcess = c.profileDetails.background_banner;
+            isCircularCrop = false;
+            aspectRatio = 4 / 1;
+            viewMode = 3;
+            autoCropArea = 1;
+        } else {
+            description = "Help teammates get to know you by showing them your best smile";
+            placeholderIcon = "user-circle-o";
+            broadcastId = "sn_employee.profilePicture";
+            imgToProcess = c.profileDetails.profile_picture;
+            isCircularCrop = true;
+            aspectRatio = 1;
+            viewMode = 0;
+            autoCropArea = 0.6;
+        }
+        imgToProcess = imgToProcess.replace('url(', '').replace(')', '').replace(/\"/gi, "") + ".iix";
+        imageType = type;
+        spModal.open({
+            size: "lg",
+            backdrop: "static",
+            widget: "employee-center-image-editor",
+            widgetInput: {
+                "description": description,
+                "placeholderIcon": placeholderIcon,
+                "broadcastId": broadcastId,
+                "editorMode": mode,
+                "imgToProcess": imgToProcess,
+                "isCircularCrop": isCircularCrop,
+                "imageType": imageType,
+                "aspectRatio": aspectRatio,
+                "dragMode": dragMode,
+                "isCropBoxMovable": isCropBoxMovable,
+                "isCropBoxResizable": isCropBoxResizable,
+                "viewMode": viewMode,
+                "autoCropArea": autoCropArea
+            },
+            buttons: []
+        });
+    };
+
+    $scope.$on("sn_employee.preferredPronoun", function($evt, data) {
+        c.profileDetails.pronoun = data;
+    });
+
+    $scope.$on("sn_employee.backgroundBanner", function($evt, file) {
+        if (file === null) {
+            c.deleteAttachment(c.profileDetails.background_banner, "cover");
+        } else {
+            snAttachmentHandler.create("sn_employee_profile", c.profileDetails.profile_id).uploadAttachment(file, {
+                sysparm_fieldname: "background_banner"
+            }).then(function(response) {
+                c.setBackgroundBanner(response.sys_id);
+                spAriaUtil.sendLiveMessage(i18n.getMessage('Profile banner updated successfully'));
+            });
+        }
+    });
+
+    $scope.$on("sn_employee.profilePicture", function($evt, file) {
+        if (file === null) {
+            c.deleteAttachment(c.profileDetails.profile_picture, "profile");
+        } else {
+            snAttachmentHandler.create("live_profile", c.profileDetails.live_profile_id).uploadAttachment(file, {
+                sysparm_fieldname: "photo"
+            }).then(function(response) {
+                c.setProfileAvatar(response.sys_id);
+                spAriaUtil.sendLiveMessage(i18n.getMessage('Profile picture updated successfully'));
+            });
+        }
+    });
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;$font-size-base: 16px !default;
+$font-size-xl: 20px !default;
+$font-size-xxl: 30px !default;
+$font-size-3xl: 36px !default;
+
+$font-size-h6: 14px !default;
+$font-size-h2: 24px !default;
+
+$sp-space--xxs: 2px !default;
+$sp-space--xs: 4px !default;
+$sp-space--sm: 8px !default;
+$sp-space--md: 12px !default;
+$sp-space--lg: 16px !default;
+$sp-space--xl: 24px !default;
+$sp-space--xxl: 32px !default;
+$sp-space--3xl: 40px !default;
+
+$text-primary: #181A1F !default;
+$text-tertiary: #656E81 !default;
+
+$border-tertiary: #DADDE2 !default;
+$border-radius-small: 2px !default;
+$border-radius-base: 4px !default;
+
+$background-primary: #ffffff !default;
+$background-tertiary: #F0F1F5 !default;
+$input-border-focus: #3c59e7 !default;
+
+$sp-panel-box-shadow:  0 4px 8px 0 rgba(23,40,52,0.08) !default;
+
+
+.teams-available{
+  color: #4BA66B;
+  font-size: 17px;
+}
+
+.teams-busy{
+  color: #EA3C10;
+  font-size: 17px;
+}
+
+.teams-away{
+  color: #E27918;
+  font-size: 17px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+.teams-offline{
+  color: #879394;
+  font-size: 17px;
+}
+
+.teams-logout{
+  color: #656E81;
+  padding-right: 6px;
+  font-size: 17px;
+}
+
+.teams-logout-group{
+  display:flex;
+  justify-content: center;
+}
+
+.teams-presence{
+  padding-left: 6px;
+  color: $text-primary;
+}
+
+.profile-header-container {
+  background: $color-lightest;
+  border-radius: $border-radius-small*3;
+  box-shadow: $sp-panel-box-shadow;
+  padding-bottom: $sp-space--xl;
+  margin-bottom: $sp-space--xxl;
+}
+
+.profile-name {
+  font-size: $font-size-h2;
+  line-height: 26.4px;
+}
+
+.profile-details {
+  font-size: $font-size-h6;
+  margin-top: $sp-space--sm;
+}
+
+.profile-container {
+  margin-top: $sp-space--xl;
+  margin-bottom: $sp-space--xl;
+}
+
+ul {
+  display: contents;
+}
+
+li {
+  display: block;
+
+  a {
+    color: $text-primary;
+  }
+}
+
+.highlight {
+  color: $brand-primary;
+}
+
+li:hover {
+  color: $brand-primary;
+}
+
+.li-upload {
+  cursor: pointer;
+  line-height: 18px;
+  margin-bottom: $sp-space--sm;
+}
+
+.banner-container {
+  background: linear-gradient(180deg, $brand-primary 0%, $brand-primary-darker 100%);
+  background-repeat: no-repeat;
+  border-top-left-radius: $border-radius-small*3;
+  border-top-right-radius: $border-radius-small*3;
+  background-color: $brand-primary;
+  padding-top: 25%;
+}
+
+.profile-avatar-container {
+  margin-top: -73px;
+  width: auto;
+  margin-bottom: $sp-space--md;
+}
+
+.avatar-container .avatar.soloAvatar .sub-avatar div#user-initials {
+  line-height: 400%;
+  font-size: $font-size-3xl;
+  font-weight: normal;
+  color: $text-primary;
+}
+
+.avatar-container.avatar-extra-large {
+  width: $sp-space--xl*6;
+  height: $sp-space--xl*6;
+}
+
+#sub-avatar {
+  background-color: $background-tertiary;
+}
+
+.avatar-container {
+  cursor: default;
+}
+
+.icon-container {
+  height: $sp-space--3xl;
+  width: $sp-space--3xl;
+  background-color: $background-primary;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: calc($sp-space--3xl - $sp-space--xxs);
+  text-align: center;
+  vertical-align: bottom;
+  border: 1px solid transparent;
+}
+
+.icon-container:focus {
+  outline: 1px auto $input-border-focus;
+}
+
+.dp-icon-container {
+  height: $sp-space--xxl;
+  width: $sp-space--xxl;
+  background-color: $background-primary;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: calc($sp-space--xxl - $sp-space--xxs);
+  text-align: center;
+  vertical-align: bottom;
+  position: absolute;
+  top: $sp-space--xxs*55;
+  left: 115px;
+  border: 1px solid $border-tertiary;
+  .fa {
+    font-size: $font-size-base;
+ 	line-height: 18.75px;
+  }
+}
+
+.fa-pencil {
+  color: $text-tertiary;
+}
+
+.fa-camera {
+  color: $text-color;
+}
+
+.topcorner {
+  position: absolute;
+  top: $sp-space--xl;
+  right: $sp-space--xl;
+  .fa {
+    font-size: $font-size-xl;
+  	line-height: 28.13px;
+  }
+}
+
+.upload-remove-banner {
+  min-height: 60px;
+  width: 115px;
+  background-color: $background-tertiary;
+  top: calc($sp-space--md + 2px);
+  position: absolute;
+  right: $sp-space--3xl*2;
+  font-size: $font-size-small;
+  border-radius: $border-radius-base;
+  z-index: 1;
+
+  div {
+    margin-left: $sp-space--sm;
+    margin-top: $sp-space--sm;
+  }
+}
+
+.upload-remove-banner:after {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  left: 100%;
+  top: calc($sp-space--xl + 1px);
+  border: $sp-space--xs solid transparent;
+
+}
+
+.banner-container {
+  background-size: cover;
+}
+
+.profile-details-container {
+  word-wrap: break-word;
+  width: auto;
+  line-height: 15.4px;
+}
+
+.profile-info {
+  background-color: $background-primary;
+  border-radius: $border-radius-small;
+  box-shadow: $sp-panel-box-shadow;
+  margin-bottom: $sp-space--xxl;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .profile-actions{
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: $sp-space--xl;
+  	margin-bottom: $sp-space--xl;
+    .action-container{
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .upload-remove-banner:after {
+    border-left: $sp-space--xs solid $background-tertiary;
+  }
+  .profile-details-container {
+    padding-left: 0px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-avatar-container {
+    margin-top: -55px;
+    margin-bottom: 0px;
+  }
+
+  .profile-details-container {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .profile-info{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:$sp-space--md;
+    .profile-actions{
+      margin-left: inherit;
+    }
+  }
+
+  .avatar-container.avatar-extra-large {
+    width: $sp-space--xs*25;
+    height: $sp-space--xs*25;
+  }
+
+  .avatar-container .avatar.soloAvatar .sub-avatar div#user-initials {
+    line-height: 350%;
+    font-size: $font-size-xxl;
+    height: 100%;
+  }
+
+  .dp-icon-container {
+    top: 60px;
+    left: 90px;
+  }
+
+  .banner-container {
+    aspect-ratio: 4/1;
+  }
+
+  .topcorner {
+    top: $sp-space--md;
+    right: $sp-space--md;
+  }
+
+  .upload-remove-banner {
+    top: 59px;
+    right: $sp-space--xs;
+  }
+
+  .upload-remove-banner:after {
+    border-bottom: 0.4rem solid #ffffff;
+    top: calc(-$sp-space--sm);
+    left: 88px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile-header-container {
+    margin: -15px;
+  }
+}
+
+/* IE specific Classes */
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+  .upload-remove-banner {
+    ul {
+      padding-left: 0;
+    }
+  }
+}&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;employee-profile-header&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+
+    var currentLI = 0;
+    $(document).ready(function() {
+        $(element).on("keypress", "div#uploadBanner", function(e) {
+            e.preventDefault();
+            $("#uploadBanner").blur();
+            resetLiIndex();
+            var listItems = document.querySelectorAll("li.li-upload");
+            if (listItems.length &gt; 0) {
+                setLiElementOnFocus(listItems, currentLI);
+            }
+        });
+        $(document).bind('click', function(event) {
+            var listItems = document.querySelectorAll("li.li-upload");
+            var uploadBanner = document.getElementById('uploadBanner');
+            if (uploadBanner &amp;&amp; !uploadBanner.contains(event.target) &amp;&amp; listItems.length &gt; 0) {
+                resetLiIndex();
+                controller.closePopUp();
+            } else if (uploadBanner &amp;&amp; uploadBanner.contains(event.target)) {
+                resetLiIndex();
+            }
+        });
+        document.addEventListener("keydown", function(event) {
+            var listItems = document.querySelectorAll("li.li-upload");
+            if (listItems.length &gt; 0) {
+
+                switch (event.keyCode) {
+                    case 38: //up arrow key
+                        event.preventDefault();
+                        blurLiElement(listItems, currentLI);
+                        currentLI = currentLI &gt; 0 ? --currentLI : 0;
+                        setLiElementOnFocus(listItems, currentLI);
+                        break;
+                    case 40: //down arrow key
+                        event.preventDefault();
+                        blurLiElement(listItems, currentLI);
+                        currentLI = currentLI &lt; listItems.length - 1 ? ++currentLI : listItems.length - 1;
+                        setLiElementOnFocus(listItems, currentLI);
+                        break;
+                    case 13: //enter key
+                        break;
+                    case 32: //space key
+                        event.preventDefault();
+                        break;
+                    case 27: //esc key, for the upload banner pop up to close
+                        setBannerFocus(listItems, currentLI);
+                        break;
+                    default:
+                        blurLiElement(listItems, currentLI);
+                        resetLiIndex();
+                }
+            }
+        });
+    });
+
+    function resetLiIndex() {
+        currentLI = 0;
+    }
+
+    function blurLiElement(liItems, index) {
+        liItems[index].classList.remove("highlight");
+        liItems[index].blur();
+    }
+
+    function setLiElementOnFocus(liItems, index) {
+        liItems[index].classList.add("highlight");
+        var liItem = $('#upload-remove-banner').find("li.li-upload.highlight");
+        liItem.focus();
+    }
+
+    function setBannerFocus(liItems, index) {
+        blurLiElement(liItems, index);
+        resetLiIndex();
+        $("#uploadBanner").focus();
+        $("#uploadBanner").click();
+    }
+}]]&gt;&lt;/link&gt;&lt;name&gt;Employee Profile Header&lt;/name&gt;&lt;option_schema&gt;[{"name":"show_ms_teams_presence","section":"Presentation","default_value":"true","label":"Show MS Teams Presence","type":"boolean"},{"displayValue":"Action group","name":"action_group","section":"Data","label":"Action Group","type":"reference","value":"sn_ex_sp_action_group","ed":{"reference":"sn_ex_sp_action_group"}}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+
+    if (!input) {
+        data.defaultBanner = '';
+        data.sysUserID = $sp.getParameter("sys_id") || gs.getUserID();
+        var epUtils = new sn_employee.ep_Utils();
+        var epPortalUtils = new sn_employee.ep_portalUtil(data.sysUserID);
+
+        var sysUserGR = epUtils.getSysUserRecord(data.sysUserID);
+        data.userExists = true;
+        if (gs.nil(sysUserGR)) {
+            data.userExists = false;
+            return;
+        }
+        var loggedInSysUserID = gs.getUser().getID();
+        data.isMyProfile = loggedInSysUserID.equals(data.sysUserID);
+
+        var isPluginActive = new GlidePluginManager().isActive('sn_now_teams');
+        data.showPresence = options.show_ms_teams_presence || true;
+
+        if(isPluginActive){
+          if (data.showPresence){
+            var auth = new sn_tcm_collab_hook.MSTeamsCredentialsHelper();
+            if (!auth.isAccessTokenOrRefreshTokenAvailable()) {
+              data.teamsOauthInitiatorURL = auth.getOauthInitiatorURL();
+              data.presenceClass = 'fa fa-info-circle teams-logout';
+              data.teamsOauthInitiatorURL = gs.getProperty('glide.servlet.uri').concat(data.teamsOauthInitiatorURL);
+            } else{
+              var presenceUtil = new sn_tcm_collab_hook.MSTeamsChatUtil();
+              var userRecord = [];
+              var user = {
+                id: data.sysUserID
+              };
+              userRecord.push(user);
+              data.presenceResponse = presenceUtil.getPresence(userRecord, 'id', true);
+              data.userChatURL = 'https://teams.microsoft.com/l/chat/0/0?users='.concat(sysUserGR.getValue('email'));
+
+              if (data.presenceResponse[0].mappedPresence == 'available'){
+                data.presenceClass = 'fa fa-check-circle teams-available';
+                data.mappedPresence = gs.getMessage('Available on Microsoft Teams');
+              } else if (data.presenceResponse[0].mappedPresence == 'busy'){
+                data.presenceClass = 'fa fa-minus-circle teams-busy';
+                data.mappedPresence = gs.getMessage('Busy on Microsoft Teams');
+              } else if (data.presenceResponse[0].mappedPresence == 'away'){
+                data.presenceClass = 'fa fa-minus-circle teams-away';
+                data.mappedPresence = gs.getMessage('Away on Microsoft Teams');
+              } else if (data.presenceResponse[0].mappedPresence == 'offline'){
+                data.presenceClass = 'fa fa-circle-o teams-offline';
+                data.mappedPresence = gs.getMessage('Offline on Microsoft Teams');
+              } else{
+                data.presenceClass = 'fa fa-circle-o teams-offline';
+                data.mappedPresence = gs.getMessage('Unknown on Microsoft Teams');
+              }
+
+              if(data.mappedPresence &amp;&amp; !data.isMyProfile){
+							data.mappedPresence = data.mappedPresence.concat(' - ');
+						  }
+            }
+          }
+        }
+        var liveProfile = epPortalUtils.getLiveProfileDetails(data.sysUserID);
+        var profilePicture = (liveProfile &amp;&amp; liveProfile.getDisplayValue("photo")) ? liveProfile.getValue("photo") : "";
+        data.defaultBanner = epPortalUtils.getDefaultBackgroundBanner();
+
+        var employeeProfileGR = epUtils.getEmployeeProfileRecord(data.sysUserID);
+        data.employeeProfileExists = !gs.nil(employeeProfileGR);
+        data.isEditable = gs.getUserID() === data.sysUserID;
+
+        if (data.employeeProfileExists) {
+            data.profileDetails = epPortalUtils.getEmployeeProfileDetails();
+            data.profileDetails.profile_picture = profilePicture;
+            data.profileDetails.live_profile_id = liveProfile ? liveProfile.getUniqueValue() : "";
+
+        } else {
+            data.userDetails = {};
+            data.userDetails.name = sysUserGR.getDisplayValue('name');
+            data.userDetails.title = sysUserGR.getDisplayValue('title');
+            data.userDetails.department = sysUserGR.getDisplayValue('department');
+            data.userDetails.profile_picture = profilePicture;
+            data.userDetails.initials = (sysUserGR.getDisplayValue('first_name').charAt(0) || '') + (sysUserGR.getDisplayValue('last_name').charAt(0) || '');
+        }
+
+			data.actionWidgetData = $sp.getWidget("action-widget",{table: 'sys_user', context:data.sysUserID, action_group: options.action_group});
+		}
+
+    if (input) {
+      if (input.action == "deleteBanner")
+        new sn_employee.ep_portalUtil(input.userID).deleteEmployeeProfileBanner();
+      else if (input.action == "deleteProfile")
+        new sn_employee.ep_portalUtil(input.userID).deleteEmployeeProfilePicture();
+    }
+
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-11-11 16:01:59&lt;/sys_created_on&gt;&lt;sys_id&gt;67863c0d073330108d6d78e99cd30080&lt;/sys_id&gt;&lt;sys_mod_count&gt;1071&lt;/sys_mod_count&gt;&lt;sys_name&gt;Employee Profile Header&lt;/sys_name&gt;&lt;sys_package display_value="Employee Profile" source="sn_employee"&gt;1e95bac2738f001001b566b90ff6a7cd&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Employee Profile"&gt;1e95bac2738f001001b566b90ff6a7cd&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_67863c0d073330108d6d78e99cd30080&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-06-09 17:57:06&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div ng-if="data.userExists" class="profile-header-container"&gt;
+    &lt;!-- Employee profile banner --&gt;
+    &lt;div class="banner-container col-xs-12" ng-style="c.backgroundBanner"&gt;
+        &lt;div ng-if="data.employeeProfileExists &amp;&amp; c.profileDetails.background_banner &amp;&amp; data.isEditable" id="uploadBanner" ng-click="c.uploadImage($event, 'cover', 'edit')"
+            tabindex="0" aria-label="${Edit cover image}" class="icon-container topcorner" data-toggle="tooltip" data-placement="top" data-title="${Edit cover image}"&gt;
+            &lt;i class="fa fa-pencil fa-lg" data-container="body"&gt;&lt;/i&gt;
+        &lt;/div&gt;
+        &lt;div ng-if="data.employeeProfileExists &amp;&amp; !c.profileDetails.background_banner &amp;&amp; data.isEditable" ng-click="c.uploadImage($event, 'cover', 'new')"
+tabindex="0" aria-label="${Add a cover image}" class="icon-container topcorner" data-toggle="tooltip" data-placement="top" data-title="${Add a cover image}"&gt;
+            &lt;i class="fa fa-camera fa-lg" data-container="body"&gt;&lt;/i&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Employee profile avatar and details --&gt;
+    &lt;div class="profile-info col-xs-12"&gt;
+        &lt;div class="profile-avatar-container col-sm-2 col-xs-12 col-md-2"&gt;
+            &lt;div class="avatar-extra-large avatar-container" style="cursor:default;"&gt;
+                &lt;div class="avatar soloAvatar bottom"&gt;
+                    &lt;div class="sub-avatar" id="sub-avatar" ng-style="c.profilePic"&gt;
+                        &lt;div id="user-initials" ng-if="!c.profilePic"&gt;{{c.profileDetails.initials || data.userDetails.initials}}&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div ng-if="data.employeeProfileExists &amp;&amp; data.isEditable &amp;&amp; c.profileDetails.profile_picture" ng-click="c.uploadImage($event, 'profile' , 'edit')"
+                aria-label="${Edit profile image}" tabindex="0" class="dp-icon-container" data-toggle="tooltip" data-placement="bottom" data-title="${Edit profile image}"&gt;
+                &lt;i class="fa fa-pencil fa-xs" data-container="body"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;div ng-if="data.employeeProfileExists &amp;&amp; data.isEditable &amp;&amp; !c.profileDetails.profile_picture" ng-click="c.uploadImage($event, 'profile' ,'new')"
+                aria-label="${Add a profile image}" tabindex="0" class="dp-icon-container" data-toggle="tooltip" data-placement="bottom" data-title="${Add a profile image}"&gt;
+                &lt;i class="fa fa-camera fa-xs" data-container="body"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="profile-details-container col-sm-10 col-xs-12 col-md-10"&gt;
+          &lt;div class="profile-container"&gt;
+            &lt;div class="profile-name"&gt;
+                &lt;span&gt;{{c.profileDetails.name || data.userDetails.name}} &lt;span
+                        ng-if="c.profileDetails.pronoun"&gt;({{c.profileDetails.pronoun}})&lt;/span&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="profile-details"&gt;
+                &lt;span&gt;{{c.profileDetails.role || data.userDetails.title}}&lt;span ng-if="c.profileDetails.role &amp;&amp; c.profileDetails.department || data.userDetails.title"&gt;,
+                    &lt;/span&gt;{{c.profileDetails.department || data.userDetails.department}}&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div class="profile-details" ng-if="data.showPresence == 'true'"&gt;
+              &lt;div ng-if="c.data.presenceResponse"&gt;
+                &lt;span class="{{c.data.presenceClass}}" /&gt;
+                &lt;span class="teams-presence"&gt;{{c.data.mappedPresence}}&lt;/span&gt;
+                &lt;a href="{{data.userChatURL}}" target="_blank" ng-if="!data.isMyProfile" aria-label="${Connect on Microsoft Teams}"&gt;${Connect}&lt;/a&gt;
+              &lt;/div&gt;
+              &lt;div ng-if="c.data.teamsOauthInitiatorURL"&gt;
+                &lt;div class="teams-logout-group"&gt;
+                  &lt;div tabindex="0" data-toggle="tooltip" data-placement="top" data-title="${After successful login, please refresh the page to start viewing the status
+}" role="img" aria-label="${After successful login, please refresh the page to start viewing the status
+}"&gt;
+                    &lt;span class="{{c.data.presenceClass}}"/&gt;
+                  &lt;/div&gt;
+                  &lt;a href="{{c.data.teamsOauthInitiatorURL}}" target="_blank"&gt;${Login to view Microsoft Teams status}&lt;/a&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;div class="profile-actions" &gt;
+        &lt;sp-widget widget="c.data.actionWidgetData"&gt;&lt;/sp-widget&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;</payload><sys_class_name>sp_rel_widget_clone</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-10 17:56:55</sys_created_on><sys_id>882e610e97a871102d7ebf56f053afa5</sys_id><sys_mod_count>0</sys_mod_count><sys_name>c42e610e97a871102d7ebf56f053afa1</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sp_rel_widget_clone_882e610e97a871102d7ebf56f053afa5</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-10 17:56:55</sys_updated_on></sp_rel_widget_clone></record_update>]]></payload>
+        <payload_hash>-491556648</payload_hash>
+        <record_name>c42e610e97a871102d7ebf56f053afa1</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 17:56:55</sys_created_on>
+        <sys_id>902e610e97a871102d7ebf56f053afa8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189e0982a0c0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 17:56:55</sys_updated_on>
+        <type>Widget Clone</type>
+        <update_guid>842e610e2fa87110226b2f36194dc7a7</update_guid>
+        <update_guid_history>842e610e2fa87110226b2f36194dc7a7:-491556648</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">b593bd4297e871102d7ebf56f053af0e</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 18:20:47</sys_created_on>
+        <sys_db_object display_value="" name="sp_rel_widget_clone">sp_rel_widget_clone</sys_db_object>
+        <sys_id>32885a3b55774a209c47d575696bea40</sys_id>
+        <sys_metadata>882e610e97a871102d7ebf56f053afa5</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>c42e610e97a871102d7ebf56f053afa1</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sp_rel_widget_clone_882e610e97a871102d7ebf56f053afa5</sys_update_name>
+        <sys_update_version display_value="sp_rel_widget_clone_882e610e97a871102d7ebf56f053afa5">902e610e97a871102d7ebf56f053afa8</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 18:20:47</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

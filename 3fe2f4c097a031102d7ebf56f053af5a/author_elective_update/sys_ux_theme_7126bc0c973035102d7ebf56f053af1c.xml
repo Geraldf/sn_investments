@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_theme">
+    <sys_ux_theme action="DELETE">
+        <active>true</active>
+        <description/>
+        <name>InvestTheme</name>
+        <parent/>
+        <sys_class_name>sys_ux_theme</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 19:00:41</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7126bc0c973035102d7ebf56f053af1c</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>InvestTheme</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sys_ux_theme_7126bc0c973035102d7ebf56f053af1c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-20 12:13:46</sys_updated_on>
+        <theme>{&#13;
+    "--ks-color_portal--banner": "30,30,30",&#13;
+    "--now-color_selection--primary-0": "221,237,233",&#13;
+	"--now-color_selection--primary-1": "126,185,171",&#13;
+	"--now-color_selection--primary-2": "30,133,109",&#13;
+	"--now-color_selection--primary-3": "23,100,82",&#13;
+	"--now-color_selection--primary-4": "15,67,55",&#13;
+	"--now-color_selection--secondary-0": "245,248,249",&#13;
+	"--now-color_selection--secondary-1": "237,243,245",&#13;
+	"--now-color_selection--secondary-2": "229,238,240",&#13;
+	"--now-color_selection--secondary-3": "218,226,228",&#13;
+	"--now-color_selection--secondary-4": "206,214,216"&#13;
+}</theme>
+    </sys_ux_theme>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sys_ux_theme_7126bc0c973035102d7ebf56f053af1c</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_theme"><sys_ux_theme action="INSERT_OR_UPDATE"><active>true</active><description/><name>InvestTheme</name><parent/><sys_class_name>sys_ux_theme</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 19:00:41</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>7126bc0c973035102d7ebf56f053af1c</sys_id><sys_mod_count>9</sys_mod_count><sys_name>InvestTheme</sys_name><sys_overrides/><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sys_ux_theme_7126bc0c973035102d7ebf56f053af1c</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-20 12:13:46</sys_updated_on><theme>{&#13;
+    "--ks-color_portal--banner": "30,30,30",&#13;
+    "--now-color_selection--primary-0": "221,237,233",&#13;
+	"--now-color_selection--primary-1": "126,185,171",&#13;
+	"--now-color_selection--primary-2": "30,133,109",&#13;
+	"--now-color_selection--primary-3": "23,100,82",&#13;
+	"--now-color_selection--primary-4": "15,67,55",&#13;
+	"--now-color_selection--secondary-0": "245,248,249",&#13;
+	"--now-color_selection--secondary-1": "237,243,245",&#13;
+	"--now-color_selection--secondary-2": "229,238,240",&#13;
+	"--now-color_selection--secondary-3": "218,226,228",&#13;
+	"--now-color_selection--secondary-4": "206,214,216"&#13;
+}</theme></sys_ux_theme></record_update>]]></payload>
+        <payload_hash>-506755748</payload_hash>
+        <record_name>InvestTheme</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-20 12:13:46</sys_created_on>
+        <sys_id>837f7b4d9778b1102d7ebf56f053af15</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18a12dd94fe0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-20 12:13:46</sys_updated_on>
+        <type>UX Theme</type>
+        <update_guid>f67f7b4da278b11083a900b7a3136a14</update_guid>
+        <update_guid_history>f67f7b4da278b11083a900b7a3136a14:-506755748,282f774d7678b110488d1b2196a66d58:167454564,c445272874b8311042c2a34806ad6eee:1552589798,79cf30ac9d3031104186169d41266345:1211290549,1b3fb06c993031100d38cdbc65467ecb:-35397128,1912a514dfb07510d8bd0fe395079c32:-492497807,0aa121148eb0751009f6cd6d616b4fb7:945083806,3c8021d0e7b07510a5aa5afe7db33f6c:-42723109,93c63c4c9530351056532bcc3ae53115:-45207396,e046f04c4b3035109aff5a5b22b23283:1211290549</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-20 12:19:53</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_theme">sys_ux_theme</sys_db_object>
+        <sys_id>1d1dd9ddeaa34690a1cec5c4af513190</sys_id>
+        <sys_metadata>7126bc0c973035102d7ebf56f053af1c</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>InvestTheme</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sys_ux_theme_7126bc0c973035102d7ebf56f053af1c</sys_update_name>
+        <sys_update_version display_value="sys_ux_theme_7126bc0c973035102d7ebf56f053af1c">837f7b4d9778b1102d7ebf56f053af15</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-20 12:19:53</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

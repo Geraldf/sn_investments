@@ -4,13 +4,13 @@
             <element>number</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>55953c7497e471102d7ebf56f053af54</sys_id>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4f13b66e972cf1102d7ebf56f053aff7</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -18,97 +18,111 @@
             <element>assigned_to</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>59953c7497e471102d7ebf56f053af54</sys_id>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4713b66e972cf1102d7ebf56f053aff8</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>state</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4b13b66e972cf1102d7ebf56f053aff8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.split</element>
-            <position>2</position>
+            <position>3</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>5d953c7497e471102d7ebf56f053af54</sys_id>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4f13b66e972cf1102d7ebf56f053aff8</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>state</element>
-            <position>3</position>
+            <element>zinv_number</element>
+            <position>4</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>51953c7497e471102d7ebf56f053af55</sys_id>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4313b66e972cf1102d7ebf56f053aff9</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>active</element>
-            <position>4</position>
+            <element>investment_value</element>
+            <position>5</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>55953c7497e471102d7ebf56f053af55</sys_id>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4713b66e972cf1102d7ebf56f053aff9</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>.end_split</element>
-            <position>5</position>
+            <position>6</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>59953c7497e471102d7ebf56f053af55</sys_id>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4b13b66e972cf1102d7ebf56f053aff9</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
             <sys_user/>
             <type>.end_split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>short_description</element>
-            <position>6</position>
+            <position>7</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>5d953c7497e471102d7ebf56f053af55</sys_id>
+            <sys_created_on>2023-08-12 12:15:16</sys_created_on>
+            <sys_id>4f13b66e972cf1102d7ebf56f053aff9</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:16</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>description</element>
-            <position>7</position>
+            <position>8</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2023-08-06 16:37:29</sys_created_on>
-            <sys_id>51953c7497e471102d7ebf56f053af56</sys_id>
+            <sys_created_on>2023-08-12 12:15:17</sys_created_on>
+            <sys_id>4313b66e972cf1102d7ebf56f053affa</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_557984_ks_inve_0_investment_requests" sys_domain="global" view="Default view">2f1478f097e471102d7ebf56f053af19</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2023-08-06 16:37:29</sys_updated_on>
+            <sys_updated_on>2023-08-12 12:15:17</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

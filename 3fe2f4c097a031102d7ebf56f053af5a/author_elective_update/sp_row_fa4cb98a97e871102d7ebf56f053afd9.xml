@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_row">
+    <sp_row action="DELETE">
+        <class_name>ks_banner</class_name>
+        <order>1</order>
+        <sp_column/>
+        <sp_container display_value="InvestPortal Main - Container 1">d2ada10e97a871102d7ebf56f053af04</sp_container>
+        <sys_class_name>sp_row</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 18:58:48</sys_created_on>
+        <sys_id>fa4cb98a97e871102d7ebf56f053afd9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sp_row_fa4cb98a97e871102d7ebf56f053afd9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 20:04:22</sys_updated_on>
+    </sp_row>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sp_row_fa4cb98a97e871102d7ebf56f053afd9</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_row"><sp_row action="INSERT_OR_UPDATE"><class_name>ks_banner</class_name><order>1</order><sp_column/><sp_container display_value="InvestPortal Main - Container 1">d2ada10e97a871102d7ebf56f053af04</sp_container><sys_class_name>sp_row</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-10 18:58:48</sys_created_on><sys_id>fa4cb98a97e871102d7ebf56f053afd9</sys_id><sys_mod_count>2</sys_mod_count><sys_name>1</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sp_row_fa4cb98a97e871102d7ebf56f053afd9</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-10 20:04:22</sys_updated_on></sp_row></record_update>]]></payload>
+        <payload_hash>-1056900484</payload_hash>
+        <record_name>1</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 20:04:22</sys_created_on>
+        <sys_id>874b8ece97e871102d7ebf56f053af16</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189e10cd64a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 20:04:22</sys_updated_on>
+        <type>Row</type>
+        <update_guid>cb4b8ecec6e87110d22775e57582e415</update_guid>
+        <update_guid_history>cb4b8ecec6e87110d22775e57582e415:-1056900484,11dace0a402c7110d36aefa4cb32fa46:695636957,b24cb98a22e87110e2e5b05fa4f6aedb:-1139673827</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="1">484c4a8a972c71102d7ebf56f053af51</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 20:08:32</sys_created_on>
+        <sys_db_object display_value="" name="sp_row">sp_row</sys_db_object>
+        <sys_id>da02ba044d71453285fef0682ffd9144</sys_id>
+        <sys_metadata>fa4cb98a97e871102d7ebf56f053afd9</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sp_row_fa4cb98a97e871102d7ebf56f053afd9</sys_update_name>
+        <sys_update_version display_value="sp_row_fa4cb98a97e871102d7ebf56f053afd9">874b8ece97e871102d7ebf56f053af16</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 20:08:32</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

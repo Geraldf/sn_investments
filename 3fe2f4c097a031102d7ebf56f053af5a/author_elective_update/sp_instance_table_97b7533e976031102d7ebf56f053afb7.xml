@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_table">
+    <sp_instance_table action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>info</color>
+        <css/>
+        <display_field/>
+        <field_list/>
+        <filter/>
+        <glyph>money</glyph>
+        <id/>
+        <maximum_entries>5</maximum_entries>
+        <order>1</order>
+        <order_by/>
+        <order_direction>asc</order_direction>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">c718df3e976031102d7ebf56f053af93</sp_column>
+        <sp_page/>
+        <sp_widget display_value="Count">1d8ad230ff223100ba13ffffffffffb9</sp_widget>
+        <sys_class_name>sp_instance_table</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 09:33:48</sys_created_on>
+        <sys_id>97b7533e976031102d7ebf56f053afb7</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>My open Investment Requests</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_update_name>sp_instance_table_97b7533e976031102d7ebf56f053afb7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 09:37:08</sys_updated_on>
+        <table>x_557984_ks_inve_0_investment_requests</table>
+        <title>My open Investment Requests</title>
+        <url/>
+        <widget_parameters/>
+    </sp_instance_table>
+    <sys_translated_text action="DELETE" query="documentkey=97b7533e976031102d7ebf56f053afb7"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</application>
+        <file_path/>
+        <instance_id>ffd77b33db71db483353f22ebf961942</instance_id>
+        <instance_name>dev58633</instance_name>
+        <name>sp_instance_table_97b7533e976031102d7ebf56f053afb7</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_table"><sp_instance_table action="INSERT_OR_UPDATE"><active>true</active><class_name/><color>info</color><css/><display_field/><field_list/><filter/><glyph>money</glyph><id/><maximum_entries>5</maximum_entries><order>1</order><order_by/><order_direction>asc</order_direction><roles/><short_description/><size>md</size><sp_column display_value="1">c718df3e976031102d7ebf56f053af93</sp_column><sp_page/><sp_widget display_value="Count">1d8ad230ff223100ba13ffffffffffb9</sp_widget><sys_class_name>sp_instance_table</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-13 09:33:48</sys_created_on><sys_id>97b7533e976031102d7ebf56f053afb7</sys_id><sys_mod_count>7</sys_mod_count><sys_name>My open Investment Requests</sys_name><sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package><sys_policy/><sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope><sys_update_name>sp_instance_table_97b7533e976031102d7ebf56f053afb7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-13 09:37:08</sys_updated_on><table>x_557984_ks_inve_0_investment_requests</table><title>My open Investment Requests</title><url/><widget_parameters/></sp_instance_table><sys_translated_text action="delete_multiple" query="documentkey=97b7533e976031102d7ebf56f053afb7"/></record_update>]]></payload>
+        <payload_hash>-8547215</payload_hash>
+        <record_name>My open Investment Requests</record_name>
+        <reverted_from/>
+        <source>a5596b1497e031102d7ebf56f053aff9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 09:37:08</sys_created_on>
+        <sys_id>98885f3e976031102d7ebf56f053afad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189ee41abe40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 09:37:08</sys_updated_on>
+        <type>Instance with Table</type>
+        <update_guid>dc885f3e476031103607b7ed1417eaac</update_guid>
+        <update_guid_history>dc885f3e476031103607b7ed1417eaac:-8547215,8568537e9b6031106922325934fceb07:-816378615,bb48537e3a6031107ca8bd1a14aae9ac:-1902807903,9a38d73e22603110a32b1149ad8bcded:792438018,d4285f3e6760311044b02b7a8457410b:784858259,73f75ffa246031108d8cd618329ff9c0:2015413736,29d7db3ec060311070a9e50df74e40db:-843502994,63b7533ee16031100345e4c58bc00db9:1570393295</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="My open Investment Requests">7fccb3fe97e031102d7ebf56f053aff7</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-13 12:15:46</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance_table">sp_instance_table</sys_db_object>
+        <sys_id>40fb5fa18ee74c9c931db2aa5245a890</sys_id>
+        <sys_metadata>97b7533e976031102d7ebf56f053afb7</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My open Investment Requests</sys_name>
+        <sys_package display_value="KS Investment Requests" source="x_557984_ks_inve_0">3fe2f4c097a031102d7ebf56f053af5a</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="KS Investment Requests">3fe2f4c097a031102d7ebf56f053af5a</sys_scope>
+        <sys_scope_delete display_value="">4725bc9f3b9c48a09615ea04128597f9</sys_scope_delete>
+        <sys_update_name>sp_instance_table_97b7533e976031102d7ebf56f053afb7</sys_update_name>
+        <sys_update_version display_value="sp_instance_table_97b7533e976031102d7ebf56f053afb7">98885f3e976031102d7ebf56f053afad</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-13 12:15:46</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
